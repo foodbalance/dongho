@@ -4,12 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+	#i {
+		text-align: center;
+	}
+</style>
 <title></title>
 </head>
 <body>
 <hr>
-<h1>copyright@ FOODBALANCE<br>
+<footer>
+<p id="i">copyright@ FOODBALANCE<br>
 	2022-04-20, 개발팀 : CMC<br>
-</h1>
+</p>
+</footer>
 </body>
 </html>

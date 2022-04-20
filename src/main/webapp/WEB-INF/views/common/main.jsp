@@ -4,35 +4,209 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- CSS -->
-<!-- <script type="text/javascript">$.fn.tooltip.Constructor.VERSION // => "4.0.0"</script> -->
-<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
-
-<!-- 테마 -->
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
-
-<!-- 자바스크립트 -->
-<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
-<meta charset="UTF-8">
-<title></title>
+<style>
+#th{
+ 	text-align: center;
+ 	height: 50px;
+ }
+ 
+ #td{
+ 	text-align: center;
+ 	height: 50px;
+ }
+ #t1{
+	float: left;	
+		width: 300px;
+ 	height: 50px;
+}
+ #t2{
+	float: left;	
+		width: 300px;
+ 	height: 50px;
+}
+body {
+  background-color:white;
+}
+#myDIV {
+  height:300px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 50px;
+  
+  padding: 10px;
+  grid-template-rows: 100px 100px;
+}
+#myDIV table {
+  background-color: black;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
+}
+</style>
 </head>
 <body>
 <nav>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 </nav>
-<section>
-<form>
-
-</form>
-
-</section>
+<br>
+<br>
 
 
-
-
-<c:import url="/WEB-INF/views/common/footer.jsp" />
-
+<div id="myDIV">
+  <table class="item1">
+  <tbody>
+   <tr class="table-dark" id="th">
+      <th colspan="3" scope="row" _msthash="2664948" _msttexthash="9407996" >공지사항</th>
+    </tr>
+    <tr class="table-light" id="th">
+      <th scope="row" _msthash="2596295" _msttexthash="4031755" ><strong>No.</strong></th>
+      <td _msthash="2596009" _msttexthash="15266329"><strong>Name</strong></td>
+      <td _msthash="2596139" _msttexthash="15266329"><strong>Value</strong></td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"></td>
+      <td _msthash="2664792" _msttexthash="15266329"></td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"> </td>
+      <td _msthash="2664792" _msttexthash="15266329"> </td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"></td>
+      <td _msthash="2664792" _msttexthash="15266329"></td>
+    </tr>
+  </tbody>
+  </table>
+  <table class="item2"><tbody>
+   <tr class="table-dark" id="th">
+      <th colspan="3" scope="row" _msthash="2664948" _msttexthash="9407996" >게시판</th>
+    </tr>
+    <tr class="table-light" id="th">
+      <th scope="row" _msthash="2596295" _msttexthash="4031755" ><strong>No.</strong></th>
+      <td _msthash="2596009" _msttexthash="15266329"><strong>Name</strong></td>
+      <td _msthash="2596139" _msttexthash="15266329"><strong>Value</strong></td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"></td>
+      <td _msthash="2664792" _msttexthash="15266329"></td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"> </td>
+      <td _msthash="2664792" _msttexthash="15266329"> </td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"></td>
+      <td _msthash="2664792" _msttexthash="15266329"></td>
+    </tr>
+  </tbody></table>
+  <table class="item3"><tbody>
+   <tr class="table-dark" id="th">
+      <th colspan="3" scope="row" _msthash="2664948" _msttexthash="9407996" >로그인</th>
+    </tr>
+    <tr class="table-light" id="th">
+      <th scope="row" _msthash="2596295" _msttexthash="4031755" ><strong>No.</strong></th>
+      <td _msthash="2596009" _msttexthash="15266329"><strong>Name</strong></td>
+      <td _msthash="2596139" _msttexthash="15266329"><strong>Value</strong></td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"></td>
+      <td _msthash="2664792" _msttexthash="15266329"></td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"> </td>
+      <td _msthash="2664792" _msttexthash="15266329"> </td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"></td>
+      <td _msthash="2664792" _msttexthash="15266329"></td>
+    </tr>
+  </tbody></table>
+  <table class="item4"><tbody>
+   <tr class="table-dark" id="th">
+      <th colspan="3" scope="row" _msthash="2664948" _msttexthash="9407996" >추천메뉴</th>
+    </tr>
+    <tr class="table-light" id="th">
+      <th scope="row" _msthash="2596295" _msttexthash="4031755" ><strong>No.</strong></th>
+      <td _msthash="2596009" _msttexthash="15266329"><strong>Name</strong></td>
+      <td _msthash="2596139" _msttexthash="15266329"><strong>Value</strong></td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"></td>
+      <td _msthash="2664792" _msttexthash="15266329"></td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"> </td>
+      <td _msthash="2664792" _msttexthash="15266329"> </td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"></td>
+      <td _msthash="2664792" _msttexthash="15266329"></td>
+    </tr>
+  </tbody></table>
+  <table class="item5"><tbody>
+   <tr class="table-dark" id="th">
+      <th colspan="3" scope="row" _msthash="2664948" _msttexthash="9407996" >운동법</th>
+    </tr>
+    <tr class="table-light" id="th">
+      <th scope="row" _msthash="2596295" _msttexthash="4031755" ><strong>No.</strong></th>
+      <td _msthash="2596009" _msttexthash="15266329"><strong>Name</strong></td>
+      <td _msthash="2596139" _msttexthash="15266329"><strong>Value</strong></td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"></td>
+      <td _msthash="2664792" _msttexthash="15266329"></td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"> </td>
+      <td _msthash="2664792" _msttexthash="15266329"> </td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"></td>
+      <td _msthash="2664792" _msttexthash="15266329"></td>
+    </tr>
+  </tbody></table>
+  <table class="item6"><tbody>
+   <tr class="table-dark" id="th">
+      <th colspan="3" scope="row" _msthash="2664948" _msttexthash="9407996" >스팟</th>
+    </tr>
+    <tr class="table-light" id="th">
+      <th scope="row" _msthash="2596295" _msttexthash="4031755" ><strong>No.</strong></th>
+      <td _msthash="2596009" _msttexthash="15266329"><strong>Name</strong></td>
+      <td _msthash="2596139" _msttexthash="15266329"><strong>Value</strong></td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"></td>
+      <td _msthash="2664792" _msttexthash="15266329"></td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"> </td>
+      <td _msthash="2664792" _msttexthash="15266329"> </td>
+    </tr>
+    <tr class="table-dark" id="td">
+      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
+      <td _msthash="2664662" _msttexthash="15266329"></td>
+      <td _msthash="2664792" _msttexthash="15266329"></td>
+    </tr>
+  </tbody>
+  </table>
+</div>
 
 </body>
 </html>
