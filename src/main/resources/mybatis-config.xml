@@ -8,11 +8,24 @@
 		<setting name="cacheEnabled" value="false" />
 	</settings>
 	
-	<typeAliases>		
+	<typeAliases>	
+
+	<!-- 	<typeAlias type="com.project.cat.member.model.vo.Member" alias="Member" />
+		<typeAlias type="com.project.cat.measure.model.vo.CatProfile" alias="CatProfile" />
+		<typeAlias alias="Notice" type="com.project.cat.notice.model.vo.Notice"/>
+		<typeAlias alias="Board" type="com.project.cat.board.model.vo.Board"/>
+		<typeAlias alias="SearchDate" type="com.project.cat.common.SearchDate"/>
+		<typeAlias alias="Paging" type="com.project.cat.common.Paging"/> -->
 		
 	</typeAliases>
 	
 	<mappers>
+	
+		<!-- <mapper resource="mappers/member-mapper.xml" />
+		<mapper resource="mappers/catprofile-mapper.xml" />
+		<mapper resource="mappers/notice-mapper.xml"/>
+		<mapper resource="mappers/board-mapper.xml"/>
+		<mapper resource="mappers/manage-mapper.xml"/> -->
 		
 	</mappers>
 </configuration>

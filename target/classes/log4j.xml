@@ -9,11 +9,11 @@
 			<param name="ConversionPattern" value="%-5p: %c - %m%n" />
 		</layout>
 	</appender>
-
+	
 	<!-- Application Loggers -->
-	<logger name="com.project.foodbalance">
+	<logger name="com.project.food">
 		<level value="info" />
-	</logger>		
+	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
