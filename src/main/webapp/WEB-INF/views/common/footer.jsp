@@ -7,6 +7,10 @@
 <style type="text/css">
 	#i {
 		text-align: center;
+<<<<<<< HEAD
+=======
+			
+>>>>>>> refs/remotes/origin/master
 	}
 </style>
 <title></title>
