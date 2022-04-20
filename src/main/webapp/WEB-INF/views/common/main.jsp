@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
 <head>
 <style>
 #th{
@@ -44,17 +43,14 @@ body {
   font-size: 30px;
 }
 </style>
-=======
 <head>
 <meta charset="UTF-8">
 <title></title>
->>>>>>> refs/remotes/origin/master
 </head>
 <body>
 <nav>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 </nav>
-<<<<<<< HEAD
 <br>
 <br>
 
@@ -214,7 +210,6 @@ body {
   </tbody>
   </table>
 </div>
-=======
 <section>
 <form>
 </form>
@@ -225,8 +220,5 @@ body {
 
 
 <c:import url="/WEB-INF/views/common/footer.jsp" />
-
->>>>>>> refs/remotes/origin/master
-
 </body>
 </html>
