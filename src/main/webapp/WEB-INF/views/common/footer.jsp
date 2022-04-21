@@ -7,17 +7,14 @@
 <style type="text/css">
 	#i {
 		text-align: center;
-<<<<<<< HEAD
-=======
-			
->>>>>>> refs/remotes/origin/master
 	}
 </style>
 <title></title>
 </head>
 <body>
-<hr>
+
 <footer>
+<hr style="clear:both;">
 <p id="i">copyright@ FOODBALANCE<br>
 	2022-04-20, 개발팀 : CMC<br>
 </p>

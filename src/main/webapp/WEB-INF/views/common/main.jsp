@@ -3,49 +3,33 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
+
+<head>
+
 <head>
 <style>
-#th{
- 	text-align: center;
- 	height: 50px;
- }
- 
- #td{
- 	text-align: center;
- 	height: 50px;
- }
- #t1{
-	float: left;	
-		width: 300px;
- 	height: 50px;
+
+#aa{
+	width: 40px;
+	height: 30px;
+  	background: black;
+  	border-radius: 30px;
+	margin: auto;
+	
 }
- #t2{
-	float: left;	
-		width: 300px;
- 	height: 50px;
+
+.square {
+  width: 500px;
+  height: 500px;
+  background: black;
+  border-radius: 30px;
 }
-body {
-  background-color:white;
-}
-#myDIV {
-  height:300px;
-  display: grid;
-  grid-template-columns: auto auto auto;
-  gap: 50px;
   
-  padding: 10px;
-  grid-template-rows: 100px 100px;
-}
-#myDIV table {
-  background-color: black;
-  text-align: center;
-  padding: 20px 0;
-  font-size: 30px;
-}
+
 </style>
-<head>
 <meta charset="UTF-8">
 <title></title>
+
 </head>
 <body>
 <nav>
@@ -53,172 +37,89 @@ body {
 </nav>
 <br>
 <br>
-
-
-<div id="myDIV">
-  <table class="item1">
-  <tbody>
-   <tr class="table-dark" id="th">
-      <th colspan="3" scope="row" _msthash="2664948" _msttexthash="9407996" >공지사항</th>
-    </tr>
-    <tr class="table-light" id="th">
-      <th scope="row" _msthash="2596295" _msttexthash="4031755" ><strong>No.</strong></th>
-      <td _msthash="2596009" _msttexthash="15266329"><strong>Name</strong></td>
-      <td _msthash="2596139" _msttexthash="15266329"><strong>Value</strong></td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"></td>
-      <td _msthash="2664792" _msttexthash="15266329"></td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"> </td>
-      <td _msthash="2664792" _msttexthash="15266329"> </td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"></td>
-      <td _msthash="2664792" _msttexthash="15266329"></td>
-    </tr>
-  </tbody>
-  </table>
-  <table class="item2"><tbody>
-   <tr class="table-dark" id="th">
-      <th colspan="3" scope="row" _msthash="2664948" _msttexthash="9407996" >게시판</th>
-    </tr>
-    <tr class="table-light" id="th">
-      <th scope="row" _msthash="2596295" _msttexthash="4031755" ><strong>No.</strong></th>
-      <td _msthash="2596009" _msttexthash="15266329"><strong>Name</strong></td>
-      <td _msthash="2596139" _msttexthash="15266329"><strong>Value</strong></td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"></td>
-      <td _msthash="2664792" _msttexthash="15266329"></td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"> </td>
-      <td _msthash="2664792" _msttexthash="15266329"> </td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"></td>
-      <td _msthash="2664792" _msttexthash="15266329"></td>
-    </tr>
-  </tbody></table>
-  <table class="item3"><tbody>
-   <tr class="table-dark" id="th">
-      <th colspan="3" scope="row" _msthash="2664948" _msttexthash="9407996" >로그인</th>
-    </tr>
-    <tr class="table-light" id="th">
-      <th scope="row" _msthash="2596295" _msttexthash="4031755" ><strong>No.</strong></th>
-      <td _msthash="2596009" _msttexthash="15266329"><strong>Name</strong></td>
-      <td _msthash="2596139" _msttexthash="15266329"><strong>Value</strong></td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"></td>
-      <td _msthash="2664792" _msttexthash="15266329"></td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"> </td>
-      <td _msthash="2664792" _msttexthash="15266329"> </td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"></td>
-      <td _msthash="2664792" _msttexthash="15266329"></td>
-    </tr>
-  </tbody></table>
-  <table class="item4"><tbody>
-   <tr class="table-dark" id="th">
-      <th colspan="3" scope="row" _msthash="2664948" _msttexthash="9407996" >추천메뉴</th>
-    </tr>
-    <tr class="table-light" id="th">
-      <th scope="row" _msthash="2596295" _msttexthash="4031755" ><strong>No.</strong></th>
-      <td _msthash="2596009" _msttexthash="15266329"><strong>Name</strong></td>
-      <td _msthash="2596139" _msttexthash="15266329"><strong>Value</strong></td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"></td>
-      <td _msthash="2664792" _msttexthash="15266329"></td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"> </td>
-      <td _msthash="2664792" _msttexthash="15266329"> </td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"></td>
-      <td _msthash="2664792" _msttexthash="15266329"></td>
-    </tr>
-  </tbody></table>
-  <table class="item5"><tbody>
-   <tr class="table-dark" id="th">
-      <th colspan="3" scope="row" _msthash="2664948" _msttexthash="9407996" >운동법</th>
-    </tr>
-    <tr class="table-light" id="th">
-      <th scope="row" _msthash="2596295" _msttexthash="4031755" ><strong>No.</strong></th>
-      <td _msthash="2596009" _msttexthash="15266329"><strong>Name</strong></td>
-      <td _msthash="2596139" _msttexthash="15266329"><strong>Value</strong></td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"></td>
-      <td _msthash="2664792" _msttexthash="15266329"></td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"> </td>
-      <td _msthash="2664792" _msttexthash="15266329"> </td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"></td>
-      <td _msthash="2664792" _msttexthash="15266329"></td>
-    </tr>
-  </tbody></table>
-  <table class="item6"><tbody>
-   <tr class="table-dark" id="th">
-      <th colspan="3" scope="row" _msthash="2664948" _msttexthash="9407996" >스팟</th>
-    </tr>
-    <tr class="table-light" id="th">
-      <th scope="row" _msthash="2596295" _msttexthash="4031755" ><strong>No.</strong></th>
-      <td _msthash="2596009" _msttexthash="15266329"><strong>Name</strong></td>
-      <td _msthash="2596139" _msttexthash="15266329"><strong>Value</strong></td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"></td>
-      <td _msthash="2664792" _msttexthash="15266329"></td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"> </td>
-      <td _msthash="2664792" _msttexthash="15266329"> </td>
-    </tr>
-    <tr class="table-dark" id="td">
-      <th scope="row" _msthash="2664948" _msttexthash="9407996"></th>
-      <td _msthash="2664662" _msttexthash="15266329"></td>
-      <td _msthash="2664792" _msttexthash="15266329"></td>
-    </tr>
-  </tbody>
-  </table>
-</div>
 <section>
-<form>
-</form>
+ <div class="container">
 
+        <div class="row" >
+          <div class="col-lg-4" style="left: 100%">
+	<!-- 최근 등록 공지글 3개 조회 출력 -->
+	<div style="border: 2px solid black; border-radius: 20px; padding: 0px; margin: 20px 50px 50px 30px; text-align: center; width: 390px; height: 330px; background-color: black; color: white;" >
+		<h4><br>공지사항</h4>
+		<table id="newnotice"  cellspacing="0" style="background-color:gray" >
+			<tr>
+				<th style="width: 45px">번호</th>
+				<th style="width: 300px">제목</th>
+				<th style="width: 90px">날짜</th>
+			</tr>
+		</table>
+	</div>
+	</div>
+
+	
+	<div class="col-lg-4 mt-4 mt-lg-0">
+	<div style="right:-50px; border: 2px solid black; border-radius: 20px; padding: 0px; margin: 20px 50px 50px 30px; text-align: center; width: 390px; height: 330px; background-color: black; color: white;" >
+		<h4><br>공지사항</h4>
+		<table id="newnotice"  cellspacing="0" style="background-color:gray" >
+			<tr>
+				<th style="width: 45px">번호</th>
+				<th style="width: 300px">제목</th>
+				<th style="width: 90px">날짜</th>
+			</tr>
+		</table>
+	</div>
+	</div>
+	<div class="col-lg-4 mt-4 mt-lg-0">
+	<div style="right:-50px; border: 2px solid black; border-radius: 20px; padding: 0px; margin: 20px 50px 50px 30px; text-align: center; width: 390px; height: 170px; background-color: black; color: white;" >
+		<table border="1" cellspacing="0">
+		<div>
+		<a id="aa">아이디</a> 
+		<input type="text" name="id" placeholder="ID"><br>
+		<a id="aa">비밀번호</a>
+		<input type="password" name="pwd" placeholder="PASSWORD">
+		<button class="btn btn-outline-dark" style type="submit">로그인</button>
+		</div>
+		</table>
+	</div>
+	</div>
+	
+	<div class="col-lg-4 mt-4 mt-lg-0">
+	<div style="border: 2px solid black; border-radius: 20px; padding: 0px; margin: 20px 50px 50px 30px; text-align: center; width: 390px; height: 330px; background-color: black; color: white;" >
+		<h4><br>추천 레시피</h4>
+		<table id="newnotice"  cellspacing="0" style="background-color:gray" >
+			<tr>
+				<th style="width: 45px">번호</th>
+				<th style="width: 300px">제목</th>
+				<th style="width: 90px">날짜</th>
+			</tr>
+		</table>
+	</div>
+	</div>
+	<div class="col-lg-4 mt-4 mt-lg-0">
+	<div style="border: 2px solid black; border-radius: 20px; padding: 0px; margin: 20px 50px 160px 30px; text-align: center; width: 390px; height: 330px; background-color: black; color: white;" >
+		<h4><br>운동법</h4>
+		<table id="newnotice"  cellspacing="0" style="background-color:gray" >
+			<tr>
+				<th style="width: 45px">번호</th>
+				<th style="width: 300px">제목</th>
+				<th style="width: 90px">날짜</th>
+			</tr>
+		</table>
+	</div>
+	</div>
+	<div class="col-lg-4 mt-4 mt-lg-0">
+	<div style="border: 2px solid black; border-radius: 20px; padding: 0px; margin: 20px 50px 50px 30px; text-align: center; width: 390px; height: 480px; background-color: black; color: white; top:-27%; position: relative;" >
+		<h4><br>스팟</h4>
+	
+	</div>
+	</div>
+	</div>
+	</div>
 </section>
+  
 
+<footer>
 
-
-
-<c:import url="/WEB-INF/views/common/footer.jsp" />
+				<c:import url="/WEB-INF/views/common/footer.jsp" />
+</footer>
 </body>
-</html> 
+</html>
