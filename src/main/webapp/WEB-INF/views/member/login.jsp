@@ -20,8 +20,19 @@
 	}
 	.div2{
 		background-color: yellow;
-		width : 300px;
+		width : 400px;
 		height: 200px;
+		padding : 20px;
+	}
+	.login{
+		position: absolute;
+		height : 70px;
+		width : 70px;
+		top : 60px;
+		right : 30px;
+	}
+	.div3{
+		padding : 3px;
 	}
 </style>
 </head>
@@ -36,21 +47,21 @@
 		    	<span>로그인</span>
 		    </h2>	                           		
 		    <form action="login.do" method="post">
-				<div>
+				<div class="div3">
 					<label for="inputID">아 이 디 </label>
 					<input id="inputID" type="text" placeholder="ID" name="inputID" value="${ reid }" required/>			    
 				</div>
-				<div>
+				<div class="div3">
 					<label for="inputPassword">비밀번호 </label>
 					<input id="inputPassword" type="password" placeholder="Password" name="inputPassword" value="${ repwd }" required/>	    
 				</div>
-				<div align="left">
+				<div align="left" class="div3">
 					<input id="inputRemember" type="checkbox" value="Remember" name="inputRemember" checked/>
 				    <label style="text-align:left" class="form-check-label" for="inputRemember">아이디, 비밀번호 저장</label>
 				</div>
-				<div>
+				<div align="right" class="div3">
 				    <a href="findPwdPage.do">비밀번호 찾기</a>
-					<input type="submit" value="로그인">
+					<input class= "login" type="submit" value="로그인">
 				</div>
 			 </form>
 	     </div>                           
