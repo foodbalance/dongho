@@ -50,4 +50,19 @@
 		set user_pwd = #{ user_pwd } 
 		where user_id = #{ user_id }
 	</update>
+	
+	<!-- 회원가입 -->
+	<insert id="insertMember" parameterType="Member">
+		insert into member (user_id, user_pwd, user_name, user_fnum, user_enum, phone, email, postcode,
+		                    address, address1, address2, keyword, admin_ok, login_ok,login_stack)
+		values (#{ user_id }, #{ user_pwd }, #{ user_name }, #{ user_fnum }, #{ user_enum }, #{ phone }, #{ email }, 
+		        #{ postcode }, #{ address }, #{ address1 },#{ address2 }, #{ keyword }, 'N', 'Y', 0)
+	</insert>
+	
+	<!-- 아이디 중복체크 -->
+	<select id="selectCheckId" parameterType="string" resultType="_int">
+		select count(user_id) 
+		from member 
+		where user_id = #{ user_id }	
+	</select>
 </mapper>

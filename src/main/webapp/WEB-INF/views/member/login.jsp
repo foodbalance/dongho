@@ -5,7 +5,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>FoodBalance</title>
+
+<style type="text/css">
+	section{
+		width : 100%;
+		height: 600px;
+	}
+	.div1{		
+		position: absolute;
+		top : 50%;
+		left : 50%;
+		transform: translate(-50%, -50%);
+	}
+	.div2{
+		background-color: yellow;
+		width : 300px;
+		height: 200px;
+	}
+</style>
 </head>
 <body>
 <nav>

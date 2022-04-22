@@ -7,6 +7,7 @@
 <style type="text/css">
 	#i {
 		text-align: center;
+			
 	}
 </style>
 <title></title>

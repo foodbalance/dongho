@@ -34,4 +34,16 @@ public class MemberServiceImpl implements MemberService{
 	public int updatePwdEncoding(Member member) {
 		return memberDao.updatePwdEncoding(member);
 	}
+	
+	//회원가입
+	@Override
+	public int insertMember(Member member) {
+		return memberDao.insertMember(member);
+	}
+	
+	//회원가입시 아이디 중복 체크
+	@Override
+	public int selectDupCheckId(String user_id) {
+		return memberDao.selectDupCheckId(user_id);
+	}
 }
