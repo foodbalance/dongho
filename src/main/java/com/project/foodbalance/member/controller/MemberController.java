@@ -1,6 +1,10 @@
 package com.project.foodbalance.member.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -11,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.project.foodbalance.member.model.service.MemberService;
@@ -154,5 +159,69 @@ public class MemberController {
 			return "common/commonview";
 		}
 	}
+	
+	
+	//회원 가입페이지 이동
+	@RequestMapping("registerPage.do")
+	public String moveEnrollPage() {
+		return "member/register";
+	}
+	
+	
+	// 회원 가입 처리
+	@RequestMapping(value = "enroll.do", method = RequestMethod.POST)
+	public String memberInsertMethod( HttpServletRequest request, Member member, Model model) {
+		logger.info("enroll.do : " + member);
+		      
+		String address = request.getParameter("postcode") + " "+ request.getParameter("address1") + " " + request.getParameter("address2");
+
+		//주소 합치기
+		member.setAddress(address);
+		//패스워드 암호화 처리
+		member.setUser_pwd(bcryptPasswordEncoder.encode(member.getUser_pwd()));
+		if (memberService.insertMember(member) > 0) {
+		    model.addAttribute("register", "회원 가입을 완료");
+		    return "common/main";
+		} else {
+		    model.addAttribute("message", "회원 가입 실패");
+		    return "common/register";
+		  }
+	}
+		   
+	//아이디 중복 확인 체크 ajax 통신 요청 처리용 
+	//ajax 통신은 뷸리졸버로 뷰파일을 리턴하면 안됨 (뷰페이지가 바뀜)
+	//요청한 클라이언트와 출력스트림을 만들어서 통신하는 방식으로 값을 리턴함
+	@RequestMapping(value = "idchk.do", method = RequestMethod.POST)
+	public void dupIdCheckMethod(@RequestParam("user_id") String user_id, HttpServletResponse response) throws IOException {
+
+		int idcount = memberService.selectDupCheckId(user_id);
+		      
+		   String returnValue = null;
+		   if(idcount == 0) {
+		    returnValue = "ok";
+		   }else {
+		       returnValue = "dup";
+		   }
+		      
+		   //response를 이용해서 클라이언트로 출력스트림 만들고 값 보내기
+		   response.setContentType("text/html; charset=utf-8");
+		   PrintWriter out = response.getWriter();
+		   out.append(returnValue);
+		   out.flush();
+		   out.close();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

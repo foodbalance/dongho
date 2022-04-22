@@ -32,4 +32,13 @@ public class MemberDao {
 		return session.update("memberMapper.updatePwdEncoding", member);
 	}
 	
+	//회원가입
+	public int insertMember(Member member) {
+		return session.insert("memberMapper.insertMember", member);
+	}
+	
+	//회원가입시 아이디 중복 체크
+	public int selectDupCheckId(String user_id) {
+		return session.selectOne("memberMapper.selectCheckId", user_id);
+	}
 }

@@ -5,10 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
-	#i {
+	footer {
+		background-color : black;
 		text-align: center;
-			
 	}
+	
+	footer > div > ul > li{
+		color : white;
+		margin-top : 5px;
+	}
+	
 </style>
 <title></title>
 </head>
