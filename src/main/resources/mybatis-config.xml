@@ -9,8 +9,8 @@
 	</settings>
 	
 	<typeAliases>	
-
-	<!-- 	<typeAlias type="com.project.cat.member.model.vo.Member" alias="Member" />
+		<typeAlias type="com.project.foodbalance.member.model.vo.Member" alias="Member" />
+	<!-- 	
 		<typeAlias type="com.project.cat.measure.model.vo.CatProfile" alias="CatProfile" />
 		<typeAlias alias="Notice" type="com.project.cat.notice.model.vo.Notice"/>
 		<typeAlias alias="Board" type="com.project.cat.board.model.vo.Board"/>
@@ -20,8 +20,8 @@
 	</typeAliases>
 	
 	<mappers>
-	
-		<!-- <mapper resource="mappers/member-mapper.xml" />
+		<mapper resource="mappers/member-mapper.xml" />
+		<!-- 
 		<mapper resource="mappers/catprofile-mapper.xml" />
 		<mapper resource="mappers/notice-mapper.xml"/>
 		<mapper resource="mappers/board-mapper.xml"/>
