@@ -20,7 +20,7 @@
 
 
 
-.tb1{
+.tb1{ 
 	cellspacing:0; 
 	background-color: #e6e6e6; 
 	height: 20%; 
