@@ -12,7 +12,7 @@ public class Member implements Serializable{
 	private String user_name; 	// 유저 이름
 	private Date user_fnum; 	//생년월일
 	private int user_enum;		//주민 뒷자리
-	private int phone; 			//폰번호
+	private String phone; 		//폰번호
 	private String email; 		//이메일
 	private String postcode; 	//우편번호
 	private String address; 	//전체주소
@@ -27,7 +27,7 @@ public class Member implements Serializable{
 		super();
 	}
 	
-	public Member(String user_id, String user_pwd, String user_name, Date user_fnum, int user_enum, int phone,
+	public Member(String user_id, String user_pwd, String user_name, Date user_fnum, int user_enum, String phone,
 			String email, String postcode, String address, String address1, String address2, String keyword,
 			String admin_ok, String login_ok, int login_stack) {
 		super();
@@ -88,11 +88,11 @@ public class Member implements Serializable{
 		this.user_enum = user_enum;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

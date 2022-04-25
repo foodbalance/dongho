@@ -14,7 +14,7 @@
 		<property name="driverClassName"
 			value="oracle.jdbc.driver.OracleDriver" />
 		<property name="url"
-			value="jdbc:oracle:thin:@localhost:1521:xe" />
+			value="jdbc:oracle:thin:@localhost:1522:xe" />
 		<property name="username" value="c##foodbalance" />
 		<property name="password" value="foodbalance" />
 	</bean>

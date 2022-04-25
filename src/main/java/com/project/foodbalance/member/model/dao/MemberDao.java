@@ -41,4 +41,19 @@ public class MemberDao {
 	public int selectDupCheckId(String user_id) {
 		return session.selectOne("memberMapper.selectCheckId", user_id);
 	}
+	
+	//네이버 로그인시 메일 체크
+	public Member dupCheck(String user_email) {
+		return session.selectOne("memberMapper.dupCheck", user_email);
+	}
+	
+	//네이버  메일등록
+	public Member selectUser(String user_email) {
+		return session.selectOne("memberMapper.selectUser", user_email);
+	}
+
+	
+	
+	
+	
 }

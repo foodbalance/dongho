@@ -65,4 +65,25 @@
 		from member 
 		where user_id = #{ user_id }	
 	</select>
+	
+	
+	<!-- 이메일로 유저 중복체크 -->
+	<select id="dupCheck" parameterType="String" resultType="Member">
+		select *
+		from member
+		where email = #{ email }
+	</select>
+	<!-- 이메일로 유저 선택 -->
+	<select id="selectUser" parameterType="String" resultType="Member">
+		select * from member
+		where email = #{ email }
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

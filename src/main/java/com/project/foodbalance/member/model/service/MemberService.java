@@ -10,4 +10,8 @@ public interface MemberService {
 	int updatePwdEncoding(Member member);	//비밀번호 암호화
 	int insertMember(Member member);		//회원가입
 	int selectDupCheckId(String user_id);	//회원가입시 아이디 중복 체크
+	
+	Member dupCheck(String email);			//네이버 로그인시 메일 체크
+	Member selectUser(String user_email);	//네이버 메일등록
+	
 }

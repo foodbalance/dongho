@@ -46,4 +46,16 @@ public class MemberServiceImpl implements MemberService{
 	public int selectDupCheckId(String user_id) {
 		return memberDao.selectDupCheckId(user_id);
 	}
+	
+	//네이버 로그인시 메일 체크
+	@Override
+	public Member dupCheck(String email) {
+		return memberDao.dupCheck(email);
+	}
+	
+	//네이버  메일조회
+	@Override
+	public Member selectUser(String user_email) {
+		return memberDao.selectUser(user_email);
+	}
 }
