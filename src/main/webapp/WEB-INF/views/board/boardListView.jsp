@@ -70,7 +70,6 @@
 </script>
 </head>
 <body>
-
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
  	<section class="page-section cta">
 		<div class="container">
@@ -84,7 +83,7 @@
 <!-- =============================================================================== -->
 						<% int num = 1; %>
 						<table style="border-top: 1px solid #444444; border-collapse: collapse; width: 98%;background: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;text-align: center;"align="center" cellspacing="0" cellpadding="15">
-							<tr><th class="th">번호</th><th class="th">제목</th><th class="th">작성자</th><th class="th">날짜</th><th class="th">조회수</th><th class="th">첨부파일</th></tr>
+							<tr><th style="border-bottom: 1px solid #444444; padding: 10px;" class="th">번호</th><th class="th">제목</th><th class="th">작성자</th><th class="th">날짜</th><th class="th">조회수</th><th class="th">첨부파일</th></tr>
 							<c:forEach items="${ requestScope.list }" var="b">
 							   <tr>
 							      <td class="td"><%= num++%></td>
@@ -116,8 +115,8 @@
 					<br>
 					<!-- 게시글 쓰기(등록)은 로그인한 회원만 가능함 -->
 					<c:if test="${ !empty sessionScope.loginMember }">
-					   <div style=" padding: 5px; margin: 5px; margin-bottom: 3%" align="center">
-					      <button style="margin-bottom: 1%; background-color: #fff; color: #000;" class="btn btn-outline-secondary" onclick="showWrite();">글쓰기</button>
+					   <div style="align:center; text-align:center;">
+					      <button style="background-color: white;" class="btn btn-primary btn-block" onclick="showWrite();">글쓰기</button>
 					   </div>
 					</c:if>
 					<br>
