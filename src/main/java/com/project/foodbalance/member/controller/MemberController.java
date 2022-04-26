@@ -83,18 +83,18 @@ public class MemberController {
 				status.setComplete();
 					
 				viewName = "common/main";
-		}
-				//로그인 성공 비암호화 (로그인 하면 비밀번호 암호화로 변경 시켜놓게 해놓음)
-				/*if(loginMember != null && loginMember.getUser_pwd().equals(pwd) && loginMember.getLogin_ok().equals("Y")) {
-					//패스워드 암호화 처리(주석으로 조절)
-					loginMember.setUser_pwd(bcryptPasswordEncoder.encode(loginMember.getUser_pwd()));
-				    memberService.updatePwdEncoding(loginMember);
-					//로그인 제한 스택 초기화
-				    loginMember.setLogin_stack(0);
-					memberService.updateLoginStack(loginMember);
-	
-					session.setAttribute("loginMember", loginMember);
-					viewName = "common/main";*/
+			}
+				//로그인 성공 비암호화 (로그인 하면 비밀번호 암호화로 변경 시켜놓게 해놓음)//				if(loginMember != null && loginMember.getUser_pwd().equals(pwd) && loginMember.getLogin_ok().equals("Y")) {
+//					//패스워드 암호화 처리(주석으로 조절)
+//					loginMember.setUser_pwd(bcryptPasswordEncoder.encode(loginMember.getUser_pwd()));
+//				    memberService.updatePwdEncoding(loginMember);
+//					//로그인 제한 스택 초기화
+//				    loginMember.setLogin_stack(0);
+//					memberService.updateLoginStack(loginMember);
+//	
+//					session.setAttribute("loginMember", loginMember);
+//					viewName = "common/main";
+
 //				}
 
 			//비밀번호 입력 실패 로그인 제한

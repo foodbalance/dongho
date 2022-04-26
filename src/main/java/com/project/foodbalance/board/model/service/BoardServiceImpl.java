@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.project.foodbalance.board.model.dao.BoardDao;
 import com.project.foodbalance.board.model.vo.Board;
 import com.project.foodbalance.common.Paging;
+import com.project.foodbalance.common.SearchDate;
 
 
 @Service("boardService")
@@ -58,41 +59,50 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	
-	
+//	//제목 검색 페이징
 //	@Override
-//	public ArrayList<Board> selectSearchTitle(String keyword) {
-//		return boardDao.selectSearchTitle(keyword);
+//	public ArrayList<Board> selectSearchTitle(Paging page) {
+//		return boardDao.selectSearchTitle(page);
 //	}
-	
-	//제목 검색 페이징
-	@Override
-	public ArrayList<Board> selectSearchTitle(Paging page) {
-		return boardDao.selectSearchTitle(page);
-	}
-	
-	//작성자 검색 페이징
-	@Override
-	public ArrayList<Board> selectSearchWriter(Paging page) {
-		return boardDao.selectSearchWriter(page);
-	}
-	
-	//날짜 검색 페이징
+//	
+//	//작성자 검색 페이징
 //	@Override
-//	public ArrayList<Board> selectSearchDate(Paging page) {
-//		return boardDao.selectSearchDate(page);
-//	}	
+//	public ArrayList<Board> selectSearchWriter(Paging page) {
+//		return boardDao.selectSearchWriter(page);
+//	}
+//	
+//	//날짜 검색 페이징
+////	@Override
+////	public ArrayList<Board> selectSearchDate(Paging page) {
+////		return boardDao.selectSearchDate(page);
+////	}	
+//	
 	
-	
-	//제목 검색 카운트
+//	//제목 검색 카운트
+//	@Override
+//	public int searchTitleCount(String keyword) {
+//		return boardDao.searchTitleCount(keyword);
+//	}
+//	
+//	//작성자 검색 카운트
+//	@Override
+//	public int searchWriterCount(String keyword) {
+//		return boardDao.searchWriterCount(keyword);
+//	}
+
 	@Override
-	public int searchTitleCount(String keyword) {
-		return boardDao.searchTitleCount(keyword);
+	public ArrayList<Board> selectSearchTitle(String keyword) {
+		return boardDao.selectSearchTitle(keyword);
 	}
-	
-	//작성자 검색 카운트
+
 	@Override
-	public int searchWriterCount(String keyword) {
-		return boardDao.searchWriterCount(keyword);
+	public ArrayList<Board> selectSearchWriter(String keyword) {
+		return boardDao.selectSearchWriter(keyword);
+	}
+
+	@Override
+	public ArrayList<Board> selectSearchDate(SearchDate date) {
+		return boardDao.selectSearchDate(date);
 	}
 	
 	//날짜 검색 카운트
