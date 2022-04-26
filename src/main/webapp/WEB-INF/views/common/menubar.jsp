@@ -55,10 +55,10 @@
       
             </button>
          &ensp;&ensp;&ensp;
-          <button type="button" class="btn btn-outline-secondary" id="menubtn">공지사항</button>
+          <a type="button" class="btn btn-outline-secondary" id="menubtn" href="${ pageContext.servletContext.contextPath }/nlist.do?page=1">공지사항</a>
     &ensp;&ensp;&ensp;
        
-          <button type="button" class="btn btn-outline-secondary" id="menubtn">게시판</button>
+          <a type="button" class="btn btn-outline-secondary" id="menubtn" href="${ pageContext.servletContext.contextPath }/blist.do?page=1">게시판</a>
          &ensp;&ensp;&ensp;
        <button type="button" class="btn btn-outline-secondary" id="menubtn">
         <li class="nav-item dropdown">

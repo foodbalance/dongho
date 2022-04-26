@@ -13,14 +13,14 @@
 		<typeAlias type="com.project.foodbalance.board.model.vo.Board" alias="Board"/>
 		<typeAlias alias="SearchDate" type="com.project.foodbalance.common.SearchDate"/>
 		<typeAlias alias="Paging" type="com.project.foodbalance.common.Paging"/>
+		<typeAlias alias="Notice" type="com.project.foodbalance.notice.model.vo.Notice"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml" />
 		<mapper resource="mappers/board-mapper.xml"/>
-		<!-- 
 		<mapper resource="mappers/notice-mapper.xml"/>
-		<mapper resource="mappers/manage-mapper.xml"/> -->
+		<!-- <mapper resource="mappers/manage-mapper.xml"/> -->
 		
 	</mappers>
 </configuration>

@@ -21,31 +21,11 @@
 
 	</resultMap>
 	
-	<resultMap type="Board" id="resultTop3" >
-		<result column="board_no" property="board_no" />
-		<result column="board_title" property="board_title" />
-		<result column="board_count" property="board_count" />
+	<resultMap id="resultTop3" type="Board">
+		<result property="board_no" column="board_no"/>
+		<result property="board_title" column="board_title"/>
+		<result property="board_count" column="board_count"/>
 	</resultMap>
-	
-		<!-- 비교연산자를 쿼리문에 그냥 사용하면 
-		태그 앨리먼트 꺽쇠괄호 등(<, >, &)과 혼동하는 문제가 발생할 수 있음.
-		이 문제를 미연에 방지하기 위해 xml 코드 중 xml parser 에 의해
-		해석하지 말고, 문장 그대로 해석하라는 뜻으로
-		<![CDATA[ 쿼리문장 ]]> 사용함
-	 -->
-	
-	<!-- 게시글 3개 출력 -->
-	<select id="selectTop3" resultMap="resultTop3">
-		<![CDATA[
-		SELECT *  
-		FROM (SELECT ROWNUM RNUM, BOARD_NO, 
-					 BOARD_TITLE, BOARD_COUNT  
-		       FROM (SELECT * FROM BOARD
-		       		  WHERE BOARD_REPLY_LEV = 1
-		              ORDER BY BOARD_COUNT DESC))  
-		WHERE RNUM >= 1 AND RNUM <= 5
-		]]>
-	</select>
 
 	<!-- 총 개시글 갯수 -->
 	<select id="getListCount" resultType="_int">
@@ -56,17 +36,15 @@
 	<select id="selectList" parameterType="Paging" resultMap="resultBoard">
 		<![CDATA[
 			SELECT *  
-			FROM (SELECT ROWNUM RNUM, BOARD_NO, BOARD_TITLE, USER_ID,   
-			               BOARD_CONTENT, BOARD_ORIGINAL_IMG,  
-			               BOARD_RENAME_IMG, BOARD_DATE,BOARD_COUNT  
-			       FROM (SELECT * FROM BOARD 
-			              ORDER BY BOARD_REF DESC,BOARD_REPLY_REF DESC,
-			              BOARD_REPLY_LEV ASC, BOARD_REPLY_SEQ ASC))
+			FROM (SELECT ROWNUM RNUM, BOARD_NO, BOARD_TITLE, user_id,   
+			               BOARD_CONTENT, BOARD_ORIGINAL_img,  
+			               BOARD_RENAME_img, BOARD_DATE,BOARD_COUNT  
+			       FROM (select * from board order by board_no desc))
 			where rnum >= #{startRow} and rnum <= #{endRow}
 		]]>
 	</select>
 	
-<!--           수정 확인                -->
+	
 	<!-- 글 등록 -->
 	<insert id="insertOriginBoard" parameterType="Board" >
 		insert into board 	(board_no, user_id, board_title, 
@@ -76,7 +54,6 @@
 				#{board_title}, #{board_content}, sysdate, 0,
 				#{board_original_img}, #{board_rename_img})		
 	</insert>
-<!--           수정 확인           -->
 	
 	<!-- 글 상세 조회 -->
 	<select id="selectBoard" parameterType="int" resultMap="resultBoard">
@@ -90,74 +67,6 @@
 		set board_count = board_count + 1 
 		where board_no = #{board_no}
 	</update>
-	
-	
-	<!-- 댓글   -->
-	<update id="updateReplySeq1" parameterType="Board" >
-		update board 
-		set board_reply_seq = board_reply_seq + 1 
-		where board_ref = #{board_ref} 
-		and board_reply_lev = #{board_reply_lev}		
-	</update>
-	
-	<!-- 대댓글   -->
-	<update id="updateReplySeq2" parameterType="Board" >
-		update board 
-		set board_reply_seq = board_reply_seq + 1 
-		where board_ref = #{board_ref} 
-		and board_reply_lev = #{board_reply_lev} 
-		and board_reply_ref = 	#{board_reply_ref}
-	</update>
-	
-	<!-- 댓글 등록 -->
-	<insert id="insertReply1" parameterType="Board">
-		insert into board (board_no, board_title, user_id,
-				board_content, board_original_img, 
-				board_rename_img, board_date, 
-				board_reply_lev, board_ref, board_reply_ref,
-				board_reply_seq, board_count)
-		values ((select max(board_no) + 1 from board), 
-				#{board_title}, #{user_id}, #{board_content}, 
-				null, null, sysdate, 2, #{board_ref}, 
-				(select max(board_no) + 1 from board), 
-				#{board_reply_seq}, default)		
-	</insert>
-	
-	<!-- 대댓글 등록 -->
-	<insert id="insertReply2" parameterType="Board">
-		insert into board (board_no, board_title, user_id,
-				board_content, board_original_img, 
-				board_rename_img, board_date, 
-				board_reply_lev, board_ref, board_reply_ref,
-				board_reply_seq, board_count)
-		values ((select max(board_no) + 1 from board), 
-				#{board_title}, #{user_id}, #{board_content}, 
-				null, null, sysdate, 3, #{board_ref}, 
-				#{board_reply_ref}, #{board_reply_seq}, default)
-	</insert>
-
-	<!-- 글 삭제 -->
-	<delete id="deleteBoard" parameterType="Board">
-		delete from board 
-		<if test="board_reply_lev == 1">
-			where board_ref = #{board_no}
-		</if>
-		<if test="board_reply_lev == 2">
-			where board_reply_ref = #{board_no}
-		</if>
-		<if test="board_reply_lev == 3">
-			where board_no = #{board_no}
-		</if>		
-	</delete>
-	
-	<!-- 댓글 수정 -->
-	<update id="updateReply" parameterType="Board">
-		update board 
-		set board_title = #{board_title}, 
-			board_content = #{board_content}
-		where board_no = #{board_no}						
-	</update>
-	
 	
 	<!-- 글 수정 -->
 	<update id="updateOrigin" parameterType="Board">
@@ -178,24 +87,34 @@
 	</update> 
 	
 	<!-- 글 삭제 -->
-<!-- 	<delete id="deleteBoard" parameterType="Board">
+	<delete id="deleteBoard" parameterType="Board">
 		delete from board 
 	 	where board_no = #{board_no}
-	</delete> 
- -->
+	</delete>
+
 
 	
-	
+	<!-- 게시글 3개 출력 -->
+	<select id="selectTop3" resultMap="resultTop3">
+		<![CDATA[
+		SELECT *  
+		FROM (SELECT ROWNUM RNUM, BOARD_NO, 
+					 BOARD_TITLE, BOARD_COUNT  
+		       FROM (SELECT * FROM BOARD
+		              ORDER BY BOARD_COUNT DESC))  
+		WHERE RNUM >= 1 AND RNUM <= 5
+		]]>
+	</select>
 
 
 
 	<!-- 게시물 목록 + 페이징 + 제목검색 -->
-<!-- <select id="searchTitle" parameterType="Object" resultMap="resultBoard">
+<select id="searchTitle" parameterType="Object" resultMap="resultBoard">
 	<![CDATA[
 		SELECT *  
-		FROM (SELECT ROWNUM RNUM, board_no, BOARD_TITLE, user_id,   
+		FROM (SELECT ROWNUM RNUM, BOARD_NO, BOARD_TITLE, user_id,   
 				               BOARD_CONTENT, BOARD_ORIGINAL_img,  
-				               BOARD_RENAME_img, BOARD_DATE,board_count  
+				               BOARD_RENAME_img, BOARD_DATE,BOARD_COUNT  
 	          FROM(select *
 	               from board
 	               where board_title like '%' || #{ keyword } || '%'))
@@ -203,7 +122,7 @@
 	]]>
 </select>
 
-게시물 총 갯수 + 검색 적용
+<!-- 게시물 총 갯수 + 검색 적용 -->
 <select id="searchTitleCount" resultType="_int" parameterType="string">	
 		SELECT count(*)  
 		from board
@@ -211,7 +130,7 @@
 </select>
 
 
-	게시물 목록 + 페이징 + 작성자
+	<!-- 게시물 목록 + 페이징 + 작성자 -->
 <select id="searchWriter" parameterType="Object" resultMap="resultBoard">
 	<![CDATA[
 		SELECT *  
@@ -225,13 +144,13 @@
 	]]>
 </select>
 
-	작성자로 검색  갯수
+	<!-- 작성자로 검색  갯수-->
  	<select id="searchWriterCount" parameterType="String" resultType="_int">
 		select count(*) 
 		from board
 		where user_id like '%' || #{ keyword } || '%'
 	</select>
-	 -->
+	
 	
 	
 	
@@ -239,7 +158,7 @@
 <!-- <select id="searchDate" parameterType="Object" resultMap="resultBoard">
 	<![CDATA[
 		SELECT *  
-		FROM (SELECT ROWNUM RNUM, board_no, BOARD_TITLE, user_id,   
+		FROM (SELECT ROWNUM RNUM, BOARD_NO, BOARD_TITLE, user_id,   
 				               BOARD_CONTENT, BOARD_ORIGINAL_img,  
 				               BOARD_RENAME_img, BOARD_DATE,board_count  
 	          FROM(select *
@@ -258,26 +177,7 @@
 	</select>
  -->
 
-	<!-- 제목으로 검색 -->
-	<select id="searchTitle" parameterType="string" resultMap="resultBoard">
-		select * from board
-		where board_title like '%' || #{ keyword } || '%'
-		order by board_no desc
-	</select>
-	
-	<!-- 작성자로 검색 -->
-	<select id="searchWriter" parameterType="string" resultMap="resultBoard">
-		select * from board
-		where user_id like '%' || #{ keyword } || '%'
-		order by board_no desc
-	</select>
-	
-	<!-- 날짜로 검색 -->
- 	<select id="searchDate" parameterType="SearchDate" resultMap="resultBoard">
-		select * from board
-		where board_date between #{ begin } and #{ end }
-		order by board_no desc
-	</select>
+
 
 
 

@@ -59,58 +59,51 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	
-//	//제목 검색 페이징
-//	@Override
-//	public ArrayList<Board> selectSearchTitle(Paging page) {
-//		return boardDao.selectSearchTitle(page);
-//	}
-//	
-//	//작성자 검색 페이징
-//	@Override
-//	public ArrayList<Board> selectSearchWriter(Paging page) {
-//		return boardDao.selectSearchWriter(page);
-//	}
-//	
-//	//날짜 검색 페이징
-////	@Override
-////	public ArrayList<Board> selectSearchDate(Paging page) {
-////		return boardDao.selectSearchDate(page);
-////	}	
-//	
 	
-//	//제목 검색 카운트
 //	@Override
-//	public int searchTitleCount(String keyword) {
-//		return boardDao.searchTitleCount(keyword);
+//	public ArrayList<Board> selectSearchTitle(String keyword) {
+//		return boardDao.selectSearchTitle(keyword);
 //	}
-//	
-//	//작성자 검색 카운트
-//	@Override
-//	public int searchWriterCount(String keyword) {
-//		return boardDao.searchWriterCount(keyword);
-//	}
-
+	
+	//제목 검색 페이징
 	@Override
-	public ArrayList<Board> selectSearchTitle(String keyword) {
-		return boardDao.selectSearchTitle(keyword);
+	public ArrayList<Board> selectSearchTitle(Paging page) {
+		return boardDao.selectSearchTitle(page);
 	}
-
+	
+	//작성자 검색 페이징
 	@Override
-	public ArrayList<Board> selectSearchWriter(String keyword) {
-		return boardDao.selectSearchWriter(keyword);
+	public ArrayList<Board> selectSearchWriter(Paging page) {
+		return boardDao.selectSearchWriter(page);
 	}
-
+	
+	//날짜 검색 페이징
 	@Override
-	public ArrayList<Board> selectSearchDate(SearchDate date) {
-		return boardDao.selectSearchDate(date);
+	public ArrayList<Board> selectSearchDate(Paging page) {
+		return boardDao.selectSearchDate(page);
+	}	
+	
+	
+	//제목 검색 카운트
+	@Override
+	public int searchTitleCount(String keyword) {
+		return boardDao.searchTitleCount(keyword);
+	}
+	
+	//작성자 검색 카운트
+	@Override
+	public int searchWriterCount(String keyword) {
+		return boardDao.searchWriterCount(keyword);
 	}
 	
 	//날짜 검색 카운트
-//	@Override
-//	public int searchDateCount(SearchDate date) {
-//		return boardDao.searchDateCount(date);
-//	}
+	@Override
+	public int searchDateCount(SearchDate date) {
+		return boardDao.searchDateCount(date);
+	}
 //	
+
+
 	
 	
 	
