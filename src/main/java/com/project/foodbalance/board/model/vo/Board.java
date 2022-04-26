@@ -44,11 +44,11 @@ public class Board implements Serializable {
 		this.board_reply_seq = board_reply_seq;
 	}
 
-	public int getboard_no() {
+	public int getBoard_no() {
 		return board_no;
 	}
 
-	public void setboard_no(int board_no) {
+	public void setBoard_no(int board_no) {
 		this.board_no = board_no;
 	}
 
@@ -152,6 +152,8 @@ public class Board implements Serializable {
 				+ ", board_ref=" + board_ref + ", board_reply_ref=" + board_reply_ref + ", board_reply_lev="
 				+ board_reply_lev + ", board_reply_seq=" + board_reply_seq + "]";
 	}
+	
+	
 
 	
 }
