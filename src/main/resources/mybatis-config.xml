@@ -11,16 +11,17 @@
 	<typeAliases>	
 		<typeAlias type="com.project.foodbalance.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.project.foodbalance.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.project.foodbalance.notice.model.vo.Notice" alias="Notice"/>
 		<typeAlias alias="SearchDate" type="com.project.foodbalance.common.SearchDate"/>
 		<typeAlias alias="Paging" type="com.project.foodbalance.common.Paging"/>
+		<typeAlias alias="Train" type="com.project.foodbalance.training.model.vo.Train"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml" />
 		<mapper resource="mappers/board-mapper.xml"/>
-		<!-- 
 		<mapper resource="mappers/notice-mapper.xml"/>
-		<mapper resource="mappers/manage-mapper.xml"/> -->
+		<!-- <mapper resource="mappers/manage-mapper.xml"/> -->
 		
 	</mappers>
 </configuration>

@@ -152,6 +152,8 @@ public class Board implements Serializable {
 				+ ", board_ref=" + board_ref + ", board_reply_ref=" + board_reply_ref + ", board_reply_lev="
 				+ board_reply_lev + ", board_reply_seq=" + board_reply_seq + "]";
 	}
+	
+	
 
 	
 }

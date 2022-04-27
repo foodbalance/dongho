@@ -3,23 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<!-- 네이버 로그인 -->
-<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
-<!-- 카카오 로그인 -->
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<!-- 구글 로그인 -->
-<meta name ="google-signin-client_id" content="475054870985-nb2ujrb17mfum0hmss48ibnrcmslgkgq.apps.googleusercontent.com">
-<script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
-
-
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+<title></title>
 
 <style>
-
-
-
-
 
 .tb1{ 
 	cellspacing:0; 
@@ -33,19 +26,7 @@
 
 
 
-#logindiv{
-	right:-50px; 
-	border: 2px solid black; 
-	border-radius: 20px; 
-	padding: 0px; 
-	margin: 20px 30px 0px 25px; 
-	text-align: center; 
-	width: 400px; 
-	height: 170px; 
-	background-color: black; 
-	color: white;
-	
-}
+
 #loginbox{
 	margin: 7%; padding: 0px;
 	position:static; 
@@ -55,45 +36,39 @@
 }
 
 
-#spotdiv{
-	border: 2px solid black;
-	border-radius: 20px; 
-	padding: 0px; 
-	margin: -130px 30px 30px 25px; 
-	text-align: center; 
-	width: 400px; 
-	height: 480px; 
-	background-color: black; 
-	color: white; 
-	top:-27%; 
+#input{  /*로그인 창 인풋*/
 
-
-}
-#input{
 	margin: 5px;
+	width: 150px;
+
 }
+
 /*   로그인창 버튼  */
-#btn{
+#btn{  /* 아이디 찾기 버튼*/
 	margin: 0;
 	padding: 0;
 	border-radius: 9px;
 	font-size: 13px;
 	width: 100px;
+	height: 30px;
 }
-#btn1{
+#btn1{  /* 비밀번호 찾기 버튼*/
+	
 	float: left;
-	margin-top: 1.5px;
-	padding 0px;
+	margin: 0;
+	padding: 0;
 	border-radius: 9px;
 	font-size: 13px;
 	width: 100px;
+	height: 30px;
 }
-#btn2{
+#btn2{  /* 회원가입 버튼*/
 	margin: 0 0 0 -20px;
 	padding 0;
 	border-radius: 9px;
 	font-size: 13px;
 	width: 100px;
+	height: 30px;
 }
 
 /*   로그인창 버튼  end */
@@ -118,11 +93,28 @@ grid-row-gap: 7px;
 .div8 { grid-area: 3 / 3 / 4 / 4; }
 
 
+/* 메인 그리드 */
+.mainA {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-template-rows: repeat(3, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+.main1 { grid-area: 1 / 1 / 2 / 4; height: 500px;} /* 지도  */
+.main2 { grid-area: 2 / 1 / 3 / 2; height: 500px;} /* 레시피  */
+.main3 { grid-area: 2 / 2 / 3 / 3; height: 500px;} /* 운동법  */
+.main4 { grid-area: 2 / 3 / 3 / 4; height: 500px;} /* 로그인  */
+.main5 { grid-area: 3 / 1 / 4 / 2; height: 500px;} /* 공지 */
+.main6 { grid-area: 3 / 2 / 4 / 3; height: 500px;} /* 게시판  */
+
+
+
 
 td{
 	background-color: black; color: white; border: 3px solid white;
 }
-  
+
 /*  박스  */
 .square {
   width: 500px;
@@ -136,8 +128,6 @@ td{
 #se{
 	position: relative;
 	margin: auto;
-	
-	
 	width: 100%;
 	max-width: 1350px;
 	height: 100%;
@@ -148,11 +138,13 @@ td{
  	transition: all ease-in-out 0.3s;
   }	
   	
-#mdv{
+
+
+#mdv2{  /* 레시피, 운동법*/
 	border: 2px solid black;
 	border-radius: 20px; 
 	padding: 0px; 
-	margin: 20px 30px 30px 25px; 
+	margin: 250px 30px 0px 25px; 
 	text-align: center; 
 	width: 400px; 
 	height: 330px; 
@@ -161,20 +153,46 @@ td{
 	position:relative;
 }
 
-#mdv2{
+#mdv{ /* 공지, 게시판*/
 	border: 2px solid black;
 	border-radius: 20px; 
 	padding: 0px; 
-	margin: 20px 30px 30px 25px; 
+	margin: 350px 30px 0px 25px; 
 	text-align: center; 
 	width: 400px; 
 	height: 330px; 
 	background-color: black; 
 	color: white;
+	top : -200px;
 	position:relative;
 }
 
+#logindiv{ /*로그인박스*/
+	border: 2px solid black;
+	border-radius: 20px; 
+	padding: 13px; 
+	margin: 250px 30px 0px 25px; 
+	text-align: center; 
+	width: 390px; 
+	height: 200px; 
+	background-color: black; 
+	color: white;
+	position:relative;
+}
+#spotdiv{  /* 스팟( 지도) */
+	border: 2px solid black;
+	border-radius: 20px; 
+	padding: 0px; 
+	margin: 10px 30px 30px 25px;   /* 상 우 하 좌 */
+	text-align: center; 
+	width: 1300px; 
+	height: 700px; 
+	background-color: black; 
+	color: white; 
+	 
 
+
+}
 </style>
 
 
@@ -187,42 +205,105 @@ td{
 <nav>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 </nav>
-<section>
-<a style="padding:10px;" href="loginPage.do">로그인</a>
-<a style="padding:10px;" href="registerPage.do">회원가입</a>
-<!-- 관리자 로그인 -->
-<c:if test="${ !empty loginMember and loginMember.admin_ok eq 'Y' }"> 
-	<div id="loginBox" class="lineA">
-		${ sessionScope.loginMember.user_name } 관리자 님<br>
-		<button onclick="javascript:location.href='logout.do';">로그아웃</button>
-		<br>
-		<c:url var="callMyInfo" value="/myinfo.do">
-			<c:param name="userid" value="${ loginMember.user_id }" />
-		</c:url>
-			
+<br>
+<br>
+
+<div class="mainA">
+<div class="main1"> 
+<div id="spotdiv">
+			<h4><br>다이어트 스팟</h4>
+	 
+			<c:import url="/WEB-INF/views/common/kakaomap.jsp" />
+		
+		</div>
+</div>
+<div class="main2"> 
+<div id="mdv2" >
+		<h4><br>추천 레시피</h4><br>
+		<table id="newnotice"  class="tb1" >
+			<tr>
+					<th style="width: 80px">No.</th>
+				<th style="width: 300px">Name</th>
+				<th style="width: 90px">Value</th>
+			</tr>
+		</table>
 	</div>
-</c:if>
-<!-- 일반 로그인 -->
-<c:if test="${ !empty loginMember and loginMember.admin_ok eq 'N' }"> 
-	<div id="loginBox" class="lineA">
-		${ sessionScope.loginMember.user_name } 님<br>
-		<button onclick="javascript:location.href='logout.do';">로그아웃</button>
-		<br>
-		<c:url var="callMyInfo" value="/myinfo.do">
-			<c:param name="userid" value="${ loginMember.user_id }" />
-		</c:url>
-			
+
+
+</div>
+<div class="main3"> 
+<div id="mdv2" >
+		<h4><br>운동법</h4><br>
+		<table id="newnotice"  class="tb1" >
+			<tr>
+					<th style="width: 80px">No.</th>
+				<th style="width: 300px">Name</th>
+				<th style="width: 90px">Value</th>
+			</tr>
+		</table>
 	</div>
-</c:if>
+</div>
+
+<div class="main4">
+<div id="logindiv">
+		<form border="1" cellspacing="0" style="position:relative; width: 40%; " >
+		<div class="parent" id="loginbox">
+			<div class="div1">
+					<div id="box1">
+						아이디 
+					</div>
+				</div>
+			<div class="div2"><input type="text" id="input"> </div>
+			<div class="div3" ><button class="btn btn-outline-secondary"  type="submit"  style="float:left; height: 100px; border-radius: 8px;">로그인</button></div>
+			<div class="div4">
+					<div id="box1">
+						비밀번호 
+					</div>
+					</div>
+			<div class="div5"><input type="password" id="input"> </div>
+			<div class="div6"><button type="button" id="btn">아이디 찾기</button></div>
+			<div class="div7"><button type="button" id="btn1">비밀번호 찾기</button></div>
+			<div class="div8"><button type="button" id="btn2">회원가입</button></div>
+		</div>
+		</form>	
+		</div> 
+
+</div>
+<div class="main5">
+<div id="mdv" >
+		<h4><br>공지사항</h4><br>
+		<table class="tb1" id="newnotice">
+			<tr>
+				<th style="width: 80px">No.</th>
+				<th style="width: 300px">Name</th>
+				<th style="width: 90px">Value</th>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div class="main6">
+<div id="mdv" >
+		<h4><br>게시판</h4><br>
+		<table id="newnotice"  class="tb1" >
+			<tr>
+				<th style="width: 80px">No.</th>
+				<th style="width: 300px">Name</th>
+				<th style="width: 90px">Value</th>
+			</tr>
+		</table>
+	</div>
+</div>
+
+</div>
+   
 
 
-<a href="${naverUrl}">네이버 로그인</a>
-<a href="kakaoLogin.do">카카오로그인</a>	
-
-
-
-
-<c:import url="/WEB-INF/views/common/footer.jsp" />
+<footer style="">
+				<c:import url="/WEB-INF/views/common/footer.jsp" />
+</footer>
+</div>   
+  </div>
 
 
 </body>

@@ -63,26 +63,26 @@
 	   	</c:url>
 	   	<c:url var="btitle" value="/bsearchTitle.do">
 	   		<c:param name="page" value="${ startPage - 10 }"/>
-	   		<c:param name="keyword" value="${keyword }"/>
+	   		<c:param name="keyword" value="${ keyword }"/>
 	   	</c:url>
 	   	<c:url var="bwrite" value="/bsearchWriter.do">
 	   		<c:param name="page" value="${ startPage - 10 }"/>
-	   		<c:param name="keyword" value="${keyword }"/>
+	   		<c:param name="keyword" value="${ keyword }"/>
 	   	</c:url>
-	  <%--  	<c:url var="bdate" value="/bsearchDate.do">
+	  	<c:url var="bdate" value="/bsearchDate.do">
 	   		<c:param name="page" value="${ startPage - 10 }"/>
 	   		<c:param name="begin" value="${begin }" />
 	   		<c:param name="end" value="${end }" />
-	   	</c:url> --%>
+	   	</c:url>
 	   	<c:if test="${ action eq 'bsearchTitle' }">
 	   		<a href="${ blf2 }">이전</a>
 	   	</c:if>
 	   	<c:if test="${ action eq 'bsearchWriter' }">
 	   		<a href="${ blf2 }">이전</a>
 	   	</c:if>
-	   	<%-- <c:if test="${ action eq 'bsearchDate' }">
+	   	<c:if test="${ action eq 'bsearchDate' }">
 	   		<a href="${ blf2 }">이전</a>
-	   	</c:if> --%>
+	   	</c:if>
 	   		   	
 	   	<!-- 검색 없을 때 -->
 	   	<c:if test="${ empty action }">
@@ -112,11 +112,11 @@
 	   				<c:param name="page" value="${ p }"/>
 	   				<c:param name="keyword" value="${keyword }"/>
 	   			</c:url>
-	   			<%-- <c:url var="bdate" value="/bsearchDate.do">
+	   			<c:url var="bdate" value="/bsearchDate.do">
 	   				<c:param name="page" value="${ p }"/>
 	   				<c:param name="begin" value="${begin }" />
 	   				<c:param name="end" value="${end }" />
-	   			</c:url> --%>
+	   			</c:url>
 	   			
 	   			<c:if test="${ action eq 'bsearchTitle' }">
 	   				<a href="${ btitle }">${ p }</a>
@@ -124,9 +124,9 @@
 	   			<c:if test="${ action eq 'bsearchWriter' }">
 	   				<a href="${ bwrite }">${ p }</a>
 	   			</c:if>
-	   		<%-- 	<c:if test="${ action eq 'bsearchDate' }">
+	   			<c:if test="${ action eq 'bsearchDate' }">
 	   				<a href="${ bdate }">${ p }</a>
-	   			</c:if> --%>
+	   			</c:if>
 	   			<!-- 검색 없을 때 -->
 	   			<c:if test="${ empty action }">
 	   				<a href="${ blf5 }">${ p }</a>
@@ -147,11 +147,11 @@
 	   			<c:param name="page" value="${ endPage + 10 }"/>
 	   			<c:param name="keyword" value="${keyword }"/>
 	   		</c:url>
-	   		<%-- <c:url var="bdate" value="/bsearchDate.do">
+	   		<c:url var="bdate" value="/bsearchDate.do">
 	   			<c:param name="page" value="${ endPage + 10 }"/>
 	   			<c:param name="begin" value="${begin }" />
 	   			<c:param name="end" value="${end }" />
-	   		</c:url> --%>
+	   		</c:url>
 	   			
 	   		<c:if test="${ action eq 'bsearchTitle' }">
 	   			<a href="${ blf3 }">다음</a>
@@ -159,9 +159,9 @@
 	   		<c:if test="${ action eq 'bsearchWriter' }">
 	   			<a href="${ blf3 }">다음</a>
 	   		</c:if>
-	   		<%-- <c:if test="${ action eq 'bsearchDate' }">
+	   		<c:if test="${ action eq 'bsearchDate' }">
 	   			<a href="${ blf3 }">다음</a>
-	   		</c:if> --%>
+	   		</c:if>
 
 	   		<!-- 검색 없을 때 -->
 	   		<c:if test="${ empty action }">
@@ -190,20 +190,20 @@
 		   		<c:param name="page" value="${ maxPage }"/>
 		   		<c:param name="keyword" value="${keyword }"/>
 		   	</c:url>
-		 <%--   	<c:url var="bdate" value="/bsearchDate.do">
+		 	<c:url var="bdate" value="/bsearchDate.do">
 		   		<c:param name="page" value="${ maxPage }"/>
 		   		<c:param name="begin" value="${begin }" />
 		   		<c:param name="end" value="${end }" />
-		   	</c:url> --%>
+		   	</c:url>
 		   	<c:if test="${ action eq 'bsearchTitle' }">
 		   		<a href="${ btitle }">▶▶</a>
 		   	</c:if>
 		   	<c:if test="${ action eq 'bsearchWriter' }">
 		   		<a href="${ bwrite }">▶▶</a>
 		   	</c:if>
-		   <%-- 	<c:if test="${ action eq 'bsearchDate' }">
+		    <c:if test="${ action eq 'bsearchDate' }">
 		   		<a href="${ bdate }">▶▶</a>
-		   	</c:if> --%>
+		   	</c:if>
 		   	   	
 		   	<!-- 검색 없을 때 -->
 		   	<c:if test="${ empty action }">
@@ -244,7 +244,7 @@
 	<!-- 현재 페이지가 속한 페이지 그룹 출력 -->
 		<c:forEach var="p1" begin="${ startPage }" end="${ endPage }" step="1">
 			<c:if test="${ p1 eq currentPage }">
-				<font size="4" color="red"><b>[${ p1 }]</b></font>
+				<font size="4" color="#919aa1;"><b>[${ p1 }]</b></font>
 			</c:if>
 			<c:if test="${ p1 ne currentPage }">
 				<c:url var="nlf5" value="/nlist.do">

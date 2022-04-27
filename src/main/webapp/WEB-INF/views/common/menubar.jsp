@@ -32,7 +32,8 @@
 
 <br>
 
-<h1 style="float: left; font-size: 40px; ">FOOD BALANCE</h1>
+
+<a style="float: left; font-size: 40px; color: black; text-decoration: none;" href="main.do"><b>FOOD BALANCE</b></a>
 <c:import url="/WEB-INF/views/common/loginSession.jsp" />
 
 <body>
@@ -46,27 +47,27 @@
     <div class="collapse navbar-collapse" id="navbarColor02" >
       <ul class="navbar-nav me-auto" style="margin: auto;">
  
-          <button type="button" class="btn btn-outline-secondary" id="menubtn">홈
+          <a type="button" class="btn btn-outline-secondary" id="menubtn" href="main.do">홈
             <span class="visually-hidden">(current)</span>
         
-         </button>
+         </a>
       &ensp;&ensp;&ensp;
           <button type="button" class="btn btn-outline-secondary" id="menubtn">음식이미지 ai분석
-      
+      		<span class="visually-hidden">(current)</span>
             </button>
          &ensp;&ensp;&ensp;
-          <button type="button" class="btn btn-outline-secondary" id="menubtn">공지사항</button>
+          <a type="button" class="btn btn-outline-secondary" id="menubtn" href="${ pageContext.servletContext.contextPath }/nlist.do?page=1">공지사항 <span class="visually-hidden">(current)</span></a>
     &ensp;&ensp;&ensp;
        
-          <button type="button" class="btn btn-outline-secondary" id="menubtn">게시판</button>
+          <a type="button" class="btn btn-outline-secondary" id="menubtn"  href="${ pageContext.servletContext.contextPath }/blist.do?page=1">게시판<span class="visually-hidden">(current)</span></a>
          &ensp;&ensp;&ensp;
        <button type="button" class="btn btn-outline-secondary" id="menubtn">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">다이어트 추천</a>
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">다이어트 추천<span class="visually-hidden">(current)</span></a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">추천레시피</a>
+            <a class="dropdown-item" href="#">추천레시피<span class="visually-hidden">(current)</span></a>
               <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">운동법</a>
+            <a class="dropdown-item" href="${ pageContext.servletContext.contextPath }/trainPage.do">운동법<span class="visually-hidden">(current)</span></a>
           </div>
         </li>
         </button>
