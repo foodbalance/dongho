@@ -46,19 +46,19 @@
     <div class="collapse navbar-collapse" id="navbarColor02" >
       <ul class="navbar-nav me-auto" style="margin: auto;">
  
-          <button type="button" class="btn btn-outline-secondary" id="menubtn">홈
+          <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='main.do';">홈
             <span class="visually-hidden">(current)</span>
         
          </button>
       &ensp;&ensp;&ensp;
-          <button type="button" class="btn btn-outline-secondary" id="menubtn">음식이미지 ai분석
+          <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='#';">음식이미지 ai분석
       
             </button>
          &ensp;&ensp;&ensp;
-          <button type="button" class="btn btn-outline-secondary" id="menubtn">공지사항</button>
+          <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='#';">공지사항</button>
     &ensp;&ensp;&ensp;
        
-          <button type="button" class="btn btn-outline-secondary" id="menubtn">게시판</button>
+          <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='blist.do';">게시판</button>
          &ensp;&ensp;&ensp;
        <button type="button" class="btn btn-outline-secondary" id="menubtn">
         <li class="nav-item dropdown">
@@ -66,7 +66,7 @@
           <div class="dropdown-menu">
             <a class="dropdown-item" href="#">추천레시피</a>
               <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">운동법</a>
+            <a class="dropdown-item" href="#" >운동법</a>
           </div>
         </li>
         </button>
