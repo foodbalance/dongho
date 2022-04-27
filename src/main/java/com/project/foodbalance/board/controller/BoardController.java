@@ -160,22 +160,25 @@ public class BoardController {
 	@RequestMapping("bdetail.do")
 	public String boardDetailMethod(@RequestParam("board_no") int board_no, Model model, HttpSession session){
 		Board board = boardService.selectBoard(board_no);
-		
+		String result = null;
 			//조회수 1증가 처리
 		boardService.updateAddReadcount(board_no);
-						
-		if(board != null) {
-			model.addAttribute("board", board);
-					
-			Member loginMember = (Member)session.getAttribute("loginMember");
-					
-			return "board/boardDetail";
+		try {
+			if(board != null) {
+				model.addAttribute("board", board);
+			
+				Member loginMember = (Member)session.getAttribute("loginMember");
+				result = "board/boardDetail";
 				
-		}else {
+			}
+		}catch(Exception e) {
 			model.addAttribute("message", board_no + "번 게시글 상세보기 실패");
-			return "common/error";
+			
+			result = "common/commonview";
 		}
+		return result;
 	}
+
 		
 	//첨부파일 다운로드 요청 처리용
 	@RequestMapping("bfdown.do")
@@ -507,8 +510,59 @@ public class BoardController {
 			return mv;
 		}
 	
-	
-	
+//		//댓글달기 페이지로 이동
+		@RequestMapping("breplyform.do")
+		public String moveReplyForm(@RequestParam("board_no") int origin_num,
+				@RequestParam("page") String currentPage, Model model) {
+			model.addAttribute("board_no", origin_num);
+			model.addAttribute("currentPage", currentPage);
+					
+			return "board/boardReplyForm";
+		}
+		
+		//댓글 등록 처리용
+		@RequestMapping(value="breply.do", method=RequestMethod.POST)
+		public String replyInsertMethod(Board reply, @RequestParam("page") int page, Model model) {
+			//해당 댓글에 대한 원글 조회
+			Board origin = boardService.selectBoard(reply.getBoard_ref());
+					
+			//현재 등록글의 레벨을 설정
+			reply.setBoard_reply_lev(origin.getBoard_reply_lev() + 1);
+					
+			//대댓글일때는 board_reply_ref 값 지정 : 참조하는 댓글 번호
+			if(reply.getBoard_reply_lev() == 3) {
+				reply.setBoard_ref(origin.getBoard_ref());  //참조 원글 번호
+				reply.setBoard_reply_ref(origin.getBoard_reply_ref());
+			}
+					
+			//댓글과 대댓글은 최근 등록글을 seq 1로 지정함
+			reply.setBoard_reply_seq(1);
+			//기존의댓글 또는 대댓글의 순번(seq)은 모두 1증가 처리함
+			boardService.updateReplySeq(reply);
+					
+			if(boardService.insertReply(reply) > 0) {
+				return "redirect:blist.do?page=" + page;
+			}else {
+				model.addAttribute("message", reply.getBoard_ref() + "번 글에 대한 댓글 등록 실패.");
+				return "common/commonview";
+			}
+		}
+		
+		//댓글, 대댓글 수정 처리용
+		@RequestMapping(value="breplyup.do", method=RequestMethod.POST)
+		public String replyUpdateMethod(Board reply, @RequestParam("page") int page, Model model) {
+					
+			if(boardService.updateReply(reply) > 0) {
+				//댓글, 대댓글 수정성공시 다시 상세페이지가 보여지게 한다면
+				model.addAttribute("board_no", reply.getBoard_no());
+				model.addAttribute("page", page);
+				return "redirect:bdetail.do";
+			}else {
+				model.addAttribute("message", reply.getBoard_no() + "번 글 수정 실패.");
+				return "common/commonview";
+			}
+		}
+		
 	
 	
 	

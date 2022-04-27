@@ -93,6 +93,35 @@ public class BoardDao implements Serializable{
 		return session.selectOne("boardMapper.searchDateCount", date);
 	}
 	
+	public int insertReply(Board reply) {
+		int result = 0;
+
+		if (reply.getBoard_reply_lev() == 2) {  //댓글이면
+			result = session.insert("boardMapper.insertReply1", reply);
+		}
+		if (reply.getBoard_reply_lev() == 3) {  //대댓글이면
+			result = session.insert("boardMapper.insertReply2", reply);
+		}
+
+		return result;
+	}
+
+	public int updateReplySeq(Board reply) {
+		int result = 0;
+
+		if (reply.getBoard_reply_lev() == 2) {  //댓글이면
+			result = session.update("boardMapper.updateReplySeq1", reply);
+		}
+		if (reply.getBoard_reply_lev() == 3) {  //대댓글이면
+			result = session.update("boardMapper.updateReplySeq2", reply);
+		}
+
+		return result;
+	}
+	
+	public int updateReply(Board reply) {
+		return session.update("boardMapper.updateReply", reply);
+	}
 	
 	
 }

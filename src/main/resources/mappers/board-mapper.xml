@@ -87,9 +87,22 @@
 	</update> 
 	
 	<!-- 글 삭제 -->
-	<delete id="deleteBoard" parameterType="Board">
+	<!-- <delete id="deleteBoard" parameterType="Board">
 		delete from board 
 	 	where board_no = #{board_no}
+	</delete> -->
+	
+	<delete id="deleteBoard" parameterType="Board">
+		delete from board 
+		<if test="board_reply_lev == 1">
+			where board_ref = #{board_no}
+		</if>
+		<if test="board_reply_lev == 2">
+			where board_reply_ref = #{board_no}
+		</if>
+		<if test="board_reply_lev == 3">
+			where board_no = #{board_no}
+		</if>		
 	</delete>
 
 
@@ -155,7 +168,7 @@
 	
 	
 		<!-- 게시물 목록 + 페이징 + 날짜 -->
-<!-- <select id="searchDate" parameterType="Object" resultMap="resultBoard">
+<select id="searchDate" parameterType="Object" resultMap="resultBoard">
 	<![CDATA[
 		SELECT *  
 		FROM (SELECT ROWNUM RNUM, BOARD_NO, BOARD_TITLE, user_id,   
@@ -169,16 +182,64 @@
 </select>
 	
 	
-	날짜로 검색 갯수
+	<!-- 날짜로 검색 갯수 -->
  	<select id="searchDateCount" parameterType="SearchDate" resultType="_int">
 		select count(*) 
 		from board
 		where board_date between #{ begin } and #{ end }		
 	</select>
- -->
 
+	<!-- 댓글 등록시 seq 증가   -->
+	<update id="updateReplySeq1" parameterType="Board" >
+		update board 
+		set board_reply_seq = board_reply_seq + 1 
+		where board_ref = #{board_ref} 
+		and board_reply_lev = #{board_reply_lev}		
+	</update>
+	
+		<!-- 대댓글 등록시 seq 증가  -->
+	<update id="updateReplySeq2" parameterType="Board" >
+		update board 
+		set board_reply_seq = board_reply_seq + 1 
+		where board_ref = #{board_ref} 
+		and board_reply_lev = #{board_reply_lev} 
+		and board_reply_ref = 	#{board_reply_ref}
+	</update>
 
+	<!-- 댓글 등록 -->
+	<insert id="insertReply1" parameterType="Board">
+		insert into board (board_no, board_title, user_id,
+				board_content, board_original_img, 
+				board_rename_img, board_date, 
+				board_reply_lev, board_ref, board_reply_ref,
+				board_reply_seq, board_count)
+		values ((select max(board_no) + 1 from board), 
+				#{board_title}, #{user_id}, #{board_content}, 
+				null, null, sysdate, 2, #{board_ref}, 
+				(select max(board_no) + 1 from board), 
+				#{board_reply_seq}, default)		
+	</insert>
+	
+	<!-- 대댓글 등록 -->
+	<insert id="insertReply2" parameterType="Board">
+		insert into board (board_no, board_title, user_id,
+				board_content, board_original_img, 
+				board_rename_img, board_date, 
+				board_reply_lev, board_ref, board_reply_ref,
+				board_reply_seq, board_count)
+		values ((select max(board_no) + 1 from board), 
+				#{board_title}, #{user_id}, #{boad_content}, 
+				null, null, sysdate, 3, #{board_ref}, 
+				#{board_reply_ref}, #{board_reply_seq}, default)
+	</insert>
 
+	<!-- 댓글 수정 -->
+	<update id="updateReply" parameterType="Board">
+		update board 
+		set board_title = #{board_title}, 
+			board_content = #{board_content}
+		where board_no = #{board_no}						
+	</update>
 
 
 

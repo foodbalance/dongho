@@ -15,19 +15,23 @@
 <meta name="author" content="" /> -->
 
 <style type="text/css">
-  table {
-    width: 100%;
-    border-top: 1px solid #444444;
-    border-collapse: collapse;
-  }
+
   .th {
-    border-bottom: 1px solid #444444;
+    border-bottom: 1px solid #52575c;
     padding: 15px;
   }
-   .td {
-    border-bottom: 1px solid #444444;
+  .td {
+    border-bottom: 1px solid #52575c;
     padding: 15px;
   }
+  .parent {
+	display: grid;
+	grid-template-columns: 2fr repeat(3, 1fr) 2fr;
+	grid-template-rows: 40px;
+	grid-column-gap: 0px;
+	grid-row-gap: 0px;
+  }
+  .div2 { grid-area: 1 / 4 / 2 / 5; }
 </style>
 
 <title></title>
@@ -75,15 +79,47 @@
  	<section class="page-section cta">
 		<div class="container">
 		<br><br>
-		    <div style="background-color: #1a1a1a;  border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;" class="row">
+		    <div style=" padding: 5px; margin: 5px;" class="row">
 		        <div class="col-xl-9 mx-auto">
 		        	<br>
-			        <p style="color: white; font-size: 45px;" align="center"><b>게시판</b></p>
+			        <p style="color: #52575c; font-size: 45px;" align="center"><b>게시판</b></p>
+			        <ul class="nav nav-tabs">
+					  <li class="nav-item">
+					    <a style="color: #52575c;" class="nav-link" data-bs-toggle="tab" href="#titleDiv">제목 검색</a>
+					  </li>
+					  <li class="nav-item">
+					    <a style="color: #52575c;" class="nav-link" data-bs-toggle="tab" href="#writerDiv">작성자 검색</a>
+					  </li>
+					  <li class="nav-item">
+					    <a style="color: #52575c;" class="nav-link" data-bs-toggle="tab" href="#dateDiv">날짜 검색</a>
+					  </li>
+					  
+					</ul>
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade" id="titleDiv">
+						    <form action="bsearchTitle.do" method="post">
+								<label>검색할 제목을 입력하세요 : <input type="search" name="keyword"></label>
+								<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
+							</form>
+						  </div>
+						  <div class="tab-pane fade" id="writerDiv">
+						    <form action="bsearchWriter.do" method="post">
+								<label>검색할 작성자를 입력하세요 : <input type="search" name="keyword"></label>
+								<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
+							</form>
+						  </div>
+						  <div class="tab-pane fade" id="dateDiv">
+						    <form action="bsearchDate.do" method="post">
+								<label>검색할 날짜를 입력하세요 : <input type="date" name="begin"> ~ <input type="date" name="end"></label>
+								<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
+							</form>
+						</div>
+					</div>
 			        <br>
 		            <div class="cta-inner bg-faded text-center rounded">
 <!-- =============================================================================== -->
 						<% int num = 1; %>
-						<table style="border-top: 1px solid #444444; border-collapse: collapse; width: 98%;background: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;text-align: center;"align="center" cellspacing="0" cellpadding="15">
+						<table style="width: 98%; ">
 							<tr><th class="th">번호</th><th class="th">제목</th><th class="th">작성자</th><th class="th">날짜</th><th class="th">조회수</th><th class="th">첨부파일</th></tr>
 							<c:forEach items="${ requestScope.list }" var="b">
 							   <tr>
@@ -93,7 +129,7 @@
 								         <c:param name="board_no" value="${ b.board_no }"/>
 								         <c:param name="page" value="${ currentPage }"/>
 								      </c:url>
-								      <a href="${ bdt }">${ b.board_title }</a>
+								      <a style="color: #52575c; text-decoration: none;" href="${ bdt }">${ b.board_title }</a>
 							      </td>
 							      <td class="td">${ b.user_id }</td>
 							      <td class="td"><fmt:formatDate value="${ b.board_date }" type="date" pattern="yyyy-MM-dd"/></td>
@@ -114,16 +150,54 @@
 <!-- =============================================================================== -->
 					</div>
 					<br>
-					<!-- 게시글 쓰기(등록)은 로그인한 회원만 가능함 -->
-					<c:if test="${ !empty sessionScope.loginMember }">
-					   <div style=" padding: 5px; margin: 5px; margin-bottom: 3%" align="center">
-					      <button style="margin-bottom: 1%; background-color: #fff; color: #000;" class="btn btn-outline-secondary" onclick="showWrite();">글쓰기</button>
-					   </div>
-					</c:if>
-					<br>
+					<!-- 게시글 쓰기(등록)은 로그인한 회원만 가능함 paging.jsp 로 기능 옮김 -->
+					<%-- <c:if test="${ !empty sessionScope.loginMember }">
+					   	<div class="div2">
+					      <button class="btn btn-outline-secondary" onclick="showWrite();">글쓰기</button>
+					   	</div>
+					</c:if> --%>
+					
+					
+					<!--  -->
+					<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="tab" href="#titleDiv">제목 검색</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="tab" href="#writerDiv">작성자 검색</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-bs-toggle="tab" href="#dateDiv">날짜 검색</a>
+  </li>
+  
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade" id="titleDiv">
+    <form action="bsearchTitle.do" method="post">
+		<label>검색할 제목을 입력하세요 : <input type="search" name="keyword"></label>
+		<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
+	</form>
+  </div>
+  <div class="tab-pane fade" id="writerDiv">
+    <form action="bsearchWriter.do" method="post">
+		<label>검색할 작성자를 입력하세요 : <input type="search" name="keyword"></label>
+		<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
+	</form>
+  </div>
+  <div class="tab-pane fade" id="dateDiv">
+    <form action="bsearchDate.do" method="post">
+		<label>검색할 날짜를 입력하세요 : <input type="date" name="begin"> ~ <input type="date" name="end"></label>
+		<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
+	</form>
+</div>
+</div>
+					
+					
+					
 					<!-- 검색 항목 -->
-					<center>
-					<div style="background-color: white; border-radius: 0.5rem;border: 1px solid; padding: 5px; margin: 5px; margin-bottom: 3%">
+					<%-- <center>
+					
+					<div style="width: 73%; padding: 5px; margin: 5px; margin-top:3%; margin-bottom: 3%">
 						<div>
 							<h2 >검색할 항목을 선택하세요.</h2>
 							<input type="radio" name="item" value="title" checked> 제목 &nbsp; &nbsp;
@@ -151,7 +225,7 @@
 						<button style="margin-bottom: 1%; " class="btn btn-outline-secondary" onclick="javascript:location.href='${ pageContext.servletContext.contextPath }/blist.do;'">전체
 								보기</button>
 						</div>
-					</center>
+					</center> --%>
 <!-- =============================================================================== -->
 	
 				</div>
