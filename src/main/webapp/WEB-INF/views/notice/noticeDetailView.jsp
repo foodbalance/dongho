@@ -41,7 +41,7 @@ table {
 	}
 </script>
 
-<!-- 공지사항 -->
+<<!-- 공지사항 -->
 <script type="text/javascript"
 	src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -79,31 +79,35 @@ table {
 			<br>
 			<br>
 			<div
-				style="background-color: #1a1a1a; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
+				style="background-color: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
 				class="row">
 				<div class="col-xl-9 mx-auto">
 					<br>
-					<p style="color: white; font-size: 45px;" align="center">
+					<p style="font-size: 45px;" align="center">
 						<b>공지사항 상세내용</b>
 					</p>
 					<br>
 					<div class="cta-inner bg-faded text-center rounded">
 						<!-- =============================================================================== -->
-						<br>
+						
 						<table align="center" width="100%" cellspacing="0"
 							cellpadding="10">
 							<tr>
-								<th style="color: white;">제 목</th> 
-								<td class="form-control" readonly>${notice.notice_title }</td>&nbsp;
-								<th style="color: white;">작 성 자</th>
-								<td class="form-control" readonly>${notice.user_id }</td>&nbsp;
-								<th style="color: white;">날 짜</th>
-								<td class="form-control" readonly>${notice.notice_date }</td>&nbsp;
+								<th>제 목</th> 
+								<td class="form-control" readonly>${ notice.notice_title }</td>
 							</tr>
 							<tr>
-								<th style="color: white;">내 용</th>
+								<th>작 성 자</th>
+								<td class="form-control" readonly>${ notice.user_id }</td>
+							</tr>
+							<tr>
+								<th>날 짜</th>
+								<td class="form-control" readonly>${ notice.notice_date }</td>
+							</tr>
+							<tr>
+								<th>내 용</th>
 								<td colspan="5"><textarea class="form-control"
-										name="board_content" rows="5" cols="50" readonly>${notice.notice_content }</textarea></td>
+										name="notice_content" rows="20" cols="50" readonly>${ notice.notice_content }</textarea></td>			
 							</tr>
 
 						</table>
@@ -111,9 +115,9 @@ table {
 					</div>
 					<br>
 					<div align="right">
-						<button style="background-color: white;"
-							class="btn btn-primary btn-block"
-							onclick="javascript:history.go(-1);">목록</button>
+						<button style= "background-color: white;"
+							 type="button" class="btn btn-outline-primary"
+							 onclick="javascript:history.go(-1);">목록</button>
 					</div>
 				</div>
 			</div>

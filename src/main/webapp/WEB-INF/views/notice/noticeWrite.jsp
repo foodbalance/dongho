@@ -30,6 +30,7 @@ table {
 	border-bottom: 1px solid #444444;
 	padding: 15px;
 }
+
 </style>
 
 <title></title>
@@ -79,12 +80,12 @@ table {
 			<br>
 			<br>
 			<div
-				style="background-color: #1a1a1a; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
+				style="background-color: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
 				class="row">
 				<form action="ninsert.do" method="post">
 				<div class="col-xl-9 mx-auto">
 					<br>
-					<p style="color: white; font-size: 45px;" align="center">
+					<p style="font-size: 45px;" align="center">
 						<b>공지사항 등록페이지</b>
 					</p>
 					<br>
@@ -95,19 +96,19 @@ table {
 							<table align="center" width="100%" cellspacing="0"
 								cellpadding="10">
 								<tr>
-									<th style="color: white;">제 목</th>
+									<th>제 목</th>
 									<td><input type="text" class="form-control"
 										name="notice_title" required></td>&nbsp;
 								</tr>
 								<tr>
-									<th style="color: white;">작 성 자</th>
+									<th>작 성 자</th>
 									<td><input type="text" class="form-control" name="user_id"
 										readonly value="${loginMember.user_id }"></td>&nbsp;
 								</tr>
-								<tr>
-									<th style="color: white;">내 용</th>
+								<tr style="overflow:scroll; width:500px; height:150px;">
+									<th>내 용</th>
 									<td><textarea name="notice_content" class="form-control"
-											rows="5" cols="50" required></textarea></td>&nbsp;
+											rows="20" cols="50" required></textarea></td>&nbsp;
 								</tr>
 							</table>
 
@@ -115,14 +116,16 @@ table {
 						</div>
 						<br>
 						<div align="right">
-							<input style="background-color: white;"
-								class="btn btn-primary btn-block" type="submit" value="등록하기">
-							&nbsp; <input style="background-color: white;"
-								class="btn btn-primary btn-block" type="reset" value="작성취소">
-							&nbsp;
-							<button style="background-color: white;"
-								class="btn btn-primary btn-block"
-								onclick="javascript:history.go(-1);return false;">목록</button>
+								<button class="source-button btn btn-outline-dark btn-xs" 
+									role="button" tabindex="0" type="submit">등록하기</button>
+								&nbsp; 
+								<button class="source-button btn btn-outline-dark btn-xs" 
+									role="button" tabindex="0" type="reset">작성취소</button>
+								&nbsp;
+								<button class="source-button btn btn-outline-dark btn-xs" role="button" tabindex="0"
+									onclick="javascript:history.go(-1);return false;">목록</button>
+								<!-- <button class="source-button btn btn-outline-dark btn-xs" role="button" tabindex="0">확인용 버튼</button> -->
+							
 							<!-- return false로 이벤트 전달 막음 -->
 						</div>
 					</div>

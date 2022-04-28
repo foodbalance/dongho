@@ -37,7 +37,7 @@ table {
 
 <script type="text/javascript">
 	function showWrite() {
-		location.href = "${ pageContext.servletContext.contextPath }/bwform.do";
+		location.href = "${ pageContext.servletContext.contextPath }/ndetail.do";
 	}
 </script>
 
@@ -79,11 +79,11 @@ table {
 			<br>
 			<br>
 			<div
-				style="background-color: #1a1a1a; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
+				style="background-color: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
 				class="row">
 				<div class="col-xl-9 mx-auto">
 					<br>
-					<p style="color: white; font-size: 45px;" align="center">
+					<p style="font-size: 45px;" align="center">
 						<b>공지사항 상세보기(관리자용)</b>
 					</p>
 					<br>
@@ -92,17 +92,21 @@ table {
 						<table align="center" width="100%" cellspacing="0"
 							cellpadding="10">
 							<tr>
-								<th style="color: white;">제 목</th>
+								<th>제 목</th>
 								<td class="form-control" readonly>${notice.notice_title }</td>
-								<th style="color: white;">작 성 자</th>
-								<td class="form-control" readonly>${notice.user_id }</td>
-								<th style="color: white;">날 짜</th>
-								<td class="form-control" readonly>${notice.notice_date }</td>
 							</tr>
 							<tr>
-								<th style="color: white;">내 용</th>
+								<th>작 성 자</th>
+								<td class="form-control" readonly>${notice.user_id }</td>
+							</tr>
+							<tr>
+								<th>날 짜</th>
+								<td class="form-control" readonly>${notice.notice_date }</td>
+							</tr>
+							<tr style="overflow:scroll; width:500px; height:150px;">
+								<th>내 용</th>
 								<td colspan="5"><textarea class="form-control"
-										name="board_content" rows="5" cols="50" readonly>${notice.notice_content }</textarea></td>
+										name="board_content" rows="20" cols="50" readonly>${notice.notice_content }</textarea></td>
 							</tr>
 
 						</table>
@@ -110,22 +114,22 @@ table {
 					</div>
 					<div align="right">
 						<br>
-						<button style="background-color: white;"
-							class="btn btn-primary btn-block"
+						<button class="source-button btn btn-outline-dark btn-xs" 
+							role="button" tabindex="0"
 							onclick="javascript:history.go(-1);">목록</button>
 						<!-- 수정페이지로 이동 -->
 						<c:url var="nup" value="/upmove.do">
 							<c:param name="notice_no" value="${notice.notice_no }" />
 						</c:url>
-						<button style="background-color: white;"
-							class="btn btn-primary btn-block"
+						<button class="source-button btn btn-outline-dark btn-xs" 
+							role="button" tabindex="0"
 							onclick="javascript:location.href='${nup}';">수정</button>
 						<!-- 공지 삭제 -->
 						<c:url var="ndel" value="/ndel.do">
 							<c:param name="notice_no" value="${notice.notice_no }" />
 						</c:url>
-						<button style="background-color: white;"
-							class="btn btn-primary btn-block"
+						<button class="source-button btn btn-outline-dark btn-xs" 
+							role="button" tabindex="0"
 							onclick="javascript:location.href='${ndel}';">글삭제</button>
 					</div>
 				</div>

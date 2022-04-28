@@ -37,7 +37,7 @@ table {
 
 <script type="text/javascript">
 	function showWrite() {
-		location.href = "${ pageContext.servletContext.contextPath }/bwform.do";
+		location.href = "${ pageContext.servletContext.contextPath }/nlist.do";
 	}
 </script>
 
@@ -79,11 +79,11 @@ table {
 			<br>
 			<br>
 			<div
-				style="background-color: #1a1a1a; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
+				style="background-color: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
 				class="row">
 				<div class="col-xl-9 mx-auto">
 					<br>
-					<p style="color: white; font-size: 45px;" align="center">
+					<p style="font-size: 45px;" align="center">
 						<b>공지사항</b>
 					</p>
 					<br>
@@ -125,8 +125,8 @@ table {
 					<br>
 					<!-- 로그인한 회원이 관리자인 경우는 공지사항 등록 버튼이 보이게 함 -->
 					<c:if test="${ loginMember.admin_ok eq 'Y' }">
-							<button style="background-color: white;"
-								class="btn btn-primary btn-block"
+							<button class="source-button btn btn-outline-dark btn-xs" 
+									role="button" tabindex="0"
 								onclick="javascript:location.href='noticeWrite.do';">공지
 								등록</button>
 						</c:if>
