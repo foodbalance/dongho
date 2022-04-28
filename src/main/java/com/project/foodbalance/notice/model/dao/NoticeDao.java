@@ -55,29 +55,51 @@ public class NoticeDao {
 	
 	//제목으로 검색 갯수 카운트
 	public int selectWriterCount() {
-		return session.selectOne("noticeMapper.getTitleCount");
+		return session.selectOne("noticeMapper.selectWriterCount");
 	}
-
+	
+	//메인에 최신 공지 3개 올리기용
 	public ArrayList<Notice> selectNewTop3() {
 		List<Notice> list = session.selectList("noticeMapper.selectTop3");
 		return (ArrayList<Notice>)list;
 	}
 	
 	//제목으로 검색
-	public ArrayList<Notice> selectSearchTitle(String keyword) {
-		List<Notice> list = session.selectList("noticeMapper.selectSearchTitle", keyword);
-		return (ArrayList<Notice>)list;
+	public int selectSearchTitle(String keyword) {
+		return session.selectOne("noticeMapper.selectSearchTitle", keyword);
+	}
+	
+	//제목 검색 페이징
+	public ArrayList<Notice> pageSearchTitle(Paging page) {
+		List<Notice> list = session.selectList("noticeMapper.nsearchTitle", page);
+		return(ArrayList<Notice>)list;
 	}
 	
 	//작성자로 검색
-	public ArrayList<Notice> selectSearchWriter(String keyword) {
-		List<Notice> list = session.selectList("noticeMapper.selectSearchWriter", keyword);
-		return (ArrayList<Notice>)list;
+	public int selectSearchWriter(String keyword) {
+		return session.selectOne("noticeMapper.selectSearchWriter", keyword);
+	}
+	
+	//작성자 검색 페이징
+	public ArrayList<Notice> pageSearchWriter(Paging page) {
+		List<Notice> list = session.selectList("noticeMapper.nsearchWriter", page);
+		return(ArrayList<Notice>)list;
 	}
 	
 	//날짜로 검색
-	public ArrayList<Notice> selectSearchDate(SearchDate date) {
-		List<Notice> list = session.selectList("noticeMapper.selectSearchDate", date);
-		return (ArrayList<Notice>)list;
+	public int selectSearchDate(SearchDate date) {
+		return session.selectOne("noticeMapper.selectSearchDate", date);
 	}
+	
+	//날짜 검색 페이징
+	public ArrayList<Notice> pageSearchDate(Paging page) {
+		List<Notice> list = session.selectList("noticeMapper.nsearchDate", page);
+		return(ArrayList<Notice>)list;
+	}
+	
+	//공지사항 조회수
+	public int updateAddReadCount(int notice_no) {
+		return session.update("noticeMapper.addReadCount", notice_no);
+	}
+	
 }

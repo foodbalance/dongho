@@ -1,18 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" errorPage="commonview.jsp"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<c:set var="currentPage" value="${ currentPage }" />
 
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- <meta charset="utf-8" />
+<meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
-<meta name="author" content="" /> -->
+<meta name="author" content="" />
 
 <style type="text/css">
 table {
@@ -32,16 +33,15 @@ table {
 }
 </style>
 
+
 <title></title>
 
 
-<script type="text/javascript">
-	function showWrite() {
-		location.href = "${ pageContext.servletContext.contextPath }/bwform.do";
-	}
-</script>
+<!-- Core theme JS-->
 
-<!-- 공지사항 -->
+
+
+<!-- 공지사항 상세 -->
 <script type="text/javascript"
 	src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -71,54 +71,58 @@ table {
 		}
 	}
 </script>
+
+
 </head>
+
+
 <body>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 	<section class="page-section cta">
 		<div class="container">
-			<br>
-			<br>
-			<div
-				style="background-color: #1a1a1a; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
-				class="row">
+			<div class="row">
 				<div class="col-xl-9 mx-auto">
-					<br>
-					<p style="color: white; font-size: 45px;" align="center">
-						<b>공지사항 상세내용</b>
+
+					<p style="color: #52575c; font-size: 35px; margin-top: 5%;"
+						align="center">
+						<b>공지사항</b>
 					</p>
 					<br>
 					<div class="cta-inner bg-faded text-center rounded">
 						<!-- =============================================================================== -->
-						<br>
-						<table align="center" width="100%" cellspacing="0"
-							cellpadding="10">
+						<table>
 							<tr>
-								<th style="color: white;">제 목</th> 
-								<td class="form-control" readonly>${notice.notice_title }</td>&nbsp;
-								<th style="color: white;">작 성 자</th>
-								<td class="form-control" readonly>${notice.user_id }</td>&nbsp;
-								<th style="color: white;">날 짜</th>
-								<td class="form-control" readonly>${notice.notice_date }</td>&nbsp;
+								<th class="th">제 목</th>
+								<td class="td" style="margin-top: 6%;" readonly>${notice.notice_title }</td>
+								<th class="th">작 성 자</th>
+								<td class="td" readonly>${notice.user_id }</td>
+								<th class="th">날 짜</th>
+								<td class="td" readonly><fmt:formatDate
+										value="${notice.notice_date }" type="date" pattern="yyyy-MM-dd" /></td>
 							</tr>
-							<tr>
-								<th style="color: white;">내 용</th>
+							<tr style="overflow:scroll; width:500px; height:150px;">
+								<th>내 용</th>
 								<td colspan="5"><textarea class="form-control"
-										name="board_content" rows="5" cols="50" readonly>${notice.notice_content }</textarea></td>
+										name="notice_content" rows="20" cols="50" readonly>${ notice.notice_content }</textarea></td>			
 							</tr>
-
 						</table>
 						<!-- =============================================================================== -->
 					</div>
 					<br>
 					<div align="right">
-						<button style="background-color: white;"
-							class="btn btn-primary btn-block"
-							onclick="javascript:history.go(-1);">목록</button>
+						<!-- <button style= "background-color: white;"
+							 type="button" class="btn btn-outline-primary"
+							 onclick="javascript:history.go(-1);">목록</button> -->
+						<a type="button" class="btn btn-outline-secondary" 
+						href="${ pageContext.servletContext.contextPath }/nlist.do?page=1">목록
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	
+	
 	<c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

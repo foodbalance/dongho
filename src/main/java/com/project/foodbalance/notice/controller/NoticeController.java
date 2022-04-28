@@ -2,6 +2,7 @@ package com.project.foodbalance.notice.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.foodbalance.board.model.vo.Board;
 import com.project.foodbalance.common.Paging;
 import com.project.foodbalance.common.SearchDate;
 import com.project.foodbalance.member.model.vo.Member;
@@ -84,7 +86,8 @@ public class NoticeController {
 		}
 		return mv;
 	}
-
+	
+	
 	// 공지 등록 페이지 이동
 	@RequestMapping("noticeWrite.do")
 	public String moveWritePage() {
@@ -107,6 +110,9 @@ public class NoticeController {
 	@RequestMapping("ndetail.do")
 	public String noticeDatailMethod(@RequestParam("notice_no") int notice_no, Model model, HttpSession session) {
 		Notice notice = noticeService.selectNotice(notice_no);
+		
+		//조회수 1증가 처리
+		noticeService.updateAddReadcount(notice_no);
 
 		if (notice != null) {
 			model.addAttribute("notice", notice);
@@ -169,22 +175,67 @@ public class NoticeController {
 		}
 	}
 
-	// 공지사항 제목 검색용
-	@RequestMapping(value = "nsearchTitle.do", method = RequestMethod.POST)
-	public String noticeSearchTitleMethod(@RequestParam("keyword") String keyword, Model model) {
-		ArrayList<Notice> list = noticeService.selectSearchTitle(keyword);
-
-		if (list.size() > 0) {
-			model.addAttribute("list", list);
-			return "notice/noticeListView";
-		} else {
-			model.addAttribute("message", keyword + "로 검색된 공지가 없습니다. ");
-			return "common/commonview";
+	// 제목 검색 및 페이징
+	@RequestMapping("nsearchTitle.do")
+	public ModelAndView searchTitleMethod(@RequestParam(name="page", required=false) String page, @RequestParam("keyword") String keyword, ModelAndView mv) {
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = Integer.parseInt(page);
 		}
+		
+		//패이징 계산 처리 -- 별도 클래스로 작성해서 사용해도 됨----------
+		int limit = 10; //한 페이지에 출력할 목록 갯수
+		//페이지 수 계산을 위해 총 목록갯수 조회
+		int listCount = noticeService.selectSearchTitle(keyword);
+		System.out.println("제목  " + keyword);
+		//페이지 수 계산
+		//주의 : 목록이 11개 이면, 페이지 수는 2가됨
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		//현재 페이지가 포함된 페이지 그룹의 시작값 지정 (뷰 아래쪽에 표시할 페이지 수를 10개씩 한 경우)
+		int startPage = (int)((double)currentPage / 10 + 0.9);
+		//현재 페이지가 포함된 페이지그룹의 끝값
+		int endPage = startPage + 10 - 1;
+		// 검색어
+		String searchkeyword  = keyword;
+		//페이징처리 분류
+		String menu = "notice";
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+	
+		//쿼리문에 전달할 현재 페이지에 출력할 목록의 첫행과 끝행 객체 처리
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		Paging paging = new Paging(startRow, endRow, searchkeyword);
+		//-----------------------------------------
+		//서비스 메소드 실행하고 결과 받기
+		ArrayList<Notice> list = noticeService.pageSearchTitle(paging);
+
+		
+		System.out.println("검색" + listCount +",  키워드 : " + searchkeyword);
+		
+		if(list != null && list.size() > 0) {
+			mv.addObject("list", list);
+			mv.addObject("listCount", listCount);
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startPage", startPage);
+			mv.addObject("endPage", endPage);
+			mv.addObject("limit", limit);
+			mv.addObject("menu", menu);
+			mv.addObject("action", "nsearchTitle");
+			mv.addObject("keyword", searchkeyword);
+			mv.setViewName("notice/noticeListView");
+		}else {
+			mv.addObject("message", currentPage + "페이지 목록 조회 실패");
+			mv.setViewName("common/commonview");
+		}
+		return mv;
 	}
 
 	// 공지사항 제목 검색시 글 갯수
-//		@RequestMapping(value="nsearchTitle.do", method=RequestMethod.POST)
+//		@RequestMapping(value="nAddSearchTitle.do", method=RequestMethod.POST)
 //		public ModelAndView SearchTitleCount(@RequestParam(name="page", required=false) String page, @RequestParam("keyword") String keyword, Model model,ModelAndView mv) {
 //			int listCount = noticeService.selectWriterCount();
 	//
@@ -200,34 +251,129 @@ public class NoticeController {
 //			}
 //			return mv;
 //		}	
-	// 공지사항 작성자 검색용
-	@RequestMapping(value = "nsearchWriter.do", method = RequestMethod.POST)
-	public String noticeSearchWriterMethod(@RequestParam("keyword") String keyword, Model model) {
-		ArrayList<Notice> list = noticeService.selectSearchWriter(keyword);
-
-		if (list.size() > 0) {
-			model.addAttribute("list", list);
-			return "notice/noticeListView";
-		} else {
-			model.addAttribute("message", keyword + "로 검색된 공지가 없습니다. ");
-			return "common/commonview";
+	// 작성자 검색 및 페이징
+	@RequestMapping("nsearchWriter.do")
+	public ModelAndView searchWriterMethod(@RequestParam(name="page", required=false) String page, @RequestParam("keyword") String keyword, ModelAndView mv) {
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = Integer.parseInt(page);
 		}
+		
+		//패이징 계산 처리 -- 별도 클래스로 작성해서 사용해도 됨----------
+		int limit = 10; //한 페이지에 출력할 목록 갯수
+		//페이지 수 계산을 위해 총 목록갯수 조회
+		int listCount = noticeService.selectSearchWriter(keyword);
+		System.out.println("작성자   " + keyword);
+		//페이지 수 계산
+		//주의 : 목록이 11개 이면, 페이지 수는 2가됨
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		//현재 페이지가 포함된 페이지 그룹의 시작값 지정 (뷰 아래쪽에 표시할 페이지 수를 10개씩 한 경우)
+		int startPage = (int)((double)currentPage / 10 + 0.9);
+		//현재 페이지가 포함된 페이지그룹의 끝값
+		int endPage = startPage + 10 - 1;
+		// 검색어
+		String searchkeyword  = keyword;
+		//페이징처리 분류
+		String menu = "notice";
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+	
+		//쿼리문에 전달할 현재 페이지에 출력할 목록의 첫행과 끝행 객체 처리
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		Paging paging = new Paging(startRow, endRow, searchkeyword);
+		
+		System.out.println(paging);
+		//-----------------------------------------
+		//서비스 메소드 실행하고 결과 받기
+		ArrayList<Notice> list = noticeService.pageSearchWriter(paging);
 
+		
+		System.out.println("검색" + listCount +",  키워드 : " + searchkeyword);
+		System.out.println(list);
+		if(list != null && list.size() > 0) {
+			mv.addObject("list", list);
+			mv.addObject("listCount", listCount);
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startPage", startPage);
+			mv.addObject("endPage", endPage);
+			mv.addObject("limit", limit);
+			mv.addObject("menu", menu);
+			mv.addObject("action", "nsearchWriter");
+			mv.addObject("keyword", searchkeyword);
+			mv.setViewName("notice/noticeListView");
+		}else {
+			mv.addObject("message", currentPage + "페이지 목록 조회 실패");
+			mv.setViewName("common/commonview");
+		}
+		return mv;
 	}
 
-	// 공지사항 날짜 검색용
-//	@RequestMapping(value = "nsearchDate.do", method = RequestMethod.POST)
-//	public String noticeSearchDateMethod(SearchDate date, Model model) {
-//		ArrayList<Notice> list = noticeService.selectSearchDate(date);
-//
-//		if (list.size() > 0) {
-//			model.addAttribute("list", list);
-//			return "notice/noticeListView";
-//		} else {
-//			model.addAttribute("message", "해당 날짜에 등록된 공지가 없습니다. ");
-//			return "common/commonview";
-//		}
-//	}
+	
+	// 날짜 검색 및 페이징
+	@RequestMapping("nsearchDate.do")
+	public ModelAndView searchDateMethod(@RequestParam(name="page", required=false) String page, SearchDate date, ModelAndView mv) {
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = Integer.parseInt(page);
+		}
+		
+		//패이징 계산 처리 -- 별도 클래스로 작성해서 사용해도 됨----------
+		int limit = 10; //한 페이지에 출력할 목록 갯수
+		//페이지 수 계산을 위해 총 목록갯수 조회
+		int listCount = noticeService.selectSearchDate(date);
+		System.out.println("검색" + listCount);
+		//페이지 수 계산
+		//주의 : 목록이 11개 이면, 페이지 수는 2가됨
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		//현재 페이지가 포함된 페이지 그룹의 시작값 지정 (뷰 아래쪽에 표시할 페이지 수를 10개씩 한 경우)
+		int startPage = (int)((double)currentPage / 10 + 0.9);
+		//현재 페이지가 포함된 페이지그룹의 끝값
+		int endPage = startPage + 10 - 1;
+		// 검색어
+		Date begin = date.getBegin();
+		Date end = date.getEnd();
+		//페이징처리 분류
+		String menu = "notice";
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+
+
+		//쿼리문에 전달할 현재 페이지에 출력할 목록의 첫행과 끝행 객체 처리
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		Paging paging = new Paging(startRow, endRow, begin, end);
+		//-----------------------------------------
+		//서비스 메소드 실행하고 결과 받기
+		ArrayList<Notice> list = noticeService.pageSearchDate(paging);
+
+		
+		System.out.println(list);
+		
+		if(list != null && list.size() > 0) {
+			mv.addObject("list", list);
+			mv.addObject("listCount", listCount);
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startPage", startPage);
+			mv.addObject("endPage", endPage);
+			mv.addObject("limit", limit);
+			mv.addObject("menu", menu);
+			mv.addObject("action", "nsearchDate");
+			mv.addObject("begin", begin);
+			mv.addObject("end", end);
+			mv.setViewName("notice/noticeListView");
+		}else {
+			mv.addObject("message", currentPage + "페이지 목록 조회 실패");
+			mv.setViewName("common/commonview");
+		}
+		return mv;
+	}
 
 	@RequestMapping(value = "ntop3.do", method = RequestMethod.POST)
 	@ResponseBody
