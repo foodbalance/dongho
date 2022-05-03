@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
-<head>
+<head>    
 <meta charset="utf-8"/>
 <style type="text/css">
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:15px; }
@@ -76,10 +76,10 @@ searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
-            var detailAddr = !!result[0].road_address ? '<div style="color:black">도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
-            detailAddr += '<div style="color:black">지번 주소 : ' + result[0].address.address_name + '</div>';
+            var detailAddr = '<div style="color:black;">도로명주소 : ' + '<p>' + result[0].address.address_name + '</p>' + '</div>';
+            	detailAddr = '<div style="color:black; ">지번 주소 : ' + '<p style="width:100px;">' + result[0].address.address_name +'</p>' +  '</div>';
             
-            var content = '<div class="bAddr" style="color:black">' +
+            var content = '<div class="bAddr" style="color:black;">' +
                            
                             detailAddr + 
                         '</div>';

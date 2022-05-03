@@ -12,23 +12,35 @@
     <meta name="author" content="">
 <title></title>
 
-<style>
+<style> 
 
 .tb1{ 
 	cellspacing:0; 
 	background-color: #e6e6e6; 
 	color: black; 
 	width: 100%;
+	border: 3px solid white;
+	border-spacing: 10px;
 	border-collapse: collapse;
-	border-color: orange blue;
+	margin-top: 0px;
+} 
 
+#toptr{
+
+	background-color: #e6e6e6; 
+	border: 1px solid #e6e6e6;
+	height: 40px;
+	
 }
-
+#bottomtr{
+	border: 1px solid black;
+	background-color: white; 
+}
 
 
 td{
 	font-size: 20px;
-	padding: 0px;
+	padding: 5px 5px 0px 5px;
 	height: 30px;
 	margin-bottom: 0px; 
 	
@@ -204,6 +216,7 @@ grid-row-gap: 0px;
 
 }
 </style>
+
 <script type="text/javascript" 
 src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
@@ -218,7 +231,7 @@ $(function(){
 	
 	//조회수 많은 인기 게시 원글 상위 3개 조회 출력되게 함
 	$.ajax({
-		url: "btop3.do",
+		url: "btop5.do",
 		type: "post",
 		dataType: "json",
 		success: function(data){
@@ -228,13 +241,13 @@ $(function(){
 			var jsonStr = JSON.stringify(data);
 			//string => json 객체로 바꿈
 			var json = JSON.parse(jsonStr);
-			
+			 
 			var values = "";
 			for(var i in json.list){  //i(인덱스) 변수가 자동으로 1씩 증가 처리됨
-				values += "<tr><td>" + json.list[i].board_no 
-						+ "<hr></td><td><a href='bdetail.do?board_no=" + json.list[i].board_no + "'>"
+				values += "<tr id='bottomtr'><td>" + json.list[i].board_no 
+						+ "</td><td><a style='text-decoration:none; color: black;' href='bdetail.do?board_no=" + json.list[i].board_no + "'>"
 						+ decodeURIComponent(json.list[i].board_title).replace(/\+/gi, " ") 
-						+ "</a><hr></td><td>" + json.list[i].board_count + "<hr></td></tr>";
+						+ "</a></td><td>" + json.list[i].board_count + "</td></tr>";
 			}  //for in
 			
 			$("#toplist").html($("#toplist").html() + values);
@@ -275,7 +288,7 @@ function movePage(){
 <div id="mdv2" >
 		<h4><br>추천 레시피</h4><br>
 		<table id="#"  class="tb1" >
-			<tr>
+			<tr id="toptr">
 				<th style="width: 80px">No.</th>
 				<th style="width: 300px">Name</th>
 				<th style="width: 90px">Value</th>
@@ -289,7 +302,7 @@ function movePage(){
 <div id="mdv2" >
 		<h4><br>운동법</h4><br>
 		<table id=""  class="tb1" >
-			<tr>
+			<tr id="toptr">
 					<th style="width: 80px">No.</th>
 				<th style="width: 300px">Name</th>
 				<th style="width: 90px">Value</th>
@@ -317,7 +330,7 @@ function movePage(){
 					</div>
 					</div>
 			<div class="div5"><input id="inputPassword" type="password" placeholder="Password" name="inputPassword" value="${ repwd }" required/></div>
-			<div class="div6"><button type="button" id="btn">아이디 찾기</button></div>
+			<div class="div6"><button type="button" id="btn" onclick="javascript:location.href='findIdPage.do';">아이디 찾기</button></div>
 			<div class="div7"><button onclick="javascript:location.href='findPwdPage.do';" type="button" id="btn1">비밀번호 찾기</button></div>
 			<div class="div8"><button onclick="javascript:location.href='registerPage.do';" type="button" id="btn2">회원가입</button></div>
 		</div>
@@ -344,7 +357,7 @@ function movePage(){
 			<div id="logindiv">
 			<div >
 				<div align="left" style="font: 40px oblique bolder;">Food Balance</div>
-				<div align="right" style="font: 30px bold; margin-top: 20px; color:white;">관리자(${ sessionScope.loginMember.user_name })님</div>
+				<div align="right" style="font: 30px bold; margin-top: 20px; color:white;">${ sessionScope.loginMember.user_name } 님 환영합니다.</div>
 				<c:url var="callMyInfo" value="myinfo.do">
 					<c:param name="user_id" value="${ loginMember.user_id }" />
 				</c:url>
@@ -360,7 +373,7 @@ function movePage(){
 <div id="mdv" >
 		<h4><br>공지사항</h4><br>
 		<table class="tb1" id="newnotice">
-			<tr>
+			<tr id="toptr">
 				<th style="width: 80px">No.</th>
 				<th style="width: 300px">Name</th>
 				<th style="width: 90px">Value</th>
@@ -372,11 +385,11 @@ function movePage(){
 <div class="main6">
 <div id="mdv" >
 		<h4><br>게시판</h4><br>
-		<table id="toplist" class="tb1" border="1">
-			<tr style="height: 50px; background-color: gray;">
+		<table id="toplist" class="tb1"  >
+			<tr id="toptr">
 				<th style="width: 80px">No.</th>
-				<th style="width: 300px">Name</th>
-				<th style="width: 90px">Value</th>
+				<th style="width: 400px">Name</th>
+				<th style="width: 80px">Value</th>
 			</tr>
 		</table>
 	</div>

@@ -13,7 +13,7 @@
 
 <!-- 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<meta charset="UTF-8">
+<meta charset="UTF-8"> 
 
 <style type="text/css">
   #menubtn{
@@ -21,7 +21,7 @@
  	 font-size: 20px;
  	 text-align: center;
  	 
-  }
+  } 
   #menubtn:hover{
    
   	background-color: silver;
@@ -64,7 +64,7 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">다이어트 추천</a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">추천레시피</a>
+            <a class="dropdown-item" href="javascript:location.href='reclist.do';">추천레시피</a>
               <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#" >운동법</a>
           </div>
