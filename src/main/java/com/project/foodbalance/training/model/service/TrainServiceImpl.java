@@ -27,7 +27,7 @@ public class TrainServiceImpl implements TrainService {
 	}
 
 	@Override
-	public ArrayList<Train> seletList(Paging page) {
+	public ArrayList<Train> selectList(Paging page) {
 		return trainDao.selectList(page);
 	}
 
@@ -43,7 +43,7 @@ public class TrainServiceImpl implements TrainService {
 
 	@Override
 	public int insertOriginTrain(Train train) {
-		return trainDao.insertOriginBoard(train);
+		return trainDao.insertOriginTrain(train);
 	}
 
 	@Override
@@ -57,18 +57,44 @@ public class TrainServiceImpl implements TrainService {
 	}
 
 	@Override
-	public ArrayList<Train> selectSearchTtitle(String keyword) {
-		return trainDao.selectSearchTitle(keyword);
+	public ArrayList<Train> selectSearchTtitle(Paging page) {
+		return trainDao.selectSearchTitle(page);
 	}
-
+	
+	//작성자 검색 페이징
 	@Override
-	public ArrayList<Train> selectSearchWriter(String keyword) {
-		return trainDao.selectSearchWriter(keyword);
+	public ArrayList<Train> selectSearchWriter(Paging page) {
+		return trainDao.selectSearchWriter(page);
 	}
-
+	
+	//날짜검색페이징
 	@Override
-	public ArrayList<Train> selectSearchDate(SearchDate date) {
-		return trainDao.selectSearchDate(date);
+	public ArrayList<Train> selectSearchDate(Paging page) {
+		return trainDao.selectSearchDate(page);
+	}
+	
+	//제목 검색 페이징
+	@Override
+	public ArrayList<Train> selectSearchTitle(Paging page) {
+		return trainDao.selectSearchTitle(page);
+	}
+	
+	//제목 검색 카운트
+	@Override
+	public int searchTitleCount(String keyword) {
+		return trainDao.searchTitleCount(keyword);
+	}
+	
+	//작성자 검색 카운트
+	@Override
+	public int searchWriterCount(String keyword) {
+		return trainDao.searchWriterCount(keyword);
+	}
+	
+	//날짜 검색 카운트
+	@Override
+	public int searchDateCount(SearchDate date) {
+		return trainDao.searchDateCount(date);
 	}
 
 	
