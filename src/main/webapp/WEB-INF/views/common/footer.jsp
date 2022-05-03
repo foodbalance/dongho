@@ -8,6 +8,7 @@
 	footer {
 		background-color : black;
 		text-align: center;
+
 	}
 	
 	footer > div > ul > li{
@@ -19,7 +20,7 @@
 <title></title>
 </head>
 <body>
-<hr>
+
 <footer>
 		<div class="left">
 			 <ul style="list-style: none">
@@ -32,6 +33,10 @@
                   <option value="">관련기관 및 사이트</option>
                   <option value="">한국ICT인재개발원</option>
          </select>
+<hr style="clear:both;">
+<p id="i">copyright@ FOODBALANCE<br>
+	2022-04-20, 개발팀 : CMC<br>
+</p>
 </footer>
 </body>
 </html>
