@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" errorPage="error.jsp"%>
+    pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
 <c:set var="currentPage" value="${ requestScope.currentPage }"/>
@@ -18,8 +20,8 @@
 <br>
 
 <form action="breply.do" method="post">
-	<input type="text" name="board_ref" value="${ board_no }">
-	<input type="text" name="page" value="${ currentPage }">
+	<input type="hidden" name="board_ref" value="${ board_no }">
+	<input type="hidden" name="page" value="${ currentPage }">
 <table align="center" width="500" border="1" cellspacing="0" cellpadding="5">
 	<tr><th>제 목</th><td><input type="text" name="board_title"></td></tr>
 	<tr><th>작성자</th><td><input type="text" name="user_id" readonly value="${ loginMember.user_id }"></td></tr>

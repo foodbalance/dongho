@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,8 +32,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.project.foodbalance.board.model.service.BoardService;
+import com.project.foodbalance.board.model.service.ReplyService;
 import com.project.foodbalance.board.model.vo.Board;
+import com.project.foodbalance.board.model.vo.Reply;
 import com.project.foodbalance.common.Paging;
 import com.project.foodbalance.common.SearchDate;
 import com.project.foodbalance.member.model.vo.Member;
@@ -44,6 +48,10 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+	
+	@Inject
+	private ReplyService replyService;
+	
 	
 	//게시글 페이지단위로 목록 조회 처리용
 	@RequestMapping("blist.do")
@@ -164,18 +172,27 @@ public class BoardController {
 			//조회수 1증가 처리
 		boardService.updateAddReadcount(board_no);
 		try {
+			
 			if(board != null) {
 				model.addAttribute("board", board);
 			
 				Member loginMember = (Member)session.getAttribute("loginMember");
+				
+				// 댓글 조회
+//				List<Reply> reply = null;
+//				reply = replyService.list(board_no);
+//				model.addAttribute("reply", reply);
+//				
 				result = "board/boardDetail";
 				
 			}
+			
 		}catch(Exception e) {
 			model.addAttribute("message", board_no + "번 게시글 상세보기 실패");
 			
 			result = "common/commonview";
 		}
+		
 		return result;
 	}
 
@@ -205,6 +222,7 @@ public class BoardController {
 	//글 삭제
 	@RequestMapping("bdel.do")
 	public String boardDeleteMethod(Board board, HttpServletRequest request, Model model) {
+		System.out.println(board);
 		if(boardService.deleteBoard(board) > 0) {
 			//글삭제 성공시 저장폴더에 첨부파일도 삭제 처리
 			if(board.getBoard_rename_img() != null) {
@@ -513,7 +531,7 @@ public class BoardController {
 //		//댓글달기 페이지로 이동
 		@RequestMapping("breplyform.do")
 		public String moveReplyForm(@RequestParam("board_no") int origin_num,
-				@RequestParam("page") String currentPage, Model model) {
+				@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
 			model.addAttribute("board_no", origin_num);
 			model.addAttribute("currentPage", currentPage);
 					
@@ -522,13 +540,13 @@ public class BoardController {
 		
 		//댓글 등록 처리용
 		@RequestMapping(value="breply.do", method=RequestMethod.POST)
-		public String replyInsertMethod(Board reply, @RequestParam("page") int page, Model model) {
+		public String replyInsertMethod(Board reply, @RequestParam(value="page") int page, Model model) {
 			//해당 댓글에 대한 원글 조회
 			Board origin = boardService.selectBoard(reply.getBoard_ref());
-					
+			System.out.println("초기" + origin.getBoard_reply_lev());		
 			//현재 등록글의 레벨을 설정
 			reply.setBoard_reply_lev(origin.getBoard_reply_lev() + 1);
-					
+			System.out.println(reply.getBoard_reply_lev());		
 			//대댓글일때는 board_reply_ref 값 지정 : 참조하는 댓글 번호
 			if(reply.getBoard_reply_lev() == 3) {
 				reply.setBoard_ref(origin.getBoard_ref());  //참조 원글 번호
@@ -542,6 +560,7 @@ public class BoardController {
 					
 			if(boardService.insertReply(reply) > 0) {
 				return "redirect:blist.do?page=" + page;
+				
 			}else {
 				model.addAttribute("message", reply.getBoard_ref() + "번 글에 대한 댓글 등록 실패.");
 				return "common/commonview";
@@ -550,7 +569,7 @@ public class BoardController {
 		
 		//댓글, 대댓글 수정 처리용
 		@RequestMapping(value="breplyup.do", method=RequestMethod.POST)
-		public String replyUpdateMethod(Board reply, @RequestParam("page") int page, Model model) {
+		public String replyUpdateMethod(Board reply, @RequestParam(value="page", defaultValue="1") int page, Model model) {
 					
 			if(boardService.updateReply(reply) > 0) {
 				//댓글, 대댓글 수정성공시 다시 상세페이지가 보여지게 한다면

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" errorPage="error.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +10,9 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
+<script src="https://cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+
+
 
 <style type="text/css">
   table {
@@ -28,7 +32,9 @@
  
 
 </style>
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+	
 <title></title>
 
 </head>
@@ -53,7 +59,11 @@
 								<tr><th class="th">제     목</th><td class="td"><input class="form-control" id="disabledInput" type="text" name="board_title" required></td></tr>
 								<tr><th class="th">작 성 자</th><td class="td"><input class="form-control" id="disabledInput" type="text" name="user_id" readonly value="${loginMember.user_id }" required></td></tr>
 								<tr><th class="th">첨부파일</th><td class="td" align="left" ><input style="margin-bottom: 1%; " class="btn btn-outline-secondary" type="file" name="upfile"></td></tr>
-								<tr><th class="th">내     용</th><td class="td"><textarea class="form-control" name="board_content" rows="5" cols="50" required></textarea></td></tr>
+								<tr><th class="th">내     용</th><td class="td"><textarea class="form-control" id='summernote' name="board_content" rows="5" cols="50" required></textarea>
+								<!-- <script>
+                        			CKEDITOR.replace( 'board_content' );
+                				</script> -->
+								</td></tr>
 					
 							</table>
 <!-- =============================================================================== -->
@@ -70,6 +80,7 @@
 			</div>			
 		</div>
 	</section>
+
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

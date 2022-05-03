@@ -95,10 +95,10 @@
 	<delete id="deleteBoard" parameterType="Board">
 		delete from board 
 		<if test="board_reply_lev == 1">
-			where board_ref = #{board_no}
+			where board_no = #{board_no}
 		</if>
 		<if test="board_reply_lev == 2">
-			where board_reply_ref = #{board_no}
+			where board_no = #{board_no}
 		</if>
 		<if test="board_reply_lev == 3">
 			where board_no = #{board_no}
@@ -186,7 +186,7 @@
  	<select id="searchDateCount" parameterType="SearchDate" resultType="_int">
 		select count(*) 
 		from board
-		where board_date between #{ begin } and #{ end }		
+		where board_date between #{ begin } and #{ end } + 1		
 	</select>
 
 	<!-- 댓글 등록시 seq 증가   -->

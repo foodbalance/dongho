@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
 
-<c:set var="currentPage" value="${ currentPage }"/>
+<c:set var="currentPage" value="${ requestScope.currentPage }"/>
 
 
 <!DOCTYPE html>
@@ -124,7 +125,7 @@
 				      	<c:if test="${ requestScope.board.user_id ne sessionScope.loginMember.user_id }">
 				         	<c:url var="brf" value="/breplyform.do">
 				            	<c:param name="board_no" value="${ board.board_no }"/>
-				            	<c:param name="page" value="${ currentPage }"/>
+				            	<c:param name="page" value="${ requestScope.currentPage }"/>
 				         	</c:url>
 				         	<a href="${ brf }">[댓글달기]</a> &nbsp;
 				      	</c:if>   
@@ -139,15 +140,95 @@
 							<a class="btn btn-outline-secondary" href="${ bup }">수정</a>
 							<c:url var="bdt" value="/bdel.do">
 								<c:param name="board_no" value="${ board.board_no }" />
+								<c:param name="board_reply_lev" value="${ board.board_reply_lev }"/>
 								<c:param name="board_rename_img" value="${ board.board_rename_img }" />
 							</c:url>
 							<a class="btn btn-outline-secondary" href="${ bdt }">삭제</a>
 						</c:if>
 					</div>
+					
 				</div>
 			</div>
 		</div>
 	</section>
+	<!-- 댓글 시작 -->
+<%-- 					<hr />
+
+						<ul>
+						    <!-- <li>
+						        <div>
+						            <p>첫번째 댓글 작성자</p>
+						            <p>첫번째 댓글</p>
+						        </div>
+						    </li>
+						    <li>
+						        <div>
+						            <p>두번째 댓글 작성자</p>
+						            <p>두번째 댓글</p>
+						        </div>
+						    </li>
+						    <li>
+						        <div>
+						            <p>세번째 댓글 작성자</p>
+						            <p>세번째 댓글</p>
+						        </div>
+						    </li> -->
+						    <c:forEach items="${reply}" var="reply">
+							<li>
+							    <div>
+							        <p>${reply.reply_writer} / <fmt:formatDate value="${reply.regdate}" pattern="yyyy-MM-dd" /></p>
+							        <p>${reply.reply_content }</p>
+							    </div>
+							</li>    
+							</c:forEach>
+						</ul>
+						
+						<div>
+
+						    <form method="post" action="replyw.do">
+						    
+						        <p>
+						            <label>댓글 작성자</label> <input type="text" name="reply_writer">
+						        </p>
+						        <p>
+						            <textarea rows="5" cols="50" name="reply_content"></textarea>
+						        </p>
+						        <p>
+						        	<input type="hidden" name="board_no" value="${board_no}">
+						            <button type="submit">댓글 작성</button>
+						        </p>
+						    </form>
+						    
+						</div> --%>
+				<c:if test="${not empty requestScope.reply}">
+					<div id="commentBox">
+						<h2>&emsp; Comment</h2>
+						<c:forEach items="${requestScope.reply}" var="reply">
+							<div id="replyList">
+								&nbsp;<font style="font-weight:bold; font-size: 20px;">${reply.reply_writer}</font> &emsp;
+								<font style="color:grey;"><fmt:formatDate pattern="YYYY-MM-dd HH:mm" value="${reply.regdate}"/></font>
+								<c:if test="${sessionScope.user_id == reply.reply_writer}">
+									&emsp;
+									<input type="button" value="수정" id="replyBtn" onclick="location.href='${pageContext.request.contextPath}/updateReply.do?board_no=${content.board_no}&&reply_no=${reply.reply_no}'">
+									<input type="button" value="삭제" id="replyBtn" onclick="location.href='${pageContext.request.contextPath}/deleteReply.do?board_no=${content.board_no}&&reply_no=${reply.reply_no}'">
+								</c:if>
+								<br><br>
+								${reply.reply_content}
+							</div>
+						</c:forEach>
+					</div>
+				</c:if>
+				
+				<form action="${pageContext.request.contextPath}/writeReply.do?board_no=${content.board_no}" method="post">
+		<div id="replyBox">
+			<div id="replyWrite">
+				<b>&emsp;Add | </b><br> 
+				<input type="text" name="replyContent" style="width:500px; height:80px; margin:15px 10px 20px 20px;">
+				<input type="submit" id="replyBtn" style="width:50px; height:80px;" value="등록">
+			</div>
+		</div>
+	</form>
+					<!-- 댓글 끝 -->
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

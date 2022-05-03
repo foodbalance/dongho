@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" errorPage="commonview.jsp" %>
+    pageEncoding="UTF-8"  %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
  
@@ -43,7 +43,7 @@
 	}
 </script>   
 
-<!-- 공지사항 -->
+<!-- 게시판 -->
 <script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -156,76 +156,8 @@
 					      <button class="btn btn-outline-secondary" onclick="showWrite();">글쓰기</button>
 					   	</div>
 					</c:if> --%>
-					
-					
-					<!--  -->
-					<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link" data-bs-toggle="tab" href="#titleDiv">제목 검색</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-bs-toggle="tab" href="#writerDiv">작성자 검색</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-bs-toggle="tab" href="#dateDiv">날짜 검색</a>
-  </li>
-  
-</ul>
-<div id="myTabContent" class="tab-content">
-  <div class="tab-pane fade" id="titleDiv">
-    <form action="bsearchTitle.do" method="post">
-		<label>검색할 제목을 입력하세요 : <input type="search" name="keyword"></label>
-		<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
-	</form>
-  </div>
-  <div class="tab-pane fade" id="writerDiv">
-    <form action="bsearchWriter.do" method="post">
-		<label>검색할 작성자를 입력하세요 : <input type="search" name="keyword"></label>
-		<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
-	</form>
-  </div>
-  <div class="tab-pane fade" id="dateDiv">
-    <form action="bsearchDate.do" method="post">
-		<label>검색할 날짜를 입력하세요 : <input type="date" name="begin"> ~ <input type="date" name="end"></label>
-		<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
-	</form>
-</div>
-</div>
-					
-					
-					
-					<!-- 검색 항목 -->
-					<%-- <center>
-					
-					<div style="width: 73%; padding: 5px; margin: 5px; margin-top:3%; margin-bottom: 3%">
-						<div>
-							<h2 >검색할 항목을 선택하세요.</h2>
-							<input type="radio" name="item" value="title" checked> 제목 &nbsp; &nbsp;
-							<input type="radio" name="item" value="writer"> 작성자 &nbsp; &nbsp;
-							<input type="radio" name="item" value="date"> 날짜 
-						</div>
-						<div id="titleDiv">
-							<form action="bsearchTitle.do" method="post">
-								<label>검색할 제목을 입력하세요 : <input type="search" name="keyword"></label>
-								<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
-							</form>
-						</div>
-						<div id="writerDiv">
-							<form action="bsearchWriter.do" method="post">
-								<label>검색할 작성자를 입력하세요 : <input type="search" name="keyword"></label>
-								<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
-							</form>
-						</div>
-						<div id="dateDiv">
-							<form action="bsearchDate.do" method="post">
-								<label>검색할 날짜를 입력하세요 : <input type="date" name="begin"> ~ <input type="date" name="end"></label>
-								<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
-							</form>
-						</div>
-						<button style="margin-bottom: 1%; " class="btn btn-outline-secondary" onclick="javascript:location.href='${ pageContext.servletContext.contextPath }/blist.do;'">전체
-								보기</button>
-						</div>
-					</center> --%>
+
+				
 <!-- =============================================================================== -->
 	
 				</div>
