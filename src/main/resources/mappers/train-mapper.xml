@@ -4,7 +4,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="trainMapper">
-<!-- 컬럼명 디비와 일치해야함!! -->
+	<!-- 컬럼명 디비와 일치해야함!! -->
 	<resultMap type="Train" id="resultTrain">
 		<id column="train_no" property="train_no" />
 		<result column="user_id" property="user_id" />
@@ -14,28 +14,25 @@
 		<result column="train_date" property="train_date" />
 		<result column="train_count" property="train_count" />
 	</resultMap>
-	
-	<resultMap type="Train" id="resultTop3" >
+
+	<resultMap type="Train" id="resultTop3">
 		<result column="train_no" property="train_no" />
 		<result column="train_title" property="train_title" />
 		<result column="train_count" property="train_count" />
 	</resultMap>
-	
-		<!-- 비교연산자를 쿼리문에 그냥 사용하면 
-		태그 앨리먼트 꺽쇠괄호 등(<, >, &)과 혼동하는 문제가 발생할 수 있음.
-		이 문제를 미연에 방지하기 위해 xml 코드 중 xml parser 에 의해
-		해석하지 말고, 문장 그대로 해석하라는 뜻으로
-		<![CDATA[ 쿼리문장 ]]> 사용함
-	 -->
-	
+
+	<!-- 비교연산자를 쿼리문에 그냥 사용하면 태그 앨리먼트 꺽쇠괄호 등(<, >, &)과 혼동하는 문제가 발생할 수 있음. 이 문제를 
+		미연에 방지하기 위해 xml 코드 중 xml parser 에 의해 해석하지 말고, 문장 그대로 해석하라는 뜻으로 <![CDATA[ 
+		쿼리문장 ]]> 사용함 -->
+
 	<!-- 게시글 3개 출력 -->
 	<select id="selectTop3" resultMap="resultTop3">
 		<![CDATA[
 		SELECT *  
 		FROM (SELECT ROWNUM RNUM, train_no, 
-					 train_title, train_count  
+					 train_title, train_count, train_url_img  
 		       FROM (SELECT * FROM train
-		              ORDER BY BOARD_COUNT DESC))  
+		              ORDER BY train_COUNT DESC))  
 		WHERE RNUM >= 1 AND RNUM <= 5
 		]]>
 	</select>
@@ -44,82 +41,134 @@
 	<select id="getListCount" resultType="_int">
 		select count(*) from train
 	</select>
-	
+
 	<!-- 개시글 출력 -->
-	<!-- <select id="selectList" parameterType="Paging" resultMap="resultTrain">
+	<select id="selectList" parameterType="Paging"
+		resultMap="resultTrain">
 		<![CDATA[
 			SELECT *  
 			FROM (SELECT ROWNUM RNUM, train_no, train_title, user_id,   
-			               train_content, train_url,  
+			               train_content, train_url, train_url_img, 
 			               train_date,train_count  
-			       FROM (SELECT * FROM train 
-			              ORDER BY BOARD_REF DESC,BOARD_REPLY_REF DESC,
-			              BOARD_REPLY_LEV ASC, BOARD_REPLY_SEQ ASC))
+			       FROM (SELECT * FROM train order by train_no desc))
 			where rnum >= #{startRow} and rnum <= #{endRow}
 		]]>
-	</select> -->
-	
-<!--           수정 확인                -->
+	</select>
+
+	<!-- 수정 확인 -->
 	<!-- 글 등록 -->
-	<insert id="insertOriginTrain" parameterType="Train" >
-		insert into train 	(train_no, user_id, train_title, 
-				train_content, train_date, train_count, train_url)
-		values ((select max(train_no) + 1 from train), #{user_id},
-				#{train_title}, #{train_content}, sysdate, 0,
-				#{train_url})		
+	<insert id="insertOriginTrain" parameterType="Train">
+		insert into
+		train
+		(train_no, user_id, train_title,
+		train_content, train_date,
+		train_count, train_url, train_url_img)
+		values ((select max(train_no) + 1
+		from train),
+		#{user_id},
+		#{train_title}, #{train_content}, sysdate, 0,
+		#{train_url}, #{train_url_img})
 	</insert>
-<!--           수정 확인           -->
-	
+	<!-- 수정 확인 -->
+
 	<!-- 글 상세 조회 -->
-	<select id="selectTrain" parameterType="int" resultMap="resultTrain">
-		select * from train 
+	<select id="selectTrain" parameterType="int"
+		resultMap="resultTrain">
+		select * from train
 		where train_no = #{train_no}
-	</select>	
+	</select>
 
 	<!-- 글 상세 조회시 카운트 증가 -->
 	<update id="addReadCount" parameterType="_int">
-		update train 
-		set train_count = train_count + 1 
+		update train
+		set
+		train_count = train_count + 1
 		where train_no = #{train_no}
 	</update>
-	
+
 	<!-- 글 삭제 -->
 	<delete id="deleteTrain" parameterType="Train">
-		delete from train 
-			where train_no = #{board_no}		
+		delete from train
+		where
+		train_no = #{train_no}
 	</delete>
-	
+
 	<!-- 글 수정 -->
 	<update id="updateOrigin" parameterType="Train">
-		update train 
-		set train_title = #{train_title}, 
-			train_content = #{train_content},
-			train_url = #{train_url}
+		update train
+		set
+		train_title = #{train_title},
+		train_content = #{train_content},
+		train_url = #{train_url}
+		train_url_img = #{train_url_img}
 		where train_no = #{train_no}
-	</update> 
+	</update>
 
-	<!-- 제목으로 검색 -->
-	<select id="searchTitle" parameterType="string" resultMap="resultTrain">
-		select * from train
-		where train_title like '%' || #{ keyword } || '%'
-		order by train_no desc
-	</select>
-	
-	<!-- 작성자로 검색 -->
-	<select id="searchWriter" parameterType="string" resultMap="resultTrain">
-		select * from train
+<!-- 게시물 목록 + 페이징 + 제목검색 -->
+<select id="searchTitle" parameterType="Object" resultMap="resultTrain">
+	<![CDATA[
+		SELECT *  
+		FROM (SELECT ROWNUM RNUM, train_no, train_TITLE, user_id,   
+				               train_CONTENT, train_url, train_url_img, train_DATE, train_count  
+	          FROM(select *
+	               from train
+	               where train_title like '%' || #{ keyword } || '%'))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+	]]>
+</select>
+
+<!-- 게시물 총 갯수 + 검색 적용 -->
+<select id="searchTitleCount" resultType="_int" parameterType="string">	
+		SELECT count(*)  
+		from train
+	    where train_title like '%' || #{ keyword } || '%'	
+</select>
+
+
+<!-- 게시물 목록 + 페이징 + 작성자 -->
+<select id="searchWriter" parameterType="Object" resultMap="resultTrain">
+	<![CDATA[
+		SELECT *  
+		FROM (SELECT ROWNUM RNUM, train_no, train_TITLE, user_id,   
+				               train_CONTENT, train_url, train_url_img, train_DATE,train_count  
+	          FROM(select *
+	               from train
+	               where user_id like '%' || #{ keyword } || '%'))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+	]]>
+</select>
+
+<!-- 작성자로 검색  갯수 -->
+ 	<select id="searchWriterCount" parameterType="String" resultType="_int">
+		select count(*) 
+		from train
 		where user_id like '%' || #{ keyword } || '%'
-		order by train_no desc
 	</select>
 	
-	<!-- 날짜로 검색 -->
- 	<select id="searchDate" parameterType="SearchDate" resultMap="resultTrain">
-		select * from train
-		where train_date between #{ begin } and #{ end }
-		order by train_no desc
+	
+	
+	
+<!-- 게시물 목록 + 페이징 + 날짜 -->
+<select id="searchDate" parameterType="Object" resultMap="resultTrain">
+	<![CDATA[
+		SELECT *  
+		FROM (SELECT ROWNUM RNUM, train_no, train_TITLE, user_id,   
+				               train_CONTENT, train_url, train_url_img, train_DATE, train_count  
+	          FROM(select *
+	               from train
+	               where train_date between #{ begin } and #{ end }))
+		where rnum >= #{startRow} and rnum <= #{endRow}
+	]]>
+</select>
+	
+	
+<!-- 날짜로 검색 갯수 -->
+ 	<select id="searchDateCount" parameterType="SearchDate" resultType="_int">
+		select count(*) 
+		from train
+		where train_date between #{ begin } and #{ end }		
 	</select>
-
-
+	
 
 
 </mapper>

@@ -12,6 +12,7 @@ public class Train implements Serializable {
 	private String train_title;	//운동법 제목
 	private String train_content;	//운동법 설명
 	private String train_url;	//운동법 영상 url
+	private String train_url_img;	//운동법 썸네일
 	private Date train_date;	//게시날짜
 	private int train_count;	//조회수
 	
@@ -20,13 +21,14 @@ public class Train implements Serializable {
 	}
 
 	public Train(int train_no, String user_id, String train_title, String train_content, String train_url,
-			Date train_date, int train_count) {
+			String train_url_img, Date train_date, int train_count) {
 		super();
 		this.train_no = train_no;
 		this.user_id = user_id;
 		this.train_title = train_title;
 		this.train_content = train_content;
 		this.train_url = train_url;
+		this.train_url_img = train_url_img;
 		this.train_date = train_date;
 		this.train_count = train_count;
 	}
@@ -71,6 +73,14 @@ public class Train implements Serializable {
 		this.train_url = train_url;
 	}
 
+	public String getTrain_url_img() {
+		return train_url_img;
+	}
+
+	public void setTrain_url_img(String train_url_img) {
+		this.train_url_img = train_url_img;
+	}
+
 	public Date getTrain_date() {
 		return train_date;
 	}
@@ -89,13 +99,6 @@ public class Train implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	@Override
-	public String toString() {
-		return "Train [train_no=" + train_no + ", user_id=" + user_id + ", train_title=" + train_title
-				+ ", train_content=" + train_content + ", train_url=" + train_url + ", train_date=" + train_date
-				+ ", train_count=" + train_count + "]";
 	}
 	
 	

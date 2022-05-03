@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" errorPage="error.jsp" %>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+
+<c:set var="currentPage" value="${ currentPage }"/>
 
 
 <!DOCTYPE html>
@@ -81,14 +83,14 @@
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 	<section class="page-section cta">
 		<div class="container">
-		    <div style="background-color: #1a1a1a;  border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;" class="row">
+		    <div  class="row">
 		        <div class="col-xl-9 mx-auto">
-		        <br>
-			        <p style="color: white; font-size: 35px;" align="center"><b>게시글 상세보기</b></p>
+		       
+			        <p style="color: #52575c; font-size: 35px; margin-top: 5%;" align="center"><b>게시글 상세보기</b></p>
 					<br>
 		            <div class="cta-inner bg-faded text-center rounded">
 <!-- =============================================================================== -->
-						<table style=" border-collapse: collapse; width: 100%;background: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;text-align: center;"align="center" cellspacing="0" cellpadding="15">
+						<table>
 							<tr>
 							<th class="th">제     목</th><td class="td" style="margin-top: 6%;"  readonly>${board.board_title }</td>
 							<th class="th">작 성 자</th><td class="td" readonly>${board.user_id }</td>
@@ -103,7 +105,7 @@
 											<c:param name="ofile" value="${board.board_original_img }"/>
 											<c:param name="rfile" value="${board.board_rename_img }"/>
 										</c:url>
-										<a readonly align="left" class="btn btn-primary btn-block" href="${ bfd }">${board.board_original_img }</a>
+										<a readonly style="float: left;" class="btn btn-outline-secondary" href="${ bfd }">${board.board_original_img }</a>
 									</c:if>
 									<c:if test="${empty board.board_original_img }"><!-- 첨부 파일이 없으면 공백문자 처리 -->
 										&nbsp;
@@ -115,8 +117,17 @@
 <!-- =============================================================================== -->
 					</div>
 					<br>
-					<div style=" padding: 5px; margin: 5px; margin-bottom: 3%" align="center" >
-						<button style="margin-bottom: 1%; background-color: #fff; color: #000;" class="btn btn-outline-secondary" onclick="javascript:history.go(-1);">목록</button>
+					<div style="padding: 5px; margin: 5px; margin-bottom: 5%" align="center" >
+						<button class="btn btn-outline-secondary" onclick="javascript:history.go(-1);">목록</button>
+						
+						<!-- 글 작성자가 아닌 회원의 경우 댓글달기 기능 제공 -->
+				      	<c:if test="${ requestScope.board.user_id ne sessionScope.loginMember.user_id }">
+				         	<c:url var="brf" value="/breplyform.do">
+				            	<c:param name="board_no" value="${ board.board_no }"/>
+				            	<c:param name="page" value="${ currentPage }"/>
+				         	</c:url>
+				         	<a href="${ brf }">[댓글달기]</a> &nbsp;
+				      	</c:if>   
 						
 						<!-- 본인이 등록한 글일때 수정 삭제 -->
 						<c:if test="${board.user_id eq sessionScope.loginMember.user_id}">
@@ -125,12 +136,12 @@
 								<c:param name="page" value="${ currentPage }" />
 							</c:url>
 							
-							<a style="background-color: white;" class="btn btn-primary btn-block" href="${ bup }">수정</a>
+							<a class="btn btn-outline-secondary" href="${ bup }">수정</a>
 							<c:url var="bdt" value="/bdel.do">
 								<c:param name="board_no" value="${ board.board_no }" />
 								<c:param name="board_rename_img" value="${ board.board_rename_img }" />
 							</c:url>
-							<a style="background-color: white;" class="btn btn-primary btn-block" href="${ bdt }">삭제</a>
+							<a class="btn btn-outline-secondary" href="${ bdt }">삭제</a>
 						</c:if>
 					</div>
 				</div>

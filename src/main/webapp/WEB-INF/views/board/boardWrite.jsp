@@ -13,13 +13,19 @@
 <style type="text/css">
   table {
     width: 100%;
-    border-top: 1px solid #444444;
+    border-top: 1px solid #52575c;
     border-collapse: collapse;
   }
  .th {
-    border-right: 1px solid #444444;
+    border-right: 1px solid #52575c;
     padding: 15px;
   }
+ .th {
+    border-right: 1px solid #52575c;
+    padding: 15px;
+  }
+    
+ 
 
 </style>
 
@@ -31,12 +37,13 @@
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 	<section class="page-section cta">
 	    <div class="container">
-	        <div style="  border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;" class="row">
+	    <br>
+	        <div style="  border-radius: 1rem; border: 1px solid #52575c; padding: 5px; margin: 5px;" class="row">
 		        <form action="binsert.do" method="post" enctype="multipart/form-data">
 		            <div class="col-xl-9 mx-auto">
-		            <br>
+		            <br><br>
 		            
-		            <p style="color: white; font-size: 35px;" align="center"><b>게시글 등록 페이지</b></p>
+		            <p style="color: #52575c; font-size: 35px;" align="center"><b>게시글 등록 페이지</b></p>
 		                <div class="cta-inner bg-faded text-center rounded">
 <!-- =============================================================================== -->
 							<!-- form에서 입력된 값들과 첨부파일을 같이 전송하려면, 반드시 enctype 속성을 추가해야 함

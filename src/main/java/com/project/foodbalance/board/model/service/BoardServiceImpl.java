@@ -101,7 +101,22 @@ public class BoardServiceImpl implements BoardService{
 	public int searchDateCount(SearchDate date) {
 		return boardDao.searchDateCount(date);
 	}
-//	
+	
+	@Override
+	public int insertReply(Board reply) {
+		return boardDao.insertReply(reply);
+	}
+
+	@Override
+	public int updateReplySeq(Board reply) {
+		return boardDao.updateReplySeq(reply);
+	}
+	
+	@Override
+	public int updateReply(Board reply) {
+		return boardDao.updateReply(reply);
+	}
+	
 
 
 	

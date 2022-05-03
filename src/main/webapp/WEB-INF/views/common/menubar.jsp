@@ -67,7 +67,7 @@
           <div class="dropdown-menu">
             <a class="dropdown-item" href="#">추천레시피<span class="visually-hidden">(current)</span></a>
               <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="${ pageContext.servletContext.contextPath }/trainPage.do">운동법<span class="visually-hidden">(current)</span></a>
+            <a class="dropdown-item" href="${ pageContext.servletContext.contextPath }/tlist.do?page=1">운동법<span class="visually-hidden">(current)</span></a>
           </div>
         </li>
         </button>
