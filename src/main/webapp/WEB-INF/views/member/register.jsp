@@ -21,20 +21,21 @@
 		width : 100%;
 		height: 1000px;
 	}
-	.div-warp{
+	/* .div-warp{
 		position: absolute;
 		top : 50%;
 		left : 50%;
 		transform: translate(-50%, -20%);
-	}
+	} */
 	.div1{
-		background-color: yellow;
+		border: 1px solid red;
 		width : 400px;
-		height: 900px;
+		height: 940px;
 	}
 	.div2{
 		padding : 10px 15px 10px 0;
 	}
+	
 </style>
 
 
@@ -154,109 +155,116 @@
 <nav>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 </nav>
- 	<section>
-            <div class="div-warp">
-            	<div class="div1">
-	            	<div class="div2"> 
-		                <h2>
-			            	<span style="display:inline;" class="section-heading-lower">회원가입</span>
-			                 <h5 align="center">(* 표시는 필수입력 항목입니다.)</h5>
-		                </h2>		                            
-		                <ul>    
-		                    <form action="enroll.do" method="post" onsubmit="return validate();">
-		                    	<h5>*아이디</h5>
-			                     <li>
-					                <div>
-					                	<input id="user_id" type="text" placeholder="아이디" name="user_id" required/>
-					                    <input style="display:inline" type="button" value="중복체크" onclick="return dupCheckId();">                       	
-					                </div>
-					                <h5 align="left" id="idcheck"></h5>
-			                     </li>
-			                                
-			                     <h5>*비밀번호</h5>
-			                     <li>
-			                     	<div>
-			                        	<input class="form-control" id="user_pwd" type="password" placeholder="비밀번호 입력" name="user_pwd" required/>
-			                        </div>
-			                     </li>
-			                                
-			                     <h5>*비밀번호 확인</h5>
-			                     <li>
-			                     	<div>
-					                	<input class="form-control" id="user_pwd2" type="password" placeholder="비밀번호 확인" required>
-					                </div>
-			                     </li>
-			                                
-			                     <h5>*이름</h5>
-			                     <li>
-			                     	<div>
-					                	<input class="form-control" id="user_name" placeholder="이름 입력" name="user_name" required>
-					                </div>
-			                     </li>
-			                                
-			                     <h5>*생년월일</h5>
-			                     <li>
-			                     	<div>
-					                 	<input type="date" class="form-control" id="user_birth" placeholder="yyyy-mm-dd (반드시 형식에 맞게 입력하세요)" name="user_fnum" required>
-					                </div>
-			                     </li>
-			                                
-			                     <h5>주민번호 뒤 첫째자리</h5>
-			                     <li>
-			                     	<div>
-					                	<input class="form-control" placeholder="1,2,3,4" name="user_enum" required>
-					                </div>
-			                     </li>
-			                     
-			                     <h5>*Email</h5>
-			                     <li>
-			                     	<div>
-					                	<input class="form-control" id="email" placeholder="이메일 형식에 맞게 입력하세요." name="email" required>
-					                </div>
-			                     </li>           
-			                     <h5>*휴대폰 번호</h5>
-			                     <li>
-			                     	<div>
-					                	<input class="form-control" id="phone" placeholder="휴대폰 번호 입력(-제외한 숫자만 입력)" name="phone" required>
-					                </div>
-			                     </li>
-			                                
-			                     <h5>*주소</h5>
-			                     <li>
-			                     	<div>
-			                     		<button style="display:inline" onclick="findAdd();">주소 찾기</button>
-					                	<input class="form-control" style="display:inline;" id="postcode" name="postcode" placeholder="우편번호" required readonly/>
-					                </div>
-					                <div>
-					                	<input class="form-control" id="address1" placeholder="주소 입력" name="address1" required readonly>
-					                </div>
-					                <div>
-					                	<input class="form-control" id="address2" placeholder="상세 주소 입력" name="address2" required>
-					                </div>
-			                     </li>
-			                                
-			                     <h5>*키워드</h5>
-			                     <li>
-			                     	<div>
-					                	<input class="form-control" id="keyword" placeholder="비밀번호 찾기 키워드" name="keyword" required>
-					                </div>
-			                     </li>
-			                                
-			                     <div id="check1">
-			                     	<input id="check2" type="hidden" value="no">
-			                     </div>
-			                                
-			                     <h5 id="result_check"></h5>
-			                                
-			                     <div>
-			                      	<input type="submit" value="가입하기">
-			                        <input type="reset" value="작성취소">
-					             </div>
-				             </form>
-		                </ul>
-	                </div>
-                </div> 
-            </div>
+ 	<section class="page-section cta">
+      <div class="container">
+      <br><br>
+          <div class="row">
+              <div class="col-xl-9 mx-auto">
+		            <center>
+		            	<div class="div1">
+			            	<div class="div2"> 
+				                <h2>
+					            	<span style="display:inline;" class="section-heading-lower">회원가입</span>
+					                 <h5 align="center">(* 표시는 필수입력 항목입니다.)</h5>
+				                </h2>		                            
+				                <ul>    
+				                    <form action="enroll.do" method="post" onsubmit="return validate();">
+				                    	<h5>*아이디</h5>
+					                     <li>
+							                <div>
+							                	<input id="user_id" type="text" placeholder="아이디" name="user_id" required/>
+							                    <input style="display:inline" type="button" value="중복체크" onclick="return dupCheckId();">                       	
+							                </div>
+							                <h5 align="left" id="idcheck"></h5>
+					                     </li>
+					                                
+					                     <h5>*비밀번호</h5>
+					                     <li>
+					                     	<div>
+					                        	<input class="form-control" id="user_pwd" type="password" placeholder="비밀번호 입력" name="user_pwd" required/>
+					                        </div>
+					                     </li>
+					                                
+					                     <h5>*비밀번호 확인</h5>
+					                     <li>
+					                     	<div>
+							                	<input class="form-control" id="user_pwd2" type="password" placeholder="비밀번호 확인" required>
+							                </div>
+					                     </li>
+					                                
+					                     <h5>*이름</h5>
+					                     <li>
+					                     	<div>
+							                	<input class="form-control" id="user_name" placeholder="이름 입력" name="user_name" required>
+							                </div>
+					                     </li>
+					                                
+					                     <h5>*생년월일</h5>
+					                     <li>
+					                     	<div>
+							                 	<input type="date" class="form-control" id="user_birth" placeholder="yyyy-mm-dd (반드시 형식에 맞게 입력하세요)" name="user_fnum" required>
+							                </div>
+					                     </li>
+					                                
+					                     <h5>주민번호 뒤 첫째자리</h5>
+					                     <li>
+					                     	<div>
+							                	<input class="form-control" placeholder="1,2,3,4" name="user_enum" required>
+							                </div>
+					                     </li>
+					                     
+					                     <h5>*Email</h5>
+					                     <li>
+					                     	<div>
+							                	<input class="form-control" id="email" placeholder="이메일 형식에 맞게 입력하세요." name="email" required>
+							                </div>
+					                     </li>           
+					                     <h5>*휴대폰 번호</h5>
+					                     <li>
+					                     	<div>
+							                	<input class="form-control" id="phone" placeholder="휴대폰 번호 입력(-제외한 숫자만 입력)" name="phone" required>
+							                </div>
+					                     </li>
+					                                
+					                     <h5>*주소</h5>
+					                     <li>
+					                     	<div>
+					                     		<button style="display:inline" onclick="findAdd();">주소 찾기</button>
+							                	<input class="form-control" style="display:inline;" id="postcode" name="postcode" placeholder="우편번호" required readonly/>
+							                </div>
+							                <div>
+							                	<input class="form-control" id="address1" placeholder="주소 입력" name="address1" required readonly>
+							                </div>
+							                <div>
+							                	<input class="form-control" id="address2" placeholder="상세 주소 입력" name="address2" required>
+							                </div>
+					                     </li>
+					                                
+					                     <h5>*키워드</h5>
+					                     <li>
+					                     	<div>
+							                	<input class="form-control" id="keyword" placeholder="비밀번호 찾기 키워드" name="keyword" required>
+							                </div>
+					                     </li>
+					                                
+					                     <div id="check1">
+					                     	<input id="check2" type="hidden" value="no">
+					                     </div>
+					                                
+					                     <h5 id="result_check"></h5>
+					                                
+					                     <div>
+					                      	<input type="submit" value="가입하기">
+					                        <input type="reset" value="작성취소">
+							             </div>
+						             </form>
+				                </ul>
+			                </div>
+		                </div> 
+		            </center>
+		          </div>
+		       </div>
+		    </div>
 	</section>
 
 
