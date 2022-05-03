@@ -2,6 +2,7 @@ package com.project.foodbalance.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.foodbalance.common.Paging;
 import com.project.foodbalance.member.model.service.MemberService;
 import com.project.foodbalance.member.model.vo.Member;
 
@@ -214,14 +218,266 @@ public class MemberController {
 	
 	
 	
+	//회원관리
+	@RequestMapping("userList.do")
+	public ModelAndView memberListViewMethod(@RequestParam(name="page", required=false) String page, ModelAndView mv ) {
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = Integer.parseInt(page);
+		}
+		System.out.println(page);
+		//페이징 계산처리 
+		int limit = 5; //한페이지에 출력할 목록 갯수
+		//페이지 수 계산을 위해 총 목록갯수 조회
+		int listCount = memberService.selectListCount();
+		System.out.println("멤버 수 : " + listCount);
+		//페이지 수 계산
+		//주의 : 목록이 11개이면, 페이지 수는 2가 됨 (나머지 목록 1개도 출력페이지가 1개 필요함)
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		//현재페이지가 포함된 페이지 그룹의 시작값 지정 (뷰 아래쪽에 표시할 페이지 수를 10개씩 한 경우)
+		int startPage = (int)((double)currentPage / 10 + 0.9);
+		//현재 페이지가 포함된 페이지 그룹의 끝값
+		int endPage = startPage + 5 - 1;
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+		
+		//쿼리문에 전달할 현재페이지에 출력할 목록의 첫행과 끝행 객체 처리
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit - 1;
+		Paging paging = new Paging(startRow, endRow);
+		System.out.println("페이징 : " + paging);
+		//서비스 메소드 실행하고 결과 받기
+		ArrayList<Member> list = memberService.selectList(paging);
+		System.out.println("리스트 :" + list.size());
+		
+		if(list != null && list.size() > 0) {
+			mv.addObject("list", list);
+			mv.addObject("listCount", listCount);
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startPage", startPage);
+			mv.addObject("endPage", endPage);
+			mv.addObject("limit", limit);
+			
+			mv.setViewName("member/userList");
+			
+		}else {
+			mv.addObject("message", currentPage + "페이지 목록 조회 실패.");
+			mv.setViewName("common/commonview");
+		}
+		
+		return mv;
+	}
+	
+	//로그인 제한/가능 변경 처리용
+    @RequestMapping("loginok.do")
+    public String changeLoginOKMethod(Member member, Model model) {
+    	logger.info("loginok.do : " + member.getUser_id() + ", " + member.getLogin_ok());
+    	System.out.println(member.getUser_id());
+	   
+	    if(memberService.updateLoginOk(member) > 0) {
+		   return "redirect:userList.do";
+	    }else {
+		   model.addAttribute("meassge", "로그인 제한/허용 처리 오류 발생!");
+		   return "common/commonview";
+	    }
+    }
+	
+	//아이디로 검색
+    @RequestMapping(value = "msearch.do")
+    public ModelAndView memberSearchMethod(@RequestParam(name ="keyword") String keyword, @RequestParam(name="page", required=false) String page, ModelAndView mv) {
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = Integer.parseInt(page);
+		}
+		
+		//페이징 계산처리 -- 별도의 클래스로 작성해서 사용해도 됨 --------------------
+		int limit = 5; //한 페이지에 출력할 목록 갯수
+		//페이지 수 계산을 위해 총 목록갯수 조회
+		int listCount = memberService.searchListCount(keyword);
+		System.out.println("리스트 카운트 : " + listCount);
+		//페이지 수 계산
+		//주의 : 목록이 11개이면, 페이지 수는 2가 됨 (나머지 목록 1개도 출력페이지가 1개 필요함)
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		//현재페이지가 포함된 페이지 그룹의 시작값 지정 (뷰 아래쪽에 표시할 페이지 수를 10개씩 한 경우)
+		int startPage = (int)((double)currentPage / 10 + 0.9);
+		//현재 페이지가 포함된 페이지 그룹의 끝값
+		int endPage = startPage + 10 - 1;
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+
+		
+		//쿼리문에 전달할 현재페이지에 출력할 목록의 첫행과 끝행 객체 처리
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit -1;
+		Paging paging = new Paging(startRow, endRow, keyword);
+		//별도의 클래스 작성 끝 -----------------------------------------------
+		System.out.println(paging);
+		//서비스 메소드 실행하고 결과받기
+		ArrayList<Member> list = memberService.searchId(paging);
+		
+		if(list != null && list.size() > 0) {
+			mv.addObject("list", list);
+			mv.addObject("listCount", listCount);
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startPage", startPage);
+			mv.addObject("endPage", endPage);
+			mv.addObject("limit", limit);
+			mv.addObject("action", "msearch");
+			mv.addObject("keyword", keyword);
+			
+			mv.setViewName("member/userList");
+		}else {
+			mv.addObject("message", currentPage + "페이지 목록 조회 실패");
+			mv.setViewName("common/commonview");
+		}
+		
+		return mv;
+    }
+    
+    //로그인 가능여부로 검색
+    @RequestMapping(value = "loginsearch.do")
+    public ModelAndView loginSearchMethod(@RequestParam(name ="keyword") String keyword, @RequestParam(name="page", required=false) String page, ModelAndView mv) {
+		int currentPage = 1;
+		if(page != null) {
+			currentPage = Integer.parseInt(page);
+		}
+		
+		//페이징 계산처리 -- 별도의 클래스로 작성해서 사용해도 됨 --------------------
+		int limit = 5; //한 페이지에 출력할 목록 갯수
+		//페이지 수 계산을 위해 총 목록갯수 조회
+		int listCount = memberService.searchOkListCount(keyword);
+		System.out.println("리스트 카운트 : " + listCount);
+		//페이지 수 계산
+		//주의 : 목록이 11개이면, 페이지 수는 2가 됨 (나머지 목록 1개도 출력페이지가 1개 필요함)
+		int maxPage = (int)((double)listCount / limit + 0.9);
+		//현재페이지가 포함된 페이지 그룹의 시작값 지정 (뷰 아래쪽에 표시할 페이지 수를 10개씩 한 경우)
+		int startPage = (int)((double)currentPage / 10 + 0.9);
+		//현재 페이지가 포함된 페이지 그룹의 끝값
+		int endPage = startPage + 10 - 1;
+		
+		if(maxPage < endPage) {
+			endPage = maxPage;
+		}
+
+		
+		//쿼리문에 전달할 현재페이지에 출력할 목록의 첫행과 끝행 객체 처리
+		int startRow = (currentPage - 1) * limit + 1;
+		int endRow = startRow + limit -1;
+		Paging paging = new Paging(startRow, endRow, keyword);
+		//별도의 클래스 작성 끝 -----------------------------------------------
+		System.out.println(paging);
+		System.out.println(keyword);
+		//서비스 메소드 실행하고 결과받기
+		ArrayList<Member> list = memberService.selectSearchLoginOk(paging);
+		
+		if(list != null && list.size() > 0) {
+			mv.addObject("list", list);
+			mv.addObject("listCount", listCount);
+			mv.addObject("maxPage", maxPage);
+			mv.addObject("currentPage", currentPage);
+			mv.addObject("startPage", startPage);
+			mv.addObject("endPage", endPage);
+			mv.addObject("limit", limit);
+			mv.addObject("action", "loginsearch");
+			mv.addObject("keyword", keyword);
+			
+			mv.setViewName("member/userList");
+		}else {
+			mv.addObject("message", currentPage + "페이지 목록 조회 실패");
+			mv.setViewName("common/commonview");
+		}
+		
+		return mv;
+    }
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	//마이페이지 이동
+    @RequestMapping("myinfo.do")
+	public String moveMyPage() {
+		return "member/myPage";
+	}
+    //내정보 수정 페이지 이동
+    @RequestMapping("myData.do")
+	public String moveMyData() {
+		return "member/myDataChange";
+	}
+    
+    //내정보 업데이트
+  	@RequestMapping(value="mupdate.do", method=RequestMethod.POST)
+  	public String memberUpdateMethod(HttpServletRequest request, Member member, Model model, @RequestParam("origin_userpwd") String originUserpwd) {
+  		String address = request.getParameter("postcode") + " "+ request.getParameter("address1") + " " + request.getParameter("address2");
+  		
+  	    //새로운 암호가 전송이 왔다면
+  		String user_pwd = member.getUser_pwd().trim();
+  		
+  		if(user_pwd != null && user_pwd.length() > 0) {
+  			if(!bcryptPasswordEncoder.matches(user_pwd, originUserpwd)) {
+  				// 멤버에 새로운 암호를 저장 :암호화 처리
+  				member.setUser_pwd(bcryptPasswordEncoder.encode(user_pwd));
+  			}
+  		}else {
+  			//새로운 암호가 없다면
+  			member.setUser_pwd(originUserpwd);
+  		}
+  		
+  		//주소 합치기
+  	    member.setAddress(address);
+  	    
+  		if(memberService.updateMember(member) > 0) {
+  			//수정 성공했다면
+  			//비밀번호 인코딩
+  			memberService.updatePwdEncoding(member);
+  			model.addAttribute("message", member.getUser_id() + "회원 정보 변경 성공");
+  			return "common/commonview" ;
+  		}else {
+  			model.addAttribute("message", "회원 정보 수정 실패");
+  			return "common/commonview";
+  		}
+  	}
+  	
+  	//회원탈퇴 팝업 페이지로 이동
+  	@RequestMapping("deleteMember.do")
+  	public String moveDeleteMember() {
+  		return "member/deleteMember";
+  	}
+  	
+  	//회원탈퇴
+  	@RequestMapping(value="mdelete.do")
+  	public String memberDeleteMethod(Member member, HttpSession session, RedirectAttributes ra,@RequestParam("user_id") String user_id, @RequestParam("user_pwd") String user_pwd, @RequestParam("keyword") String keyword, Model model) {
+  		String value = null;
+  		try {
+  			System.out.println(user_id);
+  			member = memberService.selectMember(user_id);
+  			System.out.println(member.getUser_id());
+  			String originUserpwd = member.getUser_pwd().trim();
+  			
+  		
+  			try {
+  				if(!bcryptPasswordEncoder.matches(user_pwd, originUserpwd)) {
+  					ra.addFlashAttribute("result", "pwdError");
+  					value = "redirect:deleteMember.do";
+  				}else if(bcryptPasswordEncoder.matches(user_pwd, originUserpwd) && member.getKeyword().equals(keyword) == false) {
+  					ra.addFlashAttribute("result", "keyError");
+  					value= "redirect:deleteMember.do";
+  				}else if(bcryptPasswordEncoder.matches(user_pwd, originUserpwd) && member.getKeyword().equals(keyword)) {
+  					memberService.deleteMember(user_id);
+  					session.invalidate();
+  					ra.addFlashAttribute("result", "delOk");
+  					value= "redirect:deleteMember.do";
+  				}
+  			}catch(Exception e){
+  				e.printStackTrace();
+  			}
+  		}catch(NullPointerException e) {
+  			ra.addFlashAttribute("result", "idError");
+  			value = "redirect:deleteMember.do";
+  		}
+  		return value;
+  	}
 }
