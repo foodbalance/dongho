@@ -177,12 +177,8 @@ public class BoardController {
 				model.addAttribute("board", board);
 			
 				Member loginMember = (Member)session.getAttribute("loginMember");
+				model.addAttribute("reply", replyService.viewReply(board_no));
 				
-				// 댓글 조회
-//				List<Reply> reply = null;
-//				reply = replyService.list(board_no);
-//				model.addAttribute("reply", reply);
-//				
 				result = "board/boardDetail";
 				
 			}
@@ -201,14 +197,12 @@ public class BoardController {
 	@RequestMapping("bfdown.do")
 	public ModelAndView fileDownMethod(HttpServletRequest request, @RequestParam("ofile") String originFileName, @RequestParam("rfile") String renameFileName, ModelAndView mv) {
 		//공지사항 첨부파일 저장 폴더 경로 지정
-		System.out.println("확인이다");
 		String savePath = request.getSession().getServletContext().getRealPath("resources/board_upfiles/");
 		//저장 폴더에서 읽을 파일에 대해 경로 추가
 		File renameFile = new File(savePath + renameFileName);
 		//다운을 위해 내보내는 파일 객체 생성
 		File originFile = new File(originFileName);
 		
-		System.out.println("경로"+renameFile);
 
 		//filedown - servlet-context.xml 파일 다운 위한 뷰클래스 id명
 		mv.setViewName("filedown");	//등록된 파일다운로드 처리용 뷰 클래스 id 명

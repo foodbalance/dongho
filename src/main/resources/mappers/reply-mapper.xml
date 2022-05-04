@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="replyMapper">
+
+<!-- 댓글 조회 -->
+	<select id="viewReply" resultType="Reply">
+		SELECT reply_no, user_id, reply_content, reply_date FROM reply 
+		WHERE board_no = #{board_no} ORDER BY reply_no ASC
+	</select>
+	
+	<select id="writeReply" resultType="com.project.foodbalance.board.model.vo.Reply">
+		INSERT INTO reply(board_no, reply_no, user_id, reply_content, reply_date)
+		VALUES(#{board_no}, reply_seq.NEXTVAL, #{user_id}, #{reply_content} , sysdate)
+	</select>
+
+	<update id="updateReply">
+		UPDATE reply SET reply_content = #{reply_content, jdbcType=VARCHAR}
+		WHERE reply_no = #{reply_no}
+	</update>
+	
+	<delete id="deleteReply">
+		DELETE FROM reply
+		WHERE reply_no = #{replyNo}
+	</delete>
+
+</mapper>

@@ -24,14 +24,9 @@
     border-bottom: 1px solid #52575c;
     padding: 15px;
   }
-  .parent {
-	display: grid;
-	grid-template-columns: 2fr repeat(3, 1fr) 2fr;
-	grid-template-rows: 40px;
-	grid-column-gap: 0px;
-	grid-row-gap: 0px;
-  }
-  .div2 { grid-area: 1 / 4 / 2 / 5; }
+  
+
+
 </style>
 
 <title></title>
@@ -147,15 +142,17 @@
 						</table>
 						<br>
 						<c:import url="/WEB-INF/views/common/paging.jsp" />
+						<!-- 게시글 쓰기(등록)은 로그인한 회원만 가능함 paging.jsp 로 기능 옮김 -->
+					<c:if test="${ !empty sessionScope.loginMember }">
+					   	<div class="parent">
+						   	<div class="div1">
+						      <button style="align-items: "class="btn btn-outline-secondary" onclick="showWrite();">글쓰기</button>
+						   	</div>
+					</c:if>
 <!-- =============================================================================== -->
 					</div>
 					<br>
-					<!-- 게시글 쓰기(등록)은 로그인한 회원만 가능함 paging.jsp 로 기능 옮김 -->
-					<%-- <c:if test="${ !empty sessionScope.loginMember }">
-					   	<div class="div2">
-					      <button class="btn btn-outline-secondary" onclick="showWrite();">글쓰기</button>
-					   	</div>
-					</c:if> --%>
+					
 
 				
 <!-- =============================================================================== -->

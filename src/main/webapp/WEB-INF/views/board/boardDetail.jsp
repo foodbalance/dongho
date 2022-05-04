@@ -15,7 +15,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-
+<link href="../../resources/font.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
   table {
     width: 100%;
@@ -30,8 +30,126 @@
     border-bottom: 1px solid #444444;
     padding: 15px;
   }
-  
 
+
+.form{
+	margin: 30px;
+	text-align: center;
+	font-family: "나눔스퀘어라운드R";
+		}
+h1{
+	font-family: "나눔바른고딕";
+	font-size: 40px;
+}
+th{	
+	height: 29px;
+	border-top: 0px;
+	background-color: #424343;
+	color: white;
+	font-weight: normal;
+}
+td{
+	border-top: 0px;
+	border-bottom: 1px solid #424343;
+	background-color: #FCFCFC;
+}
+#logoutBtn{
+	font-family: "나눔스퀘어라운드B";
+	font-size: 13px;
+	padding: 5px 5px;
+	color: white;
+	background-color: 424343;
+	border: none;
+	margin: 5px 8px;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 65px;
+	height: 30px;
+}
+#writeBtn{
+	font-family: "나눔스퀘어라운드B";
+	font-size: 15px;
+	padding: 3px 3px;
+	color: white;
+	background-color: 4795DA;
+	border: none;
+	margin: 0px 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 90px;
+	height: 40px;
+}
+#writeBtn:hover{
+	color: white;
+	background-color: 549FE1;
+}
+#btn{
+	font-family: "나눔스퀘어라운드B";
+	font-size: 13px;
+	padding: 5px 5px;
+	color: white;
+	border: none;
+	margin: 5px 8px;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 65px;
+	height: 30px;
+	background-color: 3D7DB5;
+}
+.note-frame card{
+	postion:realtive;
+	margin:0 auto;
+}
+.note-editor{
+	postion:realtive;
+	margin:0 auto;
+}
+#commentBox{
+	width: 850px;
+	border: 3px solid #F8F8F8;
+	text-align: left;
+	position: relative;
+	margin: 0 auto;
+}
+#replyList{
+	height: auto;
+	width: auto;
+	text-align: left;
+	position: relative;
+	margin: 5px;
+	padding: 15px 25px 15px 25px;
+	background-color: #F8F8F8;
+}
+#replyBox{
+	height: 140px;
+	width: 840px;
+	border: 3px solid #F8F8F8;
+	position: relative;
+	margin: 0 auto;
+	background-color: #F8F8F8;
+}
+#replyWrite{
+	height: 100px;
+	width: 600px;
+	text-align: left;
+	position: relative;
+	margin: 0 auto;
+	padding: 10px 0px;
+}
+#replyBtn{
+	font-family: "나눔스퀘어라운드R";
+	font-size: 12px;
+	padding: 2px 3px;
+	color: white;
+	border: none;
+	margin: 1px 3px;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 50px;
+	height: 25px;
+	background-color: C3A50E;
+}
+		
 
 </style>
 
@@ -39,7 +157,6 @@
 
 
 <!-- Core theme JS-->
-<script src="${ pageContext.servletContext.contextPath }/resources/js/scripts.js"></script>
 <script type="text/javascript">
 	function showWrite(){
 	   location.href = "${ pageContext.servletContext.contextPath }/bwform.do";
@@ -93,13 +210,13 @@
 <!-- =============================================================================== -->
 						<table>
 							<tr>
-							<th class="th">제     목</th><td class="td" style="margin-top: 6%;"  readonly>${board.board_title }</td>
+							<th class="th" style="border-bottom: 1px solid #fff;">제     목</th><td class="td" style="margin-top: 6%;"  readonly>${board.board_title }</td>
 							<th class="th">작 성 자</th><td class="td" readonly>${board.user_id }</td>
 							<th class="th">날     짜</th>
 							<td class="td" readonly><fmt:formatDate value="${board.board_date }" type="date" pattern="yyyy-MM-dd"/></td>
 							</tr>
 							<tr>
-								<th class="th">첨부파일</th>
+								<th class="th" style="border-bottom: 1px solid #fff;">첨부파일</th>
 								<td class="td" colspan="5">
 									<c:if test="${!empty board.board_original_img }"><!-- 첨부 파일이 있으면 다운로드 요청 -->
 										<c:url var="bfd" value="/bfdown.do">
@@ -121,15 +238,8 @@
 					<div style="padding: 5px; margin: 5px; margin-bottom: 5%" align="center" >
 						<button class="btn btn-outline-secondary" onclick="javascript:history.go(-1);">목록</button>
 						
-						<!-- 글 작성자가 아닌 회원의 경우 댓글달기 기능 제공 -->
-				      	<c:if test="${ requestScope.board.user_id ne sessionScope.loginMember.user_id }">
-				         	<c:url var="brf" value="/breplyform.do">
-				            	<c:param name="board_no" value="${ board.board_no }"/>
-				            	<c:param name="page" value="${ requestScope.currentPage }"/>
-				         	</c:url>
-				         	<a href="${ brf }">[댓글달기]</a> &nbsp;
-				      	</c:if>   
 						
+				      	
 						<!-- 본인이 등록한 글일때 수정 삭제 -->
 						<c:if test="${board.user_id eq sessionScope.loginMember.user_id}">
 							<c:url var="bup" value="/bupview.do">
@@ -151,84 +261,52 @@
 			</div>
 		</div>
 	</section>
+	
 	<!-- 댓글 시작 -->
-<%-- 					<hr />
-
-						<ul>
-						    <!-- <li>
-						        <div>
-						            <p>첫번째 댓글 작성자</p>
-						            <p>첫번째 댓글</p>
-						        </div>
-						    </li>
-						    <li>
-						        <div>
-						            <p>두번째 댓글 작성자</p>
-						            <p>두번째 댓글</p>
-						        </div>
-						    </li>
-						    <li>
-						        <div>
-						            <p>세번째 댓글 작성자</p>
-						            <p>세번째 댓글</p>
-						        </div>
-						    </li> -->
-						    <c:forEach items="${reply}" var="reply">
-							<li>
-							    <div>
-							        <p>${reply.reply_writer} / <fmt:formatDate value="${reply.regdate}" pattern="yyyy-MM-dd" /></p>
-							        <p>${reply.reply_content }</p>
-							    </div>
-							</li>    
-							</c:forEach>
-						</ul>
-						
-						<div>
-
-						    <form method="post" action="replyw.do">
-						    
-						        <p>
-						            <label>댓글 작성자</label> <input type="text" name="reply_writer">
-						        </p>
-						        <p>
-						            <textarea rows="5" cols="50" name="reply_content"></textarea>
-						        </p>
-						        <p>
-						        	<input type="hidden" name="board_no" value="${board_no}">
-						            <button type="submit">댓글 작성</button>
-						        </p>
-						    </form>
-						    
-						</div> --%>
+			<div class="form">
 				<c:if test="${not empty requestScope.reply}">
 					<div id="commentBox">
 						<h2>&emsp; Comment</h2>
+						
 						<c:forEach items="${requestScope.reply}" var="reply">
 							<div id="replyList">
-								&nbsp;<font style="font-weight:bold; font-size: 20px;">${reply.reply_writer}</font> &emsp;
-								<font style="color:grey;"><fmt:formatDate pattern="YYYY-MM-dd HH:mm" value="${reply.regdate}"/></font>
-								<c:if test="${sessionScope.user_id == reply.reply_writer}">
+								&nbsp;<font style="font-weight:bold; font-size: 20px;">${reply.user_id}</font> &emsp;
+								<font style="color:grey;"><fmt:formatDate pattern="YYYY-MM-dd HH:mm" value="${reply.reply_date}"/></font>
+								<%-- <textarea class="form-control" name="reply_content" rows="5" cols="50" readonly>${reply.reply_content }</textarea> --%>
+								<c:if test="${sessionScope.loginMember.user_id == reply.user_id}">
 									&emsp;
-									<input type="button" value="수정" id="replyBtn" onclick="location.href='${pageContext.request.contextPath}/updateReply.do?board_no=${content.board_no}&&reply_no=${reply.reply_no}'">
-									<input type="button" value="삭제" id="replyBtn" onclick="location.href='${pageContext.request.contextPath}/deleteReply.do?board_no=${content.board_no}&&reply_no=${reply.reply_no}'">
+									<input type="button" value="수정" id="replyBtn" onclick="location.href='${pageContext.servletContext.contextPath}/updateReply.do?board_no=${board.board_no}&&reply_no=${reply.reply_no}'">
+									<input type="button" value="삭제" id="replyBtn" onclick="location.href='${pageContext.request.contextPath}/deleteReply.do?board_no=${board.board_no}&&reply_no=${reply.reply_no}'">
 								</c:if>
 								<br><br>
 								${reply.reply_content}
 							</div>
 						</c:forEach>
+						<c:if test="${!empty loginMember and board.user_id ne sessionScope.loginMember.user_id}">
+							
+						
+						</c:if>
 					</div>
 				</c:if>
-				
-				<form action="${pageContext.request.contextPath}/writeReply.do?board_no=${content.board_no}" method="post">
-		<div id="replyBox">
-			<div id="replyWrite">
-				<b>&emsp;Add | </b><br> 
-				<input type="text" name="replyContent" style="width:500px; height:80px; margin:15px 10px 20px 20px;">
-				<input type="submit" id="replyBtn" style="width:50px; height:80px;" value="등록">
-			</div>
+				<!-- 글 작성자가 아닌 회원의 경우 댓글달기 기능 제공 -->
+			<c:if test="${!empty loginMember and board.user_id ne sessionScope.loginMember.user_id}">
+				<div id="commentBox">
+					<form action="${pageContext.request.contextPath}/writeReply.do?board_no=${board.board_no}" method="post">
+						<div id="replyBox">
+							<div id="replyWrite">
+								<b>&emsp;Add | </b><br> 
+								<input type="hidden" name="board_no" value="${ board_no }">
+								<input type="hidden" name="user_id" value="${ loginMember.user_id }">
+								<input type="text" name="reply_content" style="width:500px; height:80px; margin:15px 10px 20px 20px;">
+								<!-- <textarea class="form-control"  name="reply_content" rows="5" cols="50" required></textarea> -->
+								<input type="submit" id="replyBtn" style="width:50px; height:80px;" value="등록">
+							</div>
+						</div>
+					</form>
+				</div>
+			</c:if>
 		</div>
-	</form>
-					<!-- 댓글 끝 -->
+	<!-- 댓글 끝 -->
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
