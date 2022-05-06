@@ -22,6 +22,7 @@ function keywordCheck(){
 			console.log("success : " + data);
 			if(data == "ok"){
 				$('.newPwd').css('display', 'block');
+				$('.message').css('display', 'none');
 				message += '<h5 align="center" style="color:red;" id="idcheck"></h5>'
 				result += '<input id="check2" type="hidden" value="ok">'
 							
@@ -31,6 +32,7 @@ function keywordCheck(){
 				/* $("#user_pwd").focus(); */
 			}else{
 				$('.newPwd').css('display', 'none');
+				$('.message').css('display', 'none');
 				message += '<h5 align="center" style="color:red;" id="idcheck">아이디 또는 키워드 불일치</h5>'
 				result += '<input id="check2" type="hidden" value="no">'
 							
@@ -51,14 +53,12 @@ function keywordCheck(){
 	.check, .pwd{
 		width : 200px;
 	}
-</style>
-<style type="text/css">
 	.newPwd{
 		display : none
 	}
 	.center{
 		margin-top : 30px;
-		width : 330px;
+		width : 380px;
 		border: 1px solid blue;
 	}
 	.form-control, .button, h1{
@@ -66,6 +66,10 @@ function keywordCheck(){
 	}
 	.button{
 		margin : 10px;
+	}
+	.message{
+		width : 240px;
+		margin-left : -20px;
 	}
 </style>
 </head>
@@ -83,7 +87,7 @@ function keywordCheck(){
 	</div>
 	<h5 align="left" id="check"></h5>
 	<div class="pwd">
-		<form class="newPwd" action="pwdpdate.do" method="post" onsubmit="return validate();">
+		<form class="newPwd" action="pwdupdate.do" method="post" onsubmit="return validate();">
 			<h5 align="left">아이디</h5>
 					           
 			<div align="left">
@@ -100,13 +104,17 @@ function keywordCheck(){
 			</div>
 			<input class="button" type="submit" value="변경하기">
 		</form>
+		
+		<div class="message">  
+			<c:set var="m" value="${ message }"/>
+				<c:if test="${ !empty m }">
+				<span>${ message }</span>
+			</c:if>			
+		</div>
 	</div>
 </div>
 </center>
-<c:set var="m" value="${ message }"/>
-<c:if test="${ !empty m }">
-	<p>${ message }</p>
-</c:if>
+
 
 
 <c:import url="/WEB-INF/views/common/footer.jsp" />

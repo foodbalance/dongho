@@ -185,7 +185,7 @@ public class MemberController {
 		//패스워드 암호화 처리
 		member.setUser_pwd(bcryptPasswordEncoder.encode(member.getUser_pwd()));
 		if (memberService.insertMember(member) > 0) {
-		    model.addAttribute("register", "회원 가입을 완료");
+		    model.addAttribute("register", "회원 가입 완료");
 		    return "common/main";
 		} else {
 		    model.addAttribute("message", "회원 가입 실패");
@@ -514,15 +514,16 @@ public class MemberController {
 	}
   	
   	//비밀번호 찾기 비밀번호 변경
-  	@RequestMapping(value="pwdpdate.do", method=RequestMethod.POST)
+  	@RequestMapping(value="pwdupdate.do", method=RequestMethod.POST)
   	public String pwdChange(HttpServletRequest request, Member member, Model model) {
   		String value = null;
   		String pwd = request.getParameter("user_pwd");
 		String pwd2 = request.getParameter("user_pwd2");
+		String id = request.getParameter("user_id");
   		//아이디 확인
   		int idcount = memberService.selectDupCheckId(member.getUser_id());
   		
-  		if(idcount == 1 && pwd.equals(pwd2)) {
+  		if(idcount == 1 && pwd.equals(pwd2) && !pwd.isEmpty()) {
   			//비번 재설정시 로그인 스택 초기화
   			member.setLogin_stack(0);
 			memberService.updateLoginStack(member);
@@ -533,17 +534,22 @@ public class MemberController {
   			member.setUser_pwd(bcryptPasswordEncoder.encode(member.getUser_pwd()));
   			memberService.updatePwdEncoding(member);
   	  		value = "member/login" ;
+  		}else if(id.isEmpty()) {
+  			model.addAttribute("message", "아이디를 입력하세요.");
+  			value = "member/pwdChange";
   		}else if(idcount == 0){
-  			model.addAttribute("message", "해당 아이디가 존재하지 않습니다.");
-  			value = "common/commonview";
+  			model.addAttribute("message", "아이디가 존재하지 않습니다.");
+  			value = "member/pwdChange";
+  		}else if(pwd.isEmpty()) {
+  			model.addAttribute("message", "비밀번호를 입력하세요.");
+  			System.out.println("비밀"+ pwd);
+  			value = "member/pwdChange";
   		}else {
   			model.addAttribute("message", "비밀번호가 일치하지 않습니다.");
-  			value = "common/commonview";
+  			value = "member/pwdChange";
   		}
-		return value;
   		
-  	
-  		
-  		
+  		return value;
   	}
+  	
 }
