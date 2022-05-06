@@ -1,4 +1,5 @@
-package com.project.foodbalance.notice.model.service; 
+package com.project.foodbalance.notice.model.service;
+
 
 import java.util.ArrayList;
 

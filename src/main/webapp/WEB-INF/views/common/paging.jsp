@@ -14,6 +14,7 @@
 <c:set var="end" value="${ requestScope.end }" />
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
