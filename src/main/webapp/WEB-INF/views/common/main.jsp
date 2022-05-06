@@ -104,18 +104,18 @@ td{
 .parent {
 display: grid;
 grid-template-columns: repeat(3, 1fr);
-grid-template-rows: repeat(5, 1fr);
-grid-column-gap: 3px;
-grid-row-gap: 7px;
+grid-template-rows: repeat(3, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
 }
 
-.div1 { grid-area: 1 / 1 / 2 / 2; }  /* 박스(로그인) */
-.div2 { grid-area: 1 / 2 / 2 / 3; }/*  아이디 입력창*/
-.div3 { grid-area: 1 / 3 / 3 / 4; }/* 로그인버튼 */
-.div4 { grid-area: 2 / 1 / 3 / 2; }/* 박스(비밀번호)  */
-.div5 { grid-area: 2 / 2 / 3 / 3; } /* 비밀번호입력창  */
-.div6 { grid-area: 3 / 1 / 4 / 2; } /* 아이디찾기  */
-.div7 { grid-area: 3 / 2 / 4 / 3; }/* 비밀번호찾기  */
+.div1 { grid-area: 1 / 1 / 2 / 2; }
+.div2 { grid-area: 2 / 1 / 3 / 2; }
+.div3 { grid-area: 1 / 2 / 2 / 3; }
+.div4 { grid-area: 2 / 2 / 3 / 3; }
+.div5 { grid-area: 1 / 3 / 3 / 4; }
+.div6 { grid-area: 3 / 1 / 4 / 2; }
+.div7 { grid-area: 3 / 2 / 4 / 3; }
 .div8 { grid-area: 3 / 3 / 4 / 4; }
 
 
@@ -265,8 +265,79 @@ function movePage(){
 	location.href = "login.do";
 }
 </script>
-
-
+<script type="text/javascript">
+$(function(){
+	/* 주기적으로 자동 실행되게 하려면 자바스크립트 내장함수 setInterval(실행시킬함수명, 시간간격밀리초) 사용하면 됨*/
+	/* setInterval(function(){
+		console.log("setInterval() 에 의해 자동 실행 확인.");
+	}, 100); */
+	
+	//최근 등록한 공지글 3개 출력되게 함
+	
+	
+	//조회수 많은 인기 게시 원글 상위 3개 조회 출력되게 함
+	$.ajax({
+		url: "ntop3.do",
+		type: "post",
+		dataType: "json",
+		success: function(data){
+			console.log("success : " + data); //Object 로 받아짐
+			
+			//object => string 으로 바꿈
+			var jsonStr = JSON.stringify(data);
+			//string => json 객체로 바꿈
+			var json = JSON.parse(jsonStr);
+			 
+			var values = "";
+			for(var i in json.list){  //i(인덱스) 변수가 자동으로 1씩 증가 처리됨
+				values += "<tr id='bottomtr'><td>" + json.list[i].notice_no 
+						+ "</td><td><a style='text-decoration:none; color: black;' href='ndetail.do?notice_no=" + json.list[i].notice_no + "'>"
+						+ decodeURIComponent(json.list[i].notice_title).replace(/\+/gi, " ") 
+						+ "</a></td><td>" + json.list[i].notice_count + "</td></tr>";
+			}  //for in
+			
+			$("#newnotice").html($("#newnotice").html() + values);
+		},
+		error: function(jqXHR, textstatus, errorthrown){
+			console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
+		}
+	});  //ajax
+});  //document.ready
+</script>
+<script type="text/javascript">
+$(function(){
+		
+	//조회수 많은 인기 게시 원글 상위 3개 조회 출력되게 함
+	$.ajax({
+		url: "ttop3.do",
+		type: "post",
+		dataType: "json",
+		success: function(data){
+			console.log("success : " + data); //Object 로 받아짐
+			
+			//object => string 으로 바꿈
+			var jsonStr = JSON.stringify(data);
+			//string => json 객체로 바꿈
+			var json = JSON.parse(jsonStr);
+			 
+			var values = "";
+			for(var i in json.list){  //i(인덱스) 변수가 자동으로 1씩 증가 처리됨
+				values += "<tr id='bottomtr'><td>" + json.list[i].train_no 
+						+ "</td><td><a   href='tdetail.do?train_no=" + json.list[i].train_no + "'>"
+						+ "<img style='margin-bottom: 3px; '  src='" + json.list[i].train_url_img + "'></a>"
+						+ "</td><td><a href='tdetail.do?train_no=" + json.list[i].train_no + "'>"
+						+ decodeURIComponent(json.list[i].train_title).replace(/\+/gi, " ") 
+						+ "</a></td>"
+			}  //for in
+			
+			$("#ttoplist").html($("#ttoplist").html() + values);
+		},
+		error: function(jqXHR, textstatus, errorthrown){
+			console.log("error : " + jqXHR + ", " + textstatus + ", " + errorthrown);
+		}
+	});  //ajax
+});  //document.ready
+</script>
 </head>
 <body>
 
@@ -286,8 +357,6 @@ function movePage(){
              	<button onclick="searchPlaces1();" id="keyword1" value="서강대 헬스" style="border-radius: 10px; background-color: silver; height: 40px; width: 100px; font-size: 15px bold;" >헬스장</button>  
                 <button onclick="searchPlaces2();" id="keyword2" value="서강대 샐러드" style="border-radius: 10px; background-color: silver; height: 40px; width: 100px; font-size: 15px bold;" >샐러드</button> 
                 <button onclick="searchPlaces3();" id="keyword3" value="서강대 공원"  style="border-radius: 10px; background-color: silver; height: 40px; width: 100px; font-size: 15px bold;">공원</button>  
-              
-
         </div>
 	 <br>
 			<c:import url="/WEB-INF/views/common/kakaomap.jsp" />
@@ -297,11 +366,11 @@ function movePage(){
 <div class="main2"> 
 <div id="mdv2" >
 		<h4><br>운동법</h4><br>
-		<table id=""  class="tb1" >
+		<table id="ttoplist"  class="tb1" >
 			<tr id="toptr">
-					<th style="width: 200px">No.</th>
-				<th style="width: 100px">Name</th>
-				<th style="width: 90px">Value</th>
+					<th style="width: 20px;">No.</th>
+				<th style="width: 30px;">영상</th>
+				<th style="width: 380px;">제목</th>
 			</tr>
 		</table>
 	</div>
@@ -323,14 +392,14 @@ function movePage(){
 						아이디 
 					</div>
 				</div>
-			<div class="div2"><input id="inputID" type="text" placeholder="ID" name="inputID" value="${ reid }" required/></div>
-			<div class="div3" ><button onclick="movePage()" class="btn btn-outline-secondary"  type="submit"  style="float:left; height: 100px; border-radius: 8px;">로그인</button></div>
-			<div class="div4">
+			<div class="div3"><input id="inputID" type="text" placeholder="ID" name="inputID" value="${ reid }" required/></div>
+			<div class="div5" ><button onclick="movePage()" class="btn btn-outline-secondary"  type="submit"  style="float:left; height: 100px; border-radius: 8px;">로그인</button></div>
+			<div class="div2">
 					<div id="box1" for="inputPassword">
 						비밀번호 
 					</div>
 					</div>
-			<div class="div5"><input id="inputPassword" type="password" placeholder="Password" name="inputPassword" value="${ repwd }" required/></div>
+			<div class="div4"><input id="inputPassword" type="password" placeholder="Password" name="inputPassword" value="${ repwd }" required/></div>
 			<div class="div6"><button type="button" id="btn" onclick="javascript:location.href='findIdPage.do';">아이디 찾기</button></div>
 			<div class="div7"><button onclick="javascript:location.href='findPwdPage.do';" type="button" id="btn1">비밀번호 찾기</button></div>
 			<div class="div8"><button onclick="javascript:location.href='registerPage.do';" type="button" id="btn2">회원가입</button></div>

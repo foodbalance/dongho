@@ -33,7 +33,7 @@
 
 <br>
 
-<h1 style="float: left; font-size: 40px;"><a style="color: black; text-decoration:none;" href="main.do">FOOD BALANCE</a></h1>
+<h1 style="float: left; font-size: 40px;"><a style="color:  #52575c; font-size: 45px; text-decoration:none;" href="main.do">FOOD BALANCE</a></h1>
 <c:import url="/WEB-INF/views/common/loginSession.jsp" />
 
 <body>
@@ -55,12 +55,12 @@
       
             </button>
          &ensp;&ensp;&ensp;
-          <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='#';">공지사항</button>
+          <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='nlist.do';">공지사항</button>
     &ensp;&ensp;&ensp;
        
           <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='blist.do';">게시판</button>
          &ensp;&ensp;&ensp;
-    <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='#';">운동법</button>
+    <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='tlist.do';">운동법</button>
         &ensp;&ensp;&ensp;
           <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='#';">음식이미지 ai분석</button>
     

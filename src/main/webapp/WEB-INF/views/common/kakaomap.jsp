@@ -50,7 +50,7 @@
 
 <!-- services 라이브러리 불러오기 -->
 
-<div id="map" style="width: 1295px; margin:0px; left: -2px;  height:540px;border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;"></div>
+<div id="map" style="border: 1px solid black; width: 1295px; margin:0px; left: -2px;  height:540px;border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=48c857465598a8d4ed1ec243d3a699f8&libraries=services,clusterer,drawing"></script>
 	<script>
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
