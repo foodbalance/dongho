@@ -1,4 +1,4 @@
-package com.project.foodbalance.notice.model.vo;
+package com.project.foodbalance.notice.model.vo; 
 
 import java.sql.Date;
 

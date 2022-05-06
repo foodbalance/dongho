@@ -1,4 +1,4 @@
-package com.project.foodbalance.notice.controller;
+package com.project.foodbalance.notice.controller; 
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

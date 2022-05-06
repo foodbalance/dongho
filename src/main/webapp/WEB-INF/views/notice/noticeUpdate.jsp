@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
 	pageEncoding="UTF-8" errorPage="commonview.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -125,7 +125,7 @@ table {
 								onclick="javascript:history.go(-1);return false;">이전페이지로 이동</button>
 				
 							<!-- return false로 이벤트 전달 막음 -->
-						</div>
+						</div> 
 					</div>
 				</form>
 			</div>
