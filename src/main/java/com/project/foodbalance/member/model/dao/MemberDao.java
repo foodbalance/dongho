@@ -98,4 +98,11 @@ public class MemberDao {
 	public int deleteMember(String user_id) {
 		return session.delete("memberMapper.deleteMember", user_id);
 	}
+	
+	//비밀번호 찾기 키워드
+	public int selectCheckKeyword(String keyword) {
+		return session.selectOne("memberMapper.selectCheckKeyword", keyword);
+	}
+	
+
 }

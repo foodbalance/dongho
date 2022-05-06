@@ -15,22 +15,35 @@
 		}
 	    .wrap{
 	    	width : 800px; 
-			height : 800px;
+			height : 570px;
 			top : 20px;
 			position:relative;
+			border: 1px solid black;
+			background-color:rgba(100, 130, 110, 0.2);
 	    }
     	.myinfo{
     		width : 500px; 
-			height : 800px;
+			height : 550px;
 			position: absolute;
 			right : 0;
+			border: 1px solid blue;
+			margin : 10px;
+			background-color:rgba(123, 19, 77, 0.1);
     	}
     	.list{
     		position: absolute;
     		width: 180px; 
-			height:500px;
-			
-    	}
+			border: 1px solid blue;
+			height : 150px;
+			padding : 15px;
+			margin : 10px;
+    	}    	
+		.a1{
+			padding : 5px;
+		}
+		#address1, #address2{
+			width: 280px;
+		}
     </style>
     
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -98,8 +111,8 @@
 	<center>
 		<div class="wrap">
 			<div class="list">
-				${ sessionScope.loginMember.user_name } 님<br>
-				<a>정보수정</a><br>
+				<p>${ sessionScope.loginMember.user_name } 님</p>
+				<a href="myData.do" class="a1">정보수정</a><br>
 				<a>건강관리</a>
 			</div>
 
@@ -107,48 +120,48 @@
 				<h2>내 정보 수정</h2>
 		        <form action="mupdate.do" method="post" onsubmit="return validate();">
 		        <!-- 기존 비번 -->
-		        <input type="hidden" name="origin_userpwd" value="${ member.user_pwd }">
+		        <input align="left" type="hidden" name="origin_userpwd" value="${ member.user_pwd }">
 		            <ul>
 			            <h5 align="left">아이디</h5>
 			            <li>
-							<div>
+							<div align="left">
 						    	<input id="user_id" type="text" name="user_id" value="${ sessionScope.loginMember.user_id }" readonly>
 							</div>   
 			            </li>
 			            <h5 align="left">비밀번호</h5>
 			            <li>
-			            	<div>
+			            	<div align="left">
 			                	<input id="user_pwd" type="password" placeholder="변경할 비밀번호 입력" name="user_pwd">
 			                </div>
 			            </li>
 			            <h5 align="left">비밀번호 확인</h5>
 			            <li>
-			            	<div>
+			            	<div align="left">
 					        	<input id="user_pwd2" type="password" placeholder="변경할 비밀번호 확인" name="user_pwd2">
 					        </div>
 			            </li>
 			            <h5 align="left">휴대폰 번호</h5>
 			            <li>
-			            	<div>
+			            	<div align="left">
 					        	<input id="phone" placeholder="휴대폰 번호 입력(-제외한 숫자만 입력)" name="phone" value="${ sessionScope.loginMember.phone }">
 					        </div>
 			            </li>
 			            <h5 align="left">이메일</h5>
 			            <li>
-			            	<div>
+			            	<div align="left">
 					        	<input id="email" placeholder="이메일" name="email" value="${ sessionScope.loginMember.email }">
 					        </div>
 			            </li>
 			            <h5 align="left">주소</h5>
 			            <li>
-			            	<div>
+			            	<div align="left">
 					        	<input style="display:inline;" id="postcode" name="postcode" placeholder="우편번호" value="${ sessionScope.loginMember.postcode }">
 					            <a class="btn btn-primary btn-block" onclick="findAdd();">주소찾기</a>
 					        </div>
-					        <div>
+					        <div align="left">
 					        	<input id="address1" placeholder="주소 입력" name="address1" value="${ sessionScope.loginMember.address1 }">
 					        </div>
-					        <div>
+					        <div align="left">
 					        	<input id="address2" placeholder="상세 주소 입력" name="address2" value="${ sessionScope.loginMember.address2 }">
 					        </div>
 			            </li>
@@ -157,9 +170,6 @@
 			            	<input type="submit" value="변경하기"> 
 			                <input type="reset" value="작성취소"> 
 			                <input type="button" onclick="delPop()" value="회원 탈퇴">
-					    </div>
-					    <div>
-					       <input type="button" onclick="location.href='main.do'" value="홈으로">
 					    </div>
 					</ul>
 				</form>

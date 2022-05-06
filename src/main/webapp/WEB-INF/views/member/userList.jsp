@@ -56,6 +56,16 @@
 	.sform{
 		display : none;
 	}
+	th{
+		background-color:rgba(0, 0, 0, 0.2);	
+    	padding: 15px;
+	}
+	.th{
+		border-bottom: 3px solid black;
+	}
+	.td{
+		border-bottom: 1px solid black;
+	}
 </style>
 
 
@@ -107,23 +117,23 @@
 		<!-- 조회해 온 리스트 정보 출력 -->
 		<table align="center" cellspacing="0" cellpadding="10">
 			<tr>
-				<th>아이디</th>
-				<th>이 름</th>
-				<th>생년월일</th>
-				<th>전화번호</th>
-				<th>주 소</th>
-				<th>키워드</th>
-				<th>로그인 제한</th>
+				<th class="th">아이디</th>
+				<th class="th">이 름</th>
+				<th class="th">생년월일</th>
+				<th class="th">전화번호</th>
+				<th class="th">주 소</th>
+				<th class="th">키워드</th>
+				<th class="th">로그인 제한</th>
 			</tr>
 			<c:forEach items="${ requestScope.list }" var="m">
 				<tr>
-					<td>${ m.user_id }</td>
-					<td>${ m.user_name }</td>
-					<td>${ m.user_fnum }</td>
-					<td>${ m.phone }</td>
-					<td>${ m.address }</td>
-					<td>${ m.keyword }</td>
-					<td>
+					<td class="td">${ m.user_id }</td>
+					<td class="td">${ m.user_name }</td>
+					<td class="td">${ m.user_fnum }</td>
+					<td class="td">${ m.phone }</td>
+					<td class="td">${ m.address }</td>
+					<td class="td">${ m.keyword }</td>
+					<td class="td">
 						<c:if test="${ m.login_ok eq 'Y' }">
 							<input type="radio" name="loginok_${ m.user_id }" onchange="changeLogin(this);" value="true" checked> 가능 &nbsp;
            					<input type="radio" name="loginok_${ m.user_id }" onchange="changeLogin(this);" value="false"> 제한

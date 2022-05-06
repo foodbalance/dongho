@@ -25,4 +25,7 @@ public interface MemberService {
 	int updateMember(Member member);		//내정보 수정
 	Member selectMember(String user_id);	//회원탈퇴 회원 찾기
 	int deleteMember(String user_id);		//회원삭제
+	int selectCheckKeyword(String Keyword);	//비밀번호 찾기 키워드
+	
+	
 }

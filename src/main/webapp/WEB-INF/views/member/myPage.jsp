@@ -8,9 +8,7 @@
 	<title>마이페이지</title>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
-	<!-- 달력 -->
-	<!-- <link href='resources/css/calendar.css' rel="stylesheet"/> -->
-   <!--  <script src='resources/js/calendar.js'/> -->
+	
 
 
 <style type="text/css">
@@ -144,6 +142,18 @@
 .sec_cal .cal_wrap .day.disable {
     color: #ddd;
 }
+
+.sec_cal{
+	border: 1px solid blue;
+}
+.list{
+	border: 1px solid blue;
+	height : 150px;
+	padding : 15px;
+}
+.a1{
+	padding : 5px;
+}
 </style>
 
 <script type="text/javascript">
@@ -252,9 +262,9 @@ function calendarInit() {
 <center>
 	<div class="wrap">
 		<div class="list">
-		${ sessionScope.loginMember.user_name } 님<br>
-		<a href="myData.do">정보수정</a><br>
-		<a>건강관리</a>
+			<p>${ sessionScope.loginMember.user_name } 님</p>
+			<a href="myData.do" class="a1">정보수정</a><br>
+			<a>건강관리</a>
 		</div>
 		<!-- 달력 -->
 		<div id='calendar'>
@@ -280,7 +290,6 @@ function calendarInit() {
 		</div>
 	</div>
 </center>
-
 
 
 

@@ -19,18 +19,14 @@
 	}
 	section{
 		width : 100%;
-		height: 1000px;
+		height: 1100px;
 	}
-	/* .div-warp{
-		position: absolute;
-		top : 50%;
-		left : 50%;
-		transform: translate(-50%, -20%);
-	} */
+
 	.div1{
-		border: 1px solid red;
+		border: 1px solid blue;
+		background-color:rgba(0, 0, 0, 0.1);
 		width : 400px;
-		height: 940px;
+		height: 960px;
 	}
 	.div2{
 		padding : 10px 15px 10px 0;
@@ -74,7 +70,7 @@
 
 <!-- 회원가입 -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
-        <script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 		//전송(submit)버튼이 눌러졌을 때, 입력값들에 대한 유효성 검사함
 		function validate(){
@@ -169,67 +165,67 @@
 				                </h2>		                            
 				                <ul>    
 				                    <form action="enroll.do" method="post" onsubmit="return validate();">
-				                    	<h5>*아이디</h5>
+				                    	<h5 align="left">*아이디</h5>
 					                     <li>
-							                <div>
+							                <div align="left">
 							                	<input id="user_id" type="text" placeholder="아이디" name="user_id" required/>
 							                    <input style="display:inline" type="button" value="중복체크" onclick="return dupCheckId();">                       	
 							                </div>
 							                <h5 align="left" id="idcheck"></h5>
 					                     </li>
 					                                
-					                     <h5>*비밀번호</h5>
+					                     <h5 align="left">*비밀번호</h5>
 					                     <li>
 					                     	<div>
 					                        	<input class="form-control" id="user_pwd" type="password" placeholder="비밀번호 입력" name="user_pwd" required/>
 					                        </div>
 					                     </li>
 					                                
-					                     <h5>*비밀번호 확인</h5>
+					                     <h5 align="left">*비밀번호 확인</h5>
 					                     <li>
 					                     	<div>
 							                	<input class="form-control" id="user_pwd2" type="password" placeholder="비밀번호 확인" required>
 							                </div>
 					                     </li>
 					                                
-					                     <h5>*이름</h5>
+					                     <h5 align="left">*이름</h5>
 					                     <li>
 					                     	<div>
 							                	<input class="form-control" id="user_name" placeholder="이름 입력" name="user_name" required>
 							                </div>
 					                     </li>
 					                                
-					                     <h5>*생년월일</h5>
+					                     <h5 align="left">*생년월일</h5>
 					                     <li>
 					                     	<div>
 							                 	<input type="date" class="form-control" id="user_birth" placeholder="yyyy-mm-dd (반드시 형식에 맞게 입력하세요)" name="user_fnum" required>
 							                </div>
 					                     </li>
 					                                
-					                     <h5>주민번호 뒤 첫째자리</h5>
+					                     <h5 align="left">주민번호 뒤 첫째자리</h5>
 					                     <li>
 					                     	<div>
 							                	<input class="form-control" placeholder="1,2,3,4" name="user_enum" required>
 							                </div>
 					                     </li>
 					                     
-					                     <h5>*Email</h5>
+					                     <h5 align="left">*Email</h5>
 					                     <li>
 					                     	<div>
 							                	<input class="form-control" id="email" placeholder="이메일 형식에 맞게 입력하세요." name="email" required>
 							                </div>
 					                     </li>           
-					                     <h5>*휴대폰 번호</h5>
+					                     <h5 align="left">*휴대폰 번호</h5>
 					                     <li>
 					                     	<div>
 							                	<input class="form-control" id="phone" placeholder="휴대폰 번호 입력(-제외한 숫자만 입력)" name="phone" required>
 							                </div>
 					                     </li>
 					                                
-					                     <h5>*주소</h5>
+					                     <h5 align="left">*주소</h5>
 					                     <li>
-					                     	<div>
-					                     		<button style="display:inline" onclick="findAdd();">주소 찾기</button>
+					                     	<div align="left">
+					                     		<button  style="display:inline" onclick="findAdd();">주소 찾기</button>
 							                	<input class="form-control" style="display:inline;" id="postcode" name="postcode" placeholder="우편번호" required readonly/>
 							                </div>
 							                <div>
@@ -240,7 +236,7 @@
 							                </div>
 					                     </li>
 					                                
-					                     <h5>*키워드</h5>
+					                     <h5 align="left">*키워드</h5>
 					                     <li>
 					                     	<div>
 							                	<input class="form-control" id="keyword" placeholder="비밀번호 찾기 키워드" name="keyword" required>

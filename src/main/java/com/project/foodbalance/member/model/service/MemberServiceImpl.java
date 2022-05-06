@@ -114,4 +114,12 @@ public class MemberServiceImpl implements MemberService{
 	public int deleteMember(String user_id) {
 		return memberDao.deleteMember(user_id);		
 	}
-}
+
+	//비밀번호 찾기 키워드
+	@Override
+	public int selectCheckKeyword(String Keyword) {
+		return memberDao.selectCheckKeyword(Keyword);
+	}
+	
+	
+}	

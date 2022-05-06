@@ -127,11 +127,11 @@ public class MemberController {
 			//로그인 실패
 			else {
 				//제한 스택 부여
-				System.out.println("로그인 아이디: "+loginMember.getUser_id());
-				System.out.println("로그인 스택: "+loginMember.getLogin_stack());
 				loginMember.setLogin_stack(loginMember.getLogin_stack()+1);
 				memberService.updateLoginStack(loginMember);
-		
+				System.out.println("로그인 아이디: "+loginMember.getUser_id());
+				System.out.println("로그인 스택: "+loginMember.getLogin_stack());
+				
 				model.addAttribute("message", "비밀번호 불일치");
 				model.addAttribute("reid", id);
 				model.addAttribute("repwd", pwd);
@@ -479,5 +479,59 @@ public class MemberController {
   			value = "redirect:deleteMember.do";
   		}
   		return value;
+  	}
+  	
+  	
+  	//비밀번호 찾기 이동  
+  	@RequestMapping("findPwdPage.do")
+  	public String moveㄹindPwd() {
+  		return "member/pwdChange";
+  	}
+  	
+  	//비밀번호 찾기 아이디, 키워드 확인
+  	//ajax 통신 요청
+  	@RequestMapping(value = "keywordchk.do", method = RequestMethod.POST)
+	public void keywordCheckMethod(@RequestParam("keyword") String keyword, @RequestParam("user_id") String user_id, HttpServletResponse response) throws IOException {
+
+		int kcount = memberService.selectCheckKeyword(keyword);
+		int idcount = memberService.selectDupCheckId(user_id);
+		      
+		   String returnValue = null;
+		   if(kcount >= 1 && idcount == 1) {
+		    returnValue = "ok";
+		   }else {
+		       returnValue = "dup";
+		   }
+		      
+		   //response를 이용해서 클라이언트로 출력스트림 만들고 값 보내기
+		   response.setContentType("text/html; charset=utf-8");
+		   PrintWriter out = response.getWriter();
+		   out.append(returnValue);
+		   out.flush();
+		   out.close();
+	}
+  	
+  	//비밀번호 찾기 비밀번호 변경
+  	@RequestMapping(value="pwdpdate.do", method=RequestMethod.POST)
+  	public String pwdChange(Member member, Model model) {
+  		String value = null;
+
+  		//아이디 확인
+  		int idcount = memberService.selectDupCheckId(member.getUser_id());
+  		
+  		if(idcount == 1) {
+  			// 멤버에 새로운 암호를 저장 :암호화 처리
+  			member.setUser_pwd(bcryptPasswordEncoder.encode(member.getUser_pwd()));
+  			memberService.updatePwdEncoding(member);
+  	  		value = "member/login" ;
+  		}else {
+  			model.addAttribute("message", "해당 아이디가 존재하지 안거나 비밀번호가 다릅니다.");
+  			value = "common/commonview";
+  		}
+		return value;
+  		
+  	
+  		
+  		
   	}
 }

@@ -149,4 +149,15 @@
 	<delete id="deleteMember" parameterType="string">
 		delete from member where user_id = #{ user_id }
 	</delete>
+	
+	<!-- 비밀번호 찾기 키워드 -->
+	<select id="selectCheckKeyword" parameterType="string" resultType="_int">
+		select count(keyword) 
+		from member 
+		where keyword = #{ keyword }	
+	</select>
+	
+	
+
+	
 </mapper>
