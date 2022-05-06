@@ -127,12 +127,12 @@ grid-template-rows: repeat(3, 1fr);
 grid-column-gap: 0px;
 grid-row-gap: 0px;
 }
-.main1 { grid-area: 1 / 1 / 2 / 4; height: 500px;} /* 지도  */
-.main2 { grid-area: 2 / 1 / 3 / 2; height: 500px;} /* 레시피  */
-.main3 { grid-area: 2 / 2 / 3 / 3; height: 500px;} /* 운동법  */
-.main4 { grid-area: 2 / 3 / 3 / 4; height: 500px;} /* 로그인  */
-.main5 { grid-area: 3 / 1 / 4 / 2; height: 500px;} /* 공지 */
-.main6 { grid-area: 3 / 2 / 4 / 3; height: 500px;} /* 게시판  */
+.main1 { grid-area: 3 / 1 / 2 / 4; height: 500px;} /* 지도  */
+.main2 { grid-area: 1 / 1 / 3 / 3; height: 500px;} /* 운동법  */
+
+.main4 { grid-area: 1 / 3 / 3 / 3; height: 500px;} /* 로그인  */
+.main5 { grid-area: 2 / 1 / 4 / 2; height: 500px; padding-bottom: 50px; height: 300px;} /* 공지 */
+.main6 { grid-area: 2 / 3 / 4 / 2; height: 500px; padding-bottom: 50px; height: 300px;} /* 게시판  */
 
 
 
@@ -148,52 +148,55 @@ grid-row-gap: 0px;
 
 /*   겉 테두리  */
 #se{
-	position: relative;
+	position:relative; 
 	margin: auto;
 	width: 100%;
 	max-width: 1350px;
-	height: 100%;
+	height: 2110px;
  	background: white;
  	border-radius: 30px;
  	border: 3px solid black;
  	flex-wrap: wrap; 
  	transition: all ease-in-out 0.3s;
+ 	
   }	
   	
 
 
-#mdv2{  /* 레시피, 운동법*/
+#mdv2{  /*운동법*/
 	border: 2px solid black;
 	border-radius: 20px; 
 	padding: 0px; 
-	margin: 250px 30px 0px 25px; 
+	margin: 30px 30px 0px 25px; 
 	text-align: center; 
-	width: 400px; 
-	height: 330px; 
+	width: 860px; 
+	height: 550px; 
 	background-color: black; 
 	color: white;
 	position:relative;
 }
 
+
 #mdv{ /* 공지, 게시판*/
 	border: 2px solid black;
 	border-radius: 20px; 
-	padding: 0px; 
-	margin: 350px 30px 0px 25px; 
+	padding: 0px;
+	margin:330px 30px 0px 25px; 
 	text-align: center; 
-	width: 400px; 
+	width: 620px; 
 	height: 330px; 
 	background-color: black; 
 	color: white;
 	top : -200px;
 	position:relative;
+	
 }
 
 #logindiv{ /*로그인박스*/
 	border: 2px solid black;
 	border-radius: 20px; 
 	padding: 13px; 
-	margin: 250px 30px 0px 25px; 
+	margin: 30px 30px 0px -420px; 
 	text-align: center; 
 	width: 390px; 
 	height: 200px; 
@@ -205,10 +208,10 @@ grid-row-gap: 0px;
 	border: 2px solid black;
 	border-radius: 20px; 
 	padding: 0px; 
-	margin: 10px 30px 30px 25px;   /* 상 우 하 좌 */
+	margin: 510px 30px 30px 25px;   /* 상 우 하 좌 */
 	text-align: center; 
-	width: 1300px; 
-	height: 700px; 
+	width: 1295px; 
+	height: 650px; 
 	background-color: black; 
 	color: white; 
 	 
@@ -231,7 +234,7 @@ $(function(){
 	
 	//조회수 많은 인기 게시 원글 상위 3개 조회 출력되게 함
 	$.ajax({
-		url: "btop5.do",
+		url: "btop3.do",
 		type: "post",
 		dataType: "json",
 		success: function(data){
@@ -267,7 +270,7 @@ function movePage(){
 </head>
 <body>
 
-<div style=" position: width: 70%; min-width: 100%; margin-right:auto; margin-left:auto; ">
+<div style="width: 70%; min-width: 100%; margin-right:auto; margin-left:auto; height: 2000px;  ">
  <div  id="se">
 <nav>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
@@ -278,19 +281,26 @@ function movePage(){
 <div class="mainA">
 <div class="main1"> 
 <div id="spotdiv">
-			<h4><br>다이어트 스팟</h4>
-	 
+			<h4><br>다이어트 스팟</h4>   <div>
+           <span id="info.location.approxAddr" class="approxAddr">&nbsp;</span>
+             	<button onclick="searchPlaces1();" id="keyword1" value="서강대 헬스" style="border-radius: 10px; background-color: silver; height: 40px; width: 100px; font-size: 15px bold;" >헬스장</button>  
+                <button onclick="searchPlaces2();" id="keyword2" value="서강대 샐러드" style="border-radius: 10px; background-color: silver; height: 40px; width: 100px; font-size: 15px bold;" >샐러드</button> 
+                <button onclick="searchPlaces3();" id="keyword3" value="서강대 공원"  style="border-radius: 10px; background-color: silver; height: 40px; width: 100px; font-size: 15px bold;">공원</button>  
+              
+
+        </div>
+	 <br>
 			<c:import url="/WEB-INF/views/common/kakaomap.jsp" />
 		
 		</div>
 </div>
 <div class="main2"> 
 <div id="mdv2" >
-		<h4><br>추천 레시피</h4><br>
-		<table id="#"  class="tb1" >
+		<h4><br>운동법</h4><br>
+		<table id=""  class="tb1" >
 			<tr id="toptr">
-				<th style="width: 80px">No.</th>
-				<th style="width: 300px">Name</th>
+					<th style="width: 200px">No.</th>
+				<th style="width: 100px">Name</th>
 				<th style="width: 90px">Value</th>
 			</tr>
 		</table>
@@ -299,16 +309,7 @@ function movePage(){
 
 </div>
 <div class="main3"> 
-<div id="mdv2" >
-		<h4><br>운동법</h4><br>
-		<table id=""  class="tb1" >
-			<tr id="toptr">
-					<th style="width: 80px">No.</th>
-				<th style="width: 300px">Name</th>
-				<th style="width: 90px">Value</th>
-			</tr>
-		</table>
-	</div>
+
 </div>
 
 <div class="main4">
@@ -342,13 +343,14 @@ function movePage(){
 		<c:if test="${ !empty loginMember and loginMember.admin_ok ne 'Y' }">
 		 <div id="logindiv"> 
 			<div >
-				<div align="left" style="font: 40px oblique bolder;">Food Balance</div>
-				<div align="right" style="font: 30px bold; margin-top: 20px; color:white;">${ sessionScope.loginMember.user_name }&ensp;&ensp;님</div><br>
-				<c:url var="callMyInfo2" value="myinfo.do">
+			
+				<div align="right" style="text-align:center; font: 23px bold; margin-top: 10px; color:white;">${ sessionScope.loginMember.user_name } 님 환영합니다.</div>
+				<c:url var="callMyInfo" value="myinfo.do">
 					<c:param name="user_id" value="${ loginMember.user_id }" />
 				</c:url>
-				<button style="border-radius: 4px; width: 100px; height: 35px; left: 60px;  margin-right: 50px;" onclick="javascript:location.href='${ callMyInfo2 }';">My Page</button>
-				<button style="border-radius: 4px; width: 100px; height: 35px; left: 60px;  margin-right: 0px;" onclick="javascript:location.href='logout.do';">로그아웃</button>
+				<button style="font:20px bold; border-radius: 4px; width: 230px; height: 50px; left: 60px;  margin: 10px;" onclick="javascript:location.href='logout.do';">로그아웃</button><br>
+				<button style="border-radius: 4px; width: 120px; height: 40px; left: 60px;  margin: 10px;" onclick="javascript:location.href='#';">마이페이지</button>
+				
 			</div>
 			</div>
 		</c:if>
@@ -356,13 +358,14 @@ function movePage(){
 		<c:if test="${ !empty loginMember and loginMember.admin_ok eq 'Y' }"> 
 			<div id="logindiv">
 			<div >
-				<div align="left" style="font: 40px oblique bolder;">Food Balance</div>
-				<div align="right" style="font: 30px bold; margin-top: 20px; color:white;">${ sessionScope.loginMember.user_name } 님 환영합니다.</div>
+			
+				<div align="right" style="text-align:center; font: 23px bold; margin-top: 10px; color:white;">${ sessionScope.loginMember.user_name } 님 환영합니다.</div>
 				<c:url var="callMyInfo" value="myinfo.do">
 					<c:param name="user_id" value="${ loginMember.user_id }" />
 				</c:url>
-				<button style="border-radius: 4px; width: 100px; height: 35px; left: 60px;  margin-right: 50px;" onclick="javascript:location.href='${ callMyInfo }';">My Page</button>
-				<button style="border-radius: 4px; width: 100px; height: 35px; left: 60px;  margin-right: 0px;" onclick="javascript:location.href='logout.do';">로그아웃</button>
+				<button style="font:20px bold; border-radius: 4px; width: 230px; height: 50px; left: 60px;  margin: 10px;" onclick="javascript:location.href='logout.do';">로그아웃</button><br>
+				<button style="border-radius: 4px; width: 120px; height: 40px; left: 60px;  margin: 10px;" onclick="javascript:location.href='#';">회원관리</button>
+				
 			</div>
 			
 			</div>
@@ -399,9 +402,9 @@ function movePage(){
    
 
 
-<footer style="">
+<div >
 				<c:import url="/WEB-INF/views/common/footer.jsp" />
-</footer>
+</div>
 </div>   
   </div>
 

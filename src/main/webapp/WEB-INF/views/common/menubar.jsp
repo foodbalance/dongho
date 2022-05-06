@@ -18,8 +18,9 @@
 <style type="text/css">
   #menubtn{
  	 background-color: #52575c;
- 	 font-size: 20px;
+ 	 font-size: 25px;
  	 text-align: center;
+ 	 height: 50px;
  	 
   } 
   #menubtn:hover{
@@ -32,7 +33,7 @@
 
 <br>
 
-<h1 style="float: left; font-size: 40px; ">FOOD BALANCE</h1>
+<h1 style="float: left; font-size: 40px;"><a style="color: black; text-decoration:none;" href="main.do">FOOD BALANCE</a></h1>
 <c:import url="/WEB-INF/views/common/loginSession.jsp" />
 
 <body>
@@ -50,8 +51,7 @@
             <span class="visually-hidden">(current)</span>
         
          </button>
-      &ensp;&ensp;&ensp;
-          <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='#';">음식이미지 ai분석
+      
       
             </button>
          &ensp;&ensp;&ensp;
@@ -60,16 +60,10 @@
        
           <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='blist.do';">게시판</button>
          &ensp;&ensp;&ensp;
-       <button type="button" class="btn btn-outline-secondary" id="menubtn">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">다이어트 추천</a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="javascript:location.href='reclist.do';">추천레시피</a>
-              <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" >운동법</a>
-          </div>
-        </li>
-        </button>
+    <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='#';">운동법</button>
+        &ensp;&ensp;&ensp;
+          <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='#';">음식이미지 ai분석</button>
+    
      
       </ul>
  

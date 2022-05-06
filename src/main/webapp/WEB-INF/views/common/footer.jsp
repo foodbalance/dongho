@@ -8,6 +8,9 @@
 	footer {
 		background-color : black;
 		text-align: center;
+		border-bottom-left-radius: 30px; border-bottom-right-radius: 30px;
+		margin: 280px -1.5px -5px -1px;
+		
 	}
 	
 	footer > div > ul > li{
@@ -18,8 +21,8 @@
 </style>
 <title></title>
 </head>
-<body>
-<hr>
+<body >
+
 <footer>
 		<div class="left">
 			 <ul style="list-style: none">
