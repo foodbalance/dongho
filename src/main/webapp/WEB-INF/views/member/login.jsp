@@ -49,7 +49,7 @@
 	<div class="div1">
 		<div class="div2">
 			<h2>
-		    	<span>로그인</span>
+		    	<span>*로그인</span>
 		    </h2>	                           		
 		    <form action="login.do" method="post">
 				<div class="div3">
