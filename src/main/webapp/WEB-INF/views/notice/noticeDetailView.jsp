@@ -41,17 +41,21 @@ table {
 
 
 
+
 <!-- 공지사항 상세 -->
+
+<<!-- 공지사항 -->
+
 <script type="text/javascript"
 	src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	$(function() {
-		showDiv();
+$(function() {
+	showDiv();
 
-		$("input[name=item]").on("change", function() {
-			showDiv();
-		});
+	$("input[name=item]").on("change", function() {
+		showDiv();
 	});
+});
 
 	function showDiv() {
 		if ($("input[name=item]").eq(0).is(":checked")) {
@@ -80,12 +84,19 @@ table {
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 	<section class="page-section cta">
 		<div class="container">
-			<div class="row">
-				<div class="col-xl-9 mx-auto">
 
-					<p style="color: #52575c; font-size: 35px; margin-top: 5%;"
-						align="center">
-						<b>공지사항</b>
+			<div class="row">
+
+			<br>
+			<br>
+			<div
+				style="background-color: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
+				class="row">
+
+				<div class="col-xl-9 mx-auto">
+					<br>
+					<p style="font-size: 45px;" align="center">
+						<b>공지사항 상세내용</b>
 					</p>
 					<br>
 					<div class="cta-inner bg-faded text-center rounded">
@@ -100,22 +111,21 @@ table {
 								<td class="td" readonly><fmt:formatDate
 										value="${notice.notice_date }" type="date" pattern="yyyy-MM-dd" /></td>
 							</tr>
-							<tr style="overflow:scroll; width:500px; height:150px;">
-								<th>내 용</th>
-								<td colspan="5"><textarea class="form-control"
-										name="notice_content" rows="20" cols="50" readonly>${ notice.notice_content }</textarea></td>			
+							<tr>
+								<th class="th">내 용</th>
+								<td class="td" style="margin-left: 10%;" colspan="5"><textarea
+										class="form-control" name="notice_content" rows="20" cols="50"
+										readonly>${notice.notice_content }</textarea></td>
 							</tr>
 						</table>
 						<!-- =============================================================================== -->
 					</div>
 					<br>
 					<div align="right">
-						<!-- <button style= "background-color: white;"
-							 type="button" class="btn btn-outline-primary"
-							 onclick="javascript:history.go(-1);">목록</button> -->
 						<a type="button" class="btn btn-outline-secondary" 
 						href="${ pageContext.servletContext.contextPath }/nlist.do?page=1">목록
 						</a>
+
 					</div>
 				</div>
 			</div>

@@ -76,19 +76,18 @@ table {
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 	<section class="page-section cta">
 		<div class="container">
-			<br>
-			<br>
+			<br> <br>
 			<div
 				style="background-color: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
 				class="row">
 				<form action="nupdate.do" method="post">
-				<div class="col-xl-9 mx-auto">
-					<br>
-					<p style="font-size: 45px;" align="center">
-						<b>공지사항 수정</b>
-					</p>
-					<br>
-					<div class="cta-inner bg-faded text-center rounded">
+					<div class="col-xl-9 mx-auto">
+						<br>
+						<p style="font-size: 45px;" align="center">
+							<b>공지사항 수정</b>
+						</p>
+						<br>
+						<div class="cta-inner bg-faded text-center rounded">
 							<!-- =============================================================================== -->
 							<input type="hidden" name="notice_no"
 								value="${notice.notice_no }">
@@ -105,7 +104,12 @@ table {
 									<td><input class="form-control" type="text"
 										value="${notice.user_id}" readonly></td>
 								</tr>
-								<tr style="overflow:scroll; width:500px; height:150px;"><!-- 스크롤바 추가  -->
+								<tr>
+									<th>날 짜</th>
+									<td><input class="form-control" type="text"
+										value="${notice.notice_date}" readonly></td>
+								</tr>
+								<tr style="overflow: scroll; width: 500px; height: 150px;">
 									<th>내 용</th>
 									<td><textarea class="form-control" name="notice_content"
 											rows="20" cols="50" required>${notice.notice_content }</textarea></td>
@@ -113,19 +117,18 @@ table {
 							</table>
 							<!-- =============================================================================== -->
 						</div>
-						<br>
 						<div align="right">
-							<button class="btn btn-outline-secondary" 
+							<button class="btn btn-outline-secondary"
 									role="button" tabindex="0" type="submit">수정하기</button>
-							&nbsp; <button class="btn btn-outline-secondary" 
-									role="button" tabindex="0" type="submit">수정취소</button>
+							&nbsp; <button class="btn btn-outline-secondary"
+									role="button" tabindex="0" type="submit"
+									onclick="javascript:history.go(-1);return false;">수정취소</button>
 							&nbsp;
 									<button class="btn btn-outline-secondary" 
 									role="button" tabindex="0" type="submit"
 								onclick="javascript:history.go(-1);return false;">이전페이지로 이동</button>
-				
-							<!-- return false로 이벤트 전달 막음 -->
-						</div> 
+								<!-- return false로 이벤트 전달 막음 -->
+						</div>
 					</div>
 				</form>
 			</div>

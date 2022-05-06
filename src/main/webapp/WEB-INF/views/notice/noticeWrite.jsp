@@ -108,7 +108,11 @@ table {
 									<td><input type="text" class="form-control" name="user_id"
 										readonly value="${loginMember.user_id }"></td>&nbsp;
 								</tr>
+
 								<tr style="overflow:scroll; width:500px; height:150px;"><!-- 스크롤바 추가  -->
+
+								<tr style="overflow:scroll; width:500px; height:150px;">
+
 									<th>내 용</th>
 									<td><textarea name="notice_content" class="form-control"
 											rows="20" cols="50" required></textarea></td>&nbsp;
@@ -119,13 +123,13 @@ table {
 						</div>
 						<br>
 						<div align="right">
-								<button class="source-button btn btn-outline-dark btn-xs" 
+								<button class="btn btn-outline-secondary" 
 									role="button" tabindex="0" type="submit">등록하기</button>
 								&nbsp; 
-								<button class="source-button btn btn-outline-dark btn-xs" 
+								<button class="btn btn-outline-secondary"
 									role="button" tabindex="0" type="reset">작성취소</button>
 								&nbsp;
-								<button class="source-button btn btn-outline-dark btn-xs" role="button" tabindex="0"
+								<button class="btn btn-outline-secondary" role="button" tabindex="0"
 									onclick="javascript:history.go(-1);return false;">목록</button>
 								<!-- <button class="source-button btn btn-outline-dark btn-xs" role="button" tabindex="0">확인용 버튼</button> -->
 							

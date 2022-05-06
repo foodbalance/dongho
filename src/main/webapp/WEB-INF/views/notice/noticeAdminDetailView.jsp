@@ -49,9 +49,13 @@ function del() {
 
 
 <script type="text/javascript">
-	function showWrite() {
-		location.href = "${ pageContext.servletContext.contextPath }/noticeWrite.do";
-	}
+function showWrite() {
+
+	location.href = "${ pageContext.servletContext.contextPath }/noticeWrite.do";
+
+	location.href = "${ pageContext.servletContext.contextPath }/ndetail.do";
+
+}
 </script>
 
 <!-- 게시글 상세 -->
@@ -91,12 +95,21 @@ function del() {
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 	<section class="page-section cta">
 		<div class="container">
+
 			<div class="row">
+			<br>
+			<br>
+			<div
+				style="background-color: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
+				class="row">
+
 				<div class="col-xl-9 mx-auto">
+
 
 					<p style="color: #52575c; font-size: 35px; margin-top: 5%;"
 						align="center">
 						<b>관리자용 공지사항 보기</b>
+
 					</p>
 					<br>
 					<div class="cta-inner bg-faded text-center rounded">
@@ -111,24 +124,27 @@ function del() {
 								<td class="td" readonly><fmt:formatDate
 										value="${notice.notice_date }" type="date" pattern="yyyy-MM-dd" /></td>
 							</tr>
-							<tr style="overflow:scroll; width:500px; height:150px;">
-								<th>내 용</th>
-								<td colspan="5"><textarea class="form-control"
-										name="notice_content" rows="20" cols="50" readonly>${notice.notice_content }</textarea></td>
+							<tr>
+								<th class="th">내 용</th>
+								<td class="td" style="margin-left: 10%;" colspan="5"><textarea
+										class="form-control" name="notice_content" rows="20" cols="50"
+										readonly>${notice.notice_content }</textarea></td>
 							</tr>
-
 						</table>
 						<!-- =============================================================================== -->
 					</div>
 					<div align="right">
 						<br>
+
 						<a type="button" class="btn btn-outline-secondary" 
 						onclick="location.href=document.referrer;">목록
 						</a>
+
 						<!-- 수정페이지로 이동 -->
 						<c:url var="nup" value="/upmove.do">
 							<c:param name="notice_no" value="${notice.notice_no }" />
 						</c:url>
+
 						<button class="btn btn-outline-secondary" 
 							role="button" tabindex="0"
 							onclick="javascript:location.href='${nup}';">수정</button>
@@ -136,7 +152,8 @@ function del() {
 						<c:url var="ndel" value="/ndel.do">
 							<c:param name="notice_no" value="${notice.notice_no }" />
 						</c:url>
-						<button class="btn btn-outline-secondary" 
+
+						<button class="btn btn-outline-secondary"
 							role="button" tabindex="0"
 							onclick="javascript:location.href='${ndel}';">글삭제</button>
 					</div>

@@ -34,9 +34,13 @@
 
 
 <script type="text/javascript">
-	function showWrite() {
-		location.href = "${ pageContext.servletContext.contextPath }/noticeWrite.do";
-	}
+function showWrite() {
+
+	location.href = "${ pageContext.servletContext.contextPath }/noticeWrite.do";
+
+	location.href = "${ pageContext.servletContext.contextPath }/nlist.do";
+
+}
 </script>
 
 <!-- 공지사항 -->
@@ -75,11 +79,20 @@
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 	<section class="page-section cta">
 		<div class="container">
+
 			<br> <br>
 			<div style="padding: 5px; margin: 5px;" class="row">
+			<br>
+			<br>
+			<div
+				style="background-color: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
+				class="row">
+
 				<div class="col-xl-9 mx-auto">
 					<br>
 					<p style="color: #52575c; font-size: 45px;" align="center">
+
+					<p style="font-size: 45px;" align="center">
 						<b>공지사항</b>
 					</p>
 					<ul class="nav nav-tabs">
@@ -155,11 +168,16 @@
 					<br>
 					<!-- 로그인한 회원이 관리자인 경우는 공지사항 등록 버튼이 보이게 함 -->
 					<c:if test="${ loginMember.admin_ok eq 'Y' }">
+
 						<div>
 							<button class="btn btn-outline-secondary"
-								onclick="javascript:location.href='noticeWrite.do';">공지 등록</button>
-						</div>
-					</c:if>
+									role="button" tabindex="0"
+								onclick="javascript:location.href='noticeWrite.do';">공지
+								등록</button>
+						</c:if>
+					<br>
+					
+					
 
 					<!-- 게시글 쓰기(등록)은 로그인한 회원만 가능함 paging.jsp 로 기능 옮김 -->
 					<%-- <c:if test="${ !empty sessionScope.loginMember }">
