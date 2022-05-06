@@ -1,5 +1,6 @@
 package com.project.foodbalance.notice.model.service;
 
+
 import java.util.ArrayList;
 
 import com.project.foodbalance.common.Paging;
@@ -16,9 +17,18 @@ public interface NoticeService {
 	int updateNotice(Notice notice);  //원글 수정용
 	int deleteNotice(int notice_no);  //게시글 삭제용
 	int selectWriterCount();//제목으로 검색 갯수 카운트
-	ArrayList<Notice> selectNewTop3();
-	ArrayList<Notice> selectSearchTitle(String keyword);  //제목으로 검색
-	ArrayList<Notice> selectSearchWriter(String keyword);  //작성자로 검색
-	ArrayList<Notice> selectSearchDate(SearchDate date);  //날짜로 검색
+	
+	ArrayList<Notice> selectNewTop3();  //메인에 최신 공지 3개 올리기용
+	
+	int selectSearchTitle(String keyword);  //제목으로 검색
+	ArrayList<Notice> pageSearchTitle(Paging page);  //제목 검색 페이징
+	
+	int selectSearchWriter(String keyword);  //작성자로 검색
+	ArrayList<Notice> pageSearchWriter(Paging page);  //작성자 검색 페이징
+	
+	int selectSearchDate(SearchDate date);  //날짜로 검색
+	ArrayList<Notice> pageSearchDate(Paging page);  //날짜 검색 페이징
+	
+	int updateAddReadcount(int notice_no);  // 공지사항 조회수
 	
 }

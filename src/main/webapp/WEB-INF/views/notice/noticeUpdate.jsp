@@ -37,7 +37,7 @@ table {
 
 <script type="text/javascript">
 	function showWrite() {
-		location.href = "${ pageContext.servletContext.contextPath }/bwform.do";
+		location.href = "${ pageContext.servletContext.contextPath }/nupdate.do";
 	}
 </script>
 
@@ -76,19 +76,18 @@ table {
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 	<section class="page-section cta">
 		<div class="container">
-			<br>
-			<br>
+			<br> <br>
 			<div
-				style="background-color: #1a1a1a; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
+				style="background-color: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
 				class="row">
 				<form action="nupdate.do" method="post">
-				<div class="col-xl-9 mx-auto">
-					<br>
-					<p style="color: white; font-size: 45px;" align="center">
-						<b>공지사항</b>
-					</p>
-					<br>
-					<div class="cta-inner bg-faded text-center rounded">
+					<div class="col-xl-9 mx-auto">
+						<br>
+						<p style="font-size: 45px;" align="center">
+							<b>공지사항 수정</b>
+						</p>
+						<br>
+						<div class="cta-inner bg-faded text-center rounded">
 							<!-- =============================================================================== -->
 							<input type="hidden" name="notice_no"
 								value="${notice.notice_no }">
@@ -96,35 +95,39 @@ table {
 							<table align="center" width="100%" cellspacing="0"
 								cellpadding="10">
 								<tr>
-									<th style="color: white;">제 목</th>
+									<th>제 목</th>
 									<td><input class="form-control" type="text"
 										name="notice_title" value="${notice.notice_title }" required></td>
 								</tr>
 								<tr>
-									<th style="color: white;">작 성 자</th>
+									<th>작 성 자</th>
 									<td><input class="form-control" type="text"
 										value="${notice.user_id}" readonly></td>
 								</tr>
 								<tr>
-									<th style="color: white;">내 용</th>
+									<th>날 짜</th>
+									<td><input class="form-control" type="text"
+										value="${notice.notice_date}" readonly></td>
+								</tr>
+								<tr style="overflow: scroll; width: 500px; height: 150px;">
+									<th>내 용</th>
 									<td><textarea class="form-control" name="notice_content"
-											rows="5" cols="50" required>${notice.notice_content }</textarea></td>
+											rows="20" cols="50" required>${notice.notice_content }</textarea></td>
 								</tr>
 							</table>
 							<!-- =============================================================================== -->
 						</div>
-						<br>
 						<div align="right">
-							<input style="background-color: white;"
-								class="btn btn-primary btn-block" type="submit" value="수정하기">
-							&nbsp; <input style="background-color: white;"
-								class="btn btn-primary btn-block" type="reset" value="수정취소">
+							<button class="btn btn-outline-secondary"
+									role="button" tabindex="0" type="submit">수정하기</button>
+							&nbsp; <button class="btn btn-outline-secondary"
+									role="button" tabindex="0" type="submit"
+									onclick="javascript:history.go(-1);return false;">수정취소</button>
 							&nbsp;
-							<button style="background-color: white;"
-								class="btn btn-primary btn-block"
-								onclick="javascript:history.go(-1);return false;">이전페이지로
-								이동</button>
-							<!-- return false로 이벤트 전달 막음 -->
+									<button class="btn btn-outline-secondary" 
+									role="button" tabindex="0" type="submit"
+								onclick="javascript:history.go(-1);return false;">이전페이지로 이동</button>
+								<!-- return false로 이벤트 전달 막음 -->
 						</div>
 					</div>
 				</form>

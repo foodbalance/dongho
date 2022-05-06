@@ -38,7 +38,7 @@
 					<!-- 1페이지로 이동 처리 -->
 					   <c:if test="${ currentPage == 1 }">
 					   <li class="page-item disabled">
-					   	<a class="page-link" href="#">&laquo;</a>
+					   	<a class="page-link" href="#">&laquo;&laquo;</a>
 					   </li>			  
 					   </c:if>
 					   <c:if test="${ currentPage > 1 }">
@@ -47,42 +47,42 @@
 						   	</c:url>
 						   	<c:url var="btitle" value="/bsearchTitle.do">
 						   		<c:param name="page" value="1"/>
-						   		<c:param name="keyword" value="${keyword }"/>
+						   		<c:param name="keyword" value="${keyword}"/>
 						   	</c:url>
 						   	<c:url var="bwrite" value="/bsearchWriter.do">
 						   		<c:param name="page" value="1"/>
-						   		<c:param name="keyword" value="${keyword }"/>
+						   		<c:param name="keyword" value="${keyword}"/>
 						   	</c:url>
-					<%-- 	   	<c:url var="bdate" value="/bsearchDate.do">
+						   	<c:url var="bdate" value="/bsearchDate.do">
 						   		<c:param name="page" value="1"/>
-						   		<c:param name="begin" value="${begin }" />
-						   		<c:param name="end" value="${end }" />
-						   	</c:url> --%>
+						   		<c:param name="begin" value="${begin}" />
+						   		<c:param name="end" value="${end}" />
+						   	</c:url>
 						   	<c:if test="${ action eq 'bsearchTitle' }">
 						   	<li class="page-item">
-						   		<a class="page-link" href="${ btitle }">&laquo;</a>
+						   		<a class="page-link" href="${ btitle }">&laquo;&laquo;</a>
 						   	</li>
 						   	</c:if>
 						   	<c:if test="${ action eq 'bsearchWriter' }">
 						   	<li class="page-item">
-						   		<a class="page-link" href="${ bwrite }">&laquo;</a>
+						   		<a class="page-link" href="${ bwrite }">&laquo;&laquo;</a>
 						   	</li>
 						   	</c:if>
 						   	<c:if test="${ action eq 'bsearchDate' }">
 						   	<li class="page-item">
-						   		<a class="page-link" href="${ bdate }">&laquo;</a>
+						   		<a class="page-link" href="${ bdate }">&laquo;&laquo;</a>
 						   	</li>
 						   	</c:if>
 						   	   	
 						   	<!-- 검색 없을 때 -->
 						   	<c:if test="${ empty action }">
 						   	<li class="page-item">
-						   		<a class="page-link" href="${ blf }">&laquo;</a>
+						   		<a class="page-link" href="${ blf }">&laquo;&laquo;</a>
 						   	</li>
 						   	</c:if>
 					   	
 					   </c:if>
-<%-- 					<!-- 이전 페이지 그룹으로 이동 처리 -->
+ 					<!-- 이전 페이지 그룹으로 이동 처리 -->
 						<c:if test="${ (currentPage - 10) < startPage and (currentPage - 10) > 1 }">
 							<c:url var="blf2" value="/blist.do">
 					   			<c:param name="page" value="${ startPage - 10 }"/>
@@ -101,36 +101,36 @@
 					   			<c:param name="end" value="${end }" />
 					   		</c:url>
 					   	<c:if test="${ action eq 'bsearchTitle' }">
-					   		<li class="page-item active">
-					   			<a class="page-link" href="${ blf2 }">이전</a>
+					   		<li class="page-item">
+					   			<a class="page-link" href="${ btitle }">&laquo;</a>
 					   		</li>
 					   	</c:if>
 					   	<c:if test="${ action eq 'bsearchWriter' }">
-					   		<li class="page-item active">
-					   			<a class="page-link" href="${ blf2 }">이전</a>
+					   		<li class="page-item">
+					   			<a class="page-link" href="${ bwrite }">&laquo;</a>
 					   		</li>
 					   	</c:if>
 					   	<c:if test="${ action eq 'bsearchDate' }">
-					   		<li class="page-item active">
-					   			<a class="page-link" href="${ blf2 }">이전</a>
+					   		<li class="page-item">
+					   			<a class="page-link" href="${ bdate }">&laquo;</a>
 					   		</li>
 					   	</c:if>
 					   		   	
 					   	<!-- 검색 없을 때 -->
 					   	<c:if test="${ empty action }">
-					   		<li class="page-item active">
-					   			<a class="page-link" href="${ blf2 }">이전</a>
+					   		<li class="page-item">
+					   			<a class="page-link" href="${ blf2 }">&laquo;</a>
 					   		</li>
 					   	</c:if>
 					   	
 					   	
 						</c:if>
 						<c:if test="${ !((currentPage - 10) < startPage and (currentPage - 10) > 1) }">
-							<li class="page-item active">
-								이전 &nbsp;
+							<li class="page-item">
+								<a class="page-link">&laquo;</a>
 							</li>
 						</c:if>
-					<!-- 이전 페이지 그룹으로 이동 처리 end-->	 --%>
+					<!-- 이전 페이지 그룹으로 이동 처리 end-->
 					<!-- 현재 페이지가 속한 페이지 그룹 출력 -->
 						<c:forEach var="p" begin="${ startPage }" end="${ endPage }" step="1">
 							<c:if test="${ p eq currentPage }">
@@ -180,7 +180,7 @@
 							</c:if>		
 						</c:forEach>
 					<!-- 현재 페이지가 속한 페이지 그룹 출력 end-->
-<%-- 					<!-- 다음 페이지 그룹으로 이동 처리 -->
+ 					<!-- 다음 페이지 그룹으로 이동 처리 -->
 						<c:if test="${ (currentPage + 10) > endPage and (currentPage + 10) < maxPage }">
 							<c:url var="blf3" value="/blist.do">
 					   			<c:param name="page" value="${ endPage + 10 }"/>
@@ -201,39 +201,39 @@
 					   			
 					   		<c:if test="${ action eq 'bsearchTitle' }">
 					   		<li class="page-item">
-					   			<a class="page-link" href="${ blf3 }">다음</a>
+					   			<a class="page-link" href="${ btitle }">&raquo;</a>
 					   		</li>
 					   		</c:if>
 					   		<c:if test="${ action eq 'bsearchWriter' }">
 					   		<li class="page-item">
-					   			<a class="page-link" href="${ blf3 }">다음</a>
+					   			<a class="page-link" href="${ bwrite }">&raquo;</a>
 					   		</li>
 					   		</c:if>
 					   		<c:if test="${ action eq 'bsearchDate' }">
 					   		<li class="page-item">
-					   			<a class="page-link" href="${ blf3 }">다음</a>
+					   			<a class="page-link" href="${ bdate }">&raquo;</a>
 					   		</li>
 					   		</c:if>
 				
 					   		<!-- 검색 없을 때 -->
 					   		<c:if test="${ empty action }">
 					   		<li class="page-item">
-					   			<a class="page-link" href="${ blf3 }">다음</a>
+					   			<a class="page-link">&raquo;</a>
 					   		</li>
 					   		</c:if>
 					   		
 						</c:if>
 						<c:if test="${ !((currentPage + 10) > endPage and (currentPage + 10) < maxPage) }">
 						<li class="page-item">
-							다음 &nbsp;
+							<a class="page-link" href="#">&raquo;</a>
 						</li>
 						</c:if>
-					<!-- 다음 페이지 그룹으로 이동 처리end --> --%>
+					<!-- 다음 페이지 그룹으로 이동 처리end -->
 					
 					<!-- 끝페이지로 이동 처리 -->
 					   <c:if test="${ currentPage == maxPage }">
 					   <li class="page-item disabled">
-					   		<a class="page-link" href="#">&raquo;</a>
+					   		<a class="page-link" href="#">&raquo;&raquo;</a>
 					   </li>
 					   </c:if>
 					   <c:if test="${ currentPage < maxPage }">
@@ -255,24 +255,24 @@
 						   	</c:url>
 						   	<c:if test="${ action eq 'bsearchTitle' }">
 						   	<li class="page-item">
-						   		<a class="page-link" href="${ btitle }">&raquo;</a>
+						   		<a class="page-link" href="${ btitle }">&raquo;&raquo;</a>
 						   	</li>
 						   	</c:if>
 						   	<c:if test="${ action eq 'bsearchWriter' }">
 						   	<li class="page-item">
-						   		<a class="page-link" href="${ bwrite }">&raquo;</a>
+						   		<a class="page-link" href="${ bwrite }">&raquo;&raquo;</a>
 						   	</li>
 						   	</c:if>
 						    <c:if test="${ action eq 'bsearchDate' }">
 						    <li class="page-item">
-						   		<a class="page-link" href="${ bdate }">&raquo;</a>
+						   		<a class="page-link" href="${ bdate }">&raquo;&raquo;</a>
 						   	</li>
 						   	</c:if>
 						   	   	
 						   	<!-- 검색 없을 때 -->
 						   	<c:if test="${ empty action }">
 						   	<li class="page-item">
-						   		<a class="page-link" href="${ blf4 }">&raquo;</a>
+						   		<a class="page-link" href="${ blf4 }">&raquo;&raquo;</a>
 						   	</li>
 						   	</c:if>
 						   	
@@ -281,11 +281,7 @@
 				</c:if>
 			</ul>
 		</div>
-		<c:if test="${ !empty sessionScope.loginMember }">
-			<div class="div2">
-				<button class="btn btn-outline-secondary" onclick="showWrite();">글쓰기</button>
-			</div>
-		</c:if>
+		
 	</div>
 <!-- =================================게시판 페이징끝 ========================================= -->	
 
@@ -293,67 +289,447 @@
 
 
 
-<!-- =================================공지 페이징 ========================================= -->	
-<c:if test="${ menu eq 'notice' }">
-	<!-- 1페이지로 이동 처리 -->
-	   <c:if test="${ currentPage == 1 }">
-	   	◀◀  &nbsp;
-	   </c:if>
-	   <c:if test="${ currentPage > 1 }">
-	   	<c:url var="nlf" value="/nlist.do">
-	   		<c:param name="page" value="1"/>
-	   	</c:url>
-	   	<a href="${ nlf }">◀◀</a>
-	   </c:if>
-	<!-- 이전 페이지 그룹으로 이동 처리 -->
-		<c:if test="${ (currentPage - 10) < startPage and (currentPage - 10) > 1 }">
-			<c:url var="nlf2" value="/nlist.do">
-	   		<c:param name="page" value="${ startPage - 10 }"/>
-	   	</c:url>
-	   	<a href="${ nlf2 }">이전</a>
-		</c:if>
-		<c:if test="${ !((currentPage - 10) < startPage and (currentPage - 10) > 1) }">
-			이전 &nbsp;
-		</c:if>
-	<!-- 이전 페이지 그룹으로 이동 처리 end-->	
-	<!-- 현재 페이지가 속한 페이지 그룹 출력 -->
-		<c:forEach var="p1" begin="${ startPage }" end="${ endPage }" step="1">
-			<c:if test="${ p1 eq currentPage }">
-				<font size="4" color="#919aa1;"><b>[${ p1 }]</b></font>
-			</c:if>
-			<c:if test="${ p1 ne currentPage }">
-				<c:url var="nlf5" value="/nlist.do">
-	   				<c:param name="page" value="${ p1 }"/>
-	   			</c:url>
-	   			<a href="${ nlf5 }">${ p1 }</a>
-			</c:if>		
-		</c:forEach>
-	<!-- 현재 페이지가 속한 페이지 그룹 출력 end-->
-	<!-- 다음 페이지 그룹으로 이동 처리 -->
-		<c:if test="${ (currentPage + 10) > endPage and (currentPage + 10) < maxPage }">
-			<c:url var="nlf3" value="/nlist.do">
-	   			<c:param name="page" value="${ endPage + 10 }"/>
-	   		</c:url>
-	   		<a href="${ nlf3 }">다음</a>
-		</c:if>
-		<c:if test="${ !((currentPage + 10) > endPage and (currentPage + 10) < maxPage) }">
-			다음 &nbsp;
-		</c:if>
-	<!-- 다음 페이지 그룹으로 이동 처리end -->
-	
-	<!-- 끝페이지로 이동 처리 -->
-	   <c:if test="${ currentPage == maxPage }">
-	   	▶▶ &nbsp;
-	   </c:if>
-	   <c:if test="${ currentPage < maxPage }">
-		   	<c:url var="nlf4" value="/nlist.do">
-		   		<c:param name="page" value="${ maxPage }"/>
-		   	</c:url>
-		   	<a href="${ nlf4 }">▶▶</a>
-	   </c:if>
-	<!-- 끝페이지로 이동 처리 end-->
-</c:if>
-<!-- =================================공지 페이징 ========================================= -->	
+<!-- =================================공지사항 페이징 ========================================= -->
+		<div class="parent">
+			<div class="div1"> 		
+				<ul class="pagination">
+					<c:if test="${ menu eq 'notice' }">
+					
+						<!-- 이전 페이지 그룹으로 이동 처리 -->
+						<%-- <c:if
+							test="${ (currentPage - 10) < startPage and (currentPage - 10) > 1 }">
+							<c:url var="nlf2" value="/nlist.do">
+								<c:param name="page" value="${ startPage - 10 }" />
+							</c:url>
+							<c:url var="ntitle" value="/nsearchTitle.do">
+								<c:param name="page" value="${ startPage - 10 }" />
+								<c:param name="keyword" value="${ keyword }" />
+							</c:url>
+							<c:url var="nwrite" value="/nsearchWriter.do">
+								<c:param name="page" value="${ startPage - 10 }" />
+								<c:param name="keyword" value="${ keyword }" />
+							</c:url>
+							<c:url var="ndate" value="/nsearchDate.do">
+								<c:param name="page" value="${ startPage - 10 }" />
+								<c:param name="begin" value="${begin }" />
+								<c:param name="end" value="${end }" />
+							</c:url>
+							<c:if test="${ action eq 'nsearchTitle' }">
+								<a href="${ nlf2 }">이전</a>
+							</c:if>
+							<c:if test="${ action eq 'nsearchWriter' }">
+								<a href="${ nlf2 }">이전</a>
+							</c:if>
+							<c:if test="${ action eq 'nsearchDate' }">
+								<a href="${ nlf2 }">이전</a>
+							</c:if>
+			
+							<!-- 검색 없을 때 -->
+							<c:if test="${ empty action }">
+								<a href="${ nlf2 }">이전</a>
+							</c:if>
+			
+			
+						</c:if>
+						<c:if
+							test="${ !((currentPage - 10) < startPage and (currentPage - 10) > 1) }">
+						이전 &nbsp;
+					</c:if> --%>
+						<!-- 이전 페이지 그룹으로 이동 처리 end-->
+						
+						<!-- 1페이지로 이동 처리 -->
+						<c:if test="${ currentPage == 1 }">
+				   		<li class="page-item disabled">
+						<a class="page-link" href="#">&laquo;</a>
+						</li>
+				   </c:if>
+						<c:if test="${ currentPage > 1 }">
+							<c:url var="nlf" value="/nlist.do">
+								<c:param name="page" value="1" />
+							</c:url>
+							<c:url var="ntitle" value="/nsearchTitle.do">
+								<c:param name="page" value="1" />
+								<c:param name="keyword" value="${keyword }" />
+							</c:url>
+							<c:url var="nwrite" value="/nsearchWriter.do">
+								<c:param name="page" value="1" />
+								<c:param name="keyword" value="${keyword }" />
+							</c:url>
+							<c:url var="ndate" value="/nsearchDate.do">
+						   		<c:param name="page" value="1"/>
+						   		<c:param name="begin" value="${begin }" />
+						   		<c:param name="end" value="${end }" />
+					   		</c:url> 
+							<c:if test="${ action eq 'nsearchTitle' }">
+								<a href="${ ntitle }">&laquo;</a>
+							</c:if>
+							<c:if test="${ action eq 'nsearchWriter' }">
+								<a href="${ nwrite }">&laquo;</a>
+							</c:if>
+								<c:if test="${ action eq 'nsearchDate' }">
+						   		<a href="${ ndate }">&laquo;</a>
+					   		</c:if>
+			
+							<!-- 검색 없을 때 -->
+							<c:if test="${ empty action }">
+								<li class="page-item">
+						   			<a class="page-link" href="${ nlf }">&laquo;</a>
+						   		</li>
+							</c:if>
+			
+						</c:if>
+						
+						<!-- 현재 페이지가 속한 페이지 그룹 출력 -->
+						<c:forEach var="p" begin="${ startPage }" end="${ endPage }" step="1">
+							<c:if test="${ p eq currentPage }">
+								<li class="page-item">
+									<a class="page-link"><b>${ p }</b></a>
+								</li>
+							</c:if>
+							<c:if test="${ p ne currentPage }">
+								<c:url var="nlf5" value="/nlist.do">
+									<c:param name="page" value="${ p }" />
+								</c:url>
+								<c:url var="ntitle" value="/nsearchTitle.do">
+									<c:param name="page" value="${ p }" />
+									<c:param name="keyword" value="${keyword }" />
+								</c:url>
+								<c:url var="nwrite" value="/nsearchWriter.do">
+									<c:param name="page" value="${ p }" />
+									<c:param name="keyword" value="${keyword }" />
+								</c:url>
+								<c:url var="ndate" value="/nsearchDate.do">
+									<c:param name="page" value="${ p }" />
+									<c:param name="begin" value="${begin }" />
+									<c:param name="end" value="${end }" />
+								</c:url>
+			
+								<c:if test="${ action eq 'nsearchTitle' }">
+									<a href="${ ntitle }">${ p }</a>
+								</c:if>
+								<c:if test="${ action eq 'nsearchWriter' }">
+									<a href="${ nwrite }">${ p }</a>
+								</c:if>
+								<c:if test="${ action eq 'nsearchDate' }">
+									<a href="${ ndate }">${ p }</a>
+								</c:if>
+								<!-- 검색 없을 때 -->
+								<c:if test="${ empty action }">
+									<li class="page-item">
+						   				<a class="page-link" href="${ nlf5 }">${ p }</a>
+						   			</li>
+								</c:if>
+							</c:if>
+						</c:forEach>
+						<!-- 현재 페이지가 속한 페이지 그룹 출력 end-->
+			
+						<!-- 끝페이지로 이동 처리 -->
+						<c:if test="${ currentPage == maxPage }">
+				   			<li class="page-item">
+							   	<a class="page-link" href="#">&raquo;</a>
+							</li>
+				   </c:if>
+						<c:if test="${ currentPage < maxPage }">
+							<c:url var="nlf4" value="/nlist.do">
+								<c:param name="page" value="${ maxPage }" />
+							</c:url>
+							<c:url var="ntitle" value="/nsearchTitle.do">
+								<c:param name="page" value="${ maxPage }" />
+								<c:param name="keyword" value="${keyword }" />
+							</c:url>
+							<c:url var="nwrite" value="/nsearchWriter.do">
+								<c:param name="page" value="${ maxPage }" />
+								<c:param name="keyword" value="${keyword }" />
+							</c:url>
+							<c:url var="ndate" value="/nsearchDate.do">
+								<c:param name="page" value="${ maxPage }" />
+								<c:param name="begin" value="${begin }" />
+								<c:param name="end" value="${end }" />
+							</c:url>
+							<c:if test="${ action eq 'nsearchTitle' }">
+								<a href="${ ntitle }">&raquo;</a>
+							</c:if>
+							<c:if test="${ action eq 'nsearchWriter' }">
+								<a href="${ nwrite }">&raquo;</a>
+							</c:if>
+							<c:if test="${ action eq 'nsearchDate' }">
+								<a href="${ ndate }">&raquo;</a>
+							</c:if>
+			
+							<!-- 검색 없을 때 -->
+							<c:if test="${ empty action }">
+								<li class="page-item">
+						   			<a class="page-link" href="${ nlf4 }">&raquo;</a>
+						   		</li>
+							</c:if>
+			
+						</c:if>
+						<!-- 끝페이지로 이동 처리 end-->
+						
+						<%-- <!-- 다음 페이지 그룹으로 이동 처리 -->
+						<c:if
+							test="${ (currentPage + 10) > endPage and (currentPage + 10) < maxPage }">
+							<c:url var="nlf3" value="/nlist.do">
+								<c:param name="page" value="${ endPage + 10 }" />
+							</c:url>
+							<c:url var="ntitle" value="/nsearchTitle.do">
+								<c:param name="page" value="${ endPage + 10 }" />
+								<c:param name="keyword" value="${keyword }" />
+							</c:url>
+							<c:url var="nwrite" value="/nsearchWriter.do">
+								<c:param name="page" value="${ endPage + 10 }" />
+								<c:param name="keyword" value="${keyword }" />
+							</c:url>
+							<c:url var="ndate" value="/nsearchDate.do">
+								<c:param name="page" value="${ endPage + 10 }" />
+								<c:param name="begin" value="${begin }" />
+								<c:param name="end" value="${end }" />
+							</c:url>
+			
+							<c:if test="${ action eq 'nsearchTitle' }">
+								<a href="${ nlf3 }">다음</a>
+							</c:if>
+							<c:if test="${ action eq 'nsearchWriter' }">
+								<a href="${ nlf3 }">다음</a>
+							</c:if>
+							<c:if test="${ action eq 'nsearchDate' }">
+								<a href="${ nlf3 }">다음</a>
+							</c:if>
+			
+							<!-- 검색 없을 때 -->
+							<c:if test="${ empty action }">
+								<a href="${ nlf3 }">다음</a>
+							</c:if>
+			
+						</c:if>
+						<c:if
+							test="${ !((currentPage + 10) > endPage and (currentPage + 10) < maxPage) }">
+						다음 &nbsp;
+					</c:if> --%>
+						<!-- 다음 페이지 그룹으로 이동 처리end -->
+						
+					</c:if>
+				</ul>
+			</div>
+		<!-- =================================공지사항 페이징 end ========================================= -->
 	</div>
+
+
+
+
+	<!-- =================================운동법 페이징 ========================================= -->	
+	<div class="parent">
+		<div class="div1"> 
+			<ul class="pagination">
+				<c:if test="${ menu eq 'train' }">
+					<!-- 1페이지로 이동 처리 -->
+					   <c:if test="${ currentPage == 1 }">
+					   <li class="page-item disabled">
+					   	<a class="page-link" href="tlf">&laquo;&laquo;</a>
+					   </li>			  
+					   </c:if>
+					   <c:if test="${ currentPage > 1 }">
+						   	<c:url var="tlf" value="/tlist.do">
+						   		<c:param name="page" value="1"/>
+						   	</c:url>
+						   	<c:url var="ttitle" value="/tsearchTitle.do">
+						   		<c:param name="page" value="1"/>
+						   		<c:param name="keyword" value="${keyword}"/>
+						   	</c:url>
+						   	<c:url var="tdate" value="/tsearchDate.do">
+						   		<c:param name="page" value="1"/>
+						   		<c:param name="begin" value="${begin}" />
+						   		<c:param name="end" value="${end}" />
+						   	</c:url>
+						   	<c:if test="${ action eq 'tsearchTitle' }">
+						   	<li class="page-item">
+						   		<a class="page-link" href="${ ttitle }">&laquo;&laquo;</a>
+						   	</li>
+						   	</c:if>
+						   	<c:if test="${ action eq 'tsearchDate' }">
+						   	<li class="page-item">
+						   		<a class="page-link" href="${ tdate }">&laquo;&laquo;</a>
+						   	</li>
+						   	</c:if>
+						   	   	
+						   	<!-- 검색 없을 때 -->
+						   	<c:if test="${ empty action }">
+						   	<li class="page-item">
+						   		<a class="page-link" href="${ tlf }">&laquo;&laquo;</a>
+						   	</li>
+						   	</c:if>
+					   	
+					   </c:if>
+ 					<!-- 이전 페이지 그룹으로 이동 처리 -->
+						<c:if test="${ (currentPage - 10) < startPage and (currentPage - 10) > 1 }">
+							<c:url var="tlf2" value="/tlist.do">
+					   			<c:param name="page" value="${ startPage - 10 }"/>
+					   		</c:url>
+					   		<c:url var="ttitle" value="/tsearchTitle.do">
+					   			<c:param name="page" value="${ startPage - 10 }"/>
+					   			<c:param name="keyword" value="${ keyword }"/>
+					   		</c:url>
+					  		<c:url var="tdate" value="/tsearchDate.do">
+					   			<c:param name="page" value="${ startPage - 10 }"/>
+					   			<c:param name="begin" value="${begin }" />
+					   			<c:param name="end" value="${end }" />
+					   		</c:url>
+					   	<c:if test="${ action eq 'tsearchTitle' }">
+					   		<li class="page-item">
+					   			<a class="page-link" href="${ ttitle }">&laquo;</a>
+					   		</li>
+					   	</c:if>
+					   	<c:if test="${ action eq 'tsearchDate' }">
+					   		<li class="page-item">
+					   			<a class="page-link" href="${ tdate }">&laquo;</a>
+					   		</li>
+					   	</c:if>
+					   	<!-- 검색 없을 때 -->
+					   	<c:if test="${ empty action }">
+					   		<li class="page-item">
+					   			<a class="page-link" href="${ tlf2 }">&laquo;</a>
+					   		</li>
+					   	</c:if>
+
+						</c:if>
+						<c:if test="${ !((currentPage - 10) < startPage and (currentPage - 10) > 1) }">
+							<li class="page-item">
+								<a class="page-link">&laquo;</a>
+							</li>
+						</c:if>
+					<!-- 이전 페이지 그룹으로 이동 처리 end-->
+					<!-- 현재 페이지가 속한 페이지 그룹 출력 -->
+						<c:forEach var="p" begin="${ startPage }" end="${ endPage }" step="1">
+							<c:if test="${ p eq currentPage }">
+							<li class="page-item">
+								<a class="page-link"><b>${ p }</b></a>
+							</li>
+							</c:if>
+							<c:if test="${ p ne currentPage }">
+								<c:url var="tlf5" value="/tlist.do">
+					   				<c:param name="page" value="${ p }"/>
+					   			</c:url>
+					   			<c:url var="ttitle" value="/tsearchTitle.do">
+					   				<c:param name="page" value="${ p }"/>
+					   				<c:param name="keyword" value="${keyword }"/>
+					   			</c:url>
+					   			<c:url var="tdate" value="/tsearchDate.do">
+					   				<c:param name="page" value="${ p }"/>
+					   				<c:param name="begin" value="${begin }" />
+					   				<c:param name="end" value="${end }" />
+					   			</c:url>
+					   			
+					   			<c:if test="${ action eq 'tsearchTitle' }">
+						   			<li class="page-item">
+						   				<a class="page-link" href="${ ttitle }">${ p }</a>
+						   			</li>
+					   			</c:if>
+					   			<c:if test="${ action eq 'tsearchDate' }">
+						   			<li class="page-item">
+						   				<a class="page-link" href="${ tdate }">${ p }</a>
+						   			</li>
+					   			</c:if>
+					   			<!-- 검색 없을 때 -->
+					   			<c:if test="${ empty action }">
+						   			<li class="page-item">
+						   				<a class="page-link" href="${ tlf5 }">${ p }</a>
+						   			</li>
+					   			</c:if>
+							</c:if>		
+						</c:forEach>
+					<!-- 현재 페이지가 속한 페이지 그룹 출력 end-->
+ 					<!-- 다음 페이지 그룹으로 이동 처리 -->
+						<c:if test="${ (currentPage + 10) > endPage and (currentPage + 10) < maxPage }">
+							<c:url var="tlf3" value="/tlist.do">
+					   			<c:param name="page" value="${ endPage + 10 }"/>
+					   		</c:url>
+					   		<c:url var="ttitle" value="/tsearchTitle.do">
+					   			<c:param name="page" value="${ endPage + 10 }"/>
+					   			<c:param name="keyword" value="${keyword }"/>
+					   		</c:url>
+					   		<c:url var="tdate" value="/tsearchDate.do">
+					   			<c:param name="page" value="${ endPage + 10 }"/>
+					   			<c:param name="begin" value="${begin }" />
+					   			<c:param name="end" value="${end }" />
+					   		</c:url>		   			
+					   		<c:if test="${ action eq 'tsearchTitle' }">
+					   		<li class="page-item">
+					   			<a class="page-link" href="${ ttitle }">&raquo;</a>
+					   		</li>
+					   		</c:if>
+					   		<c:if test="${ action eq 'tsearchDate' }">
+					   		<li class="page-item">
+					   			<a class="page-link" href="${ tdate }">&raquo;</a>
+					   		</li>
+					   		</c:if>
+					   		<!-- 검색 없을 때 -->
+					   		<c:if test="${ empty action }">
+					   		<li class="page-item">
+					   			<a class="page-link" href="${ tlf3 }">&raquo;</a>
+					   		</li>
+					   		</c:if>
+						</c:if>
+						<c:if test="${ !((currentPage + 10) > endPage and (currentPage + 10) < maxPage) }">
+						<li class="page-item">
+							<a class="page-link" href="#">&raquo;</a>
+						</li>
+						</c:if>
+					<!-- 다음 페이지 그룹으로 이동 처리end -->
+					
+					<!-- 끝페이지로 이동 처리 -->
+					   <c:if test="${ currentPage == maxPage }">
+					   <li class="page-item disabled">
+					   		<a class="page-link" href="tlf4">&raquo;&raquo;</a>
+					   </li>
+					   </c:if>
+					   <c:if test="${ currentPage < maxPage }">
+						   	<c:url var="tlf4" value="/tlist.do">
+						   		<c:param name="page" value="${ maxPage }"/>
+						   	</c:url>
+						   	<c:url var="ttitle" value="/tsearchTitle.do">
+						   			<c:param name="page" value="${ maxPage }"/>
+						   			<c:param name="keyword" value="${keyword }"/>
+						   	</c:url>
+						   	<c:url var="twrite" value="/tsearchWriter.do">
+						   		<c:param name="page" value="${ maxPage }"/>
+						   		<c:param name="keyword" value="${keyword }"/>
+						   	</c:url>
+						 	<c:url var="tdate" value="/tsearchDate.do">
+						   		<c:param name="page" value="${ maxPage }"/>
+						   		<c:param name="begin" value="${begin }" />
+						   		<c:param name="end" value="${end }" />
+						   	</c:url>
+						   	<c:if test="${ action eq 'tsearchTitle' }">
+						   	<li class="page-item">
+						   		<a class="page-link" href="${ ttitle }">&raquo;&raquo;</a>
+						   	</li>
+						   	</c:if>
+						   	<c:if test="${ action eq 'tsearchWriter' }">
+						   	<li class="page-item">
+						   		<a class="page-link" href="${ twrite }">&raquo;&raquo;</a>
+						   	</li>
+						   	</c:if>
+						    <c:if test="${ action eq 'tsearchDate' }">
+						    <li class="page-item">
+						   		<a class="page-link" href="${ tdate }">&raquo;&raquo;</a>
+						   	</li>
+						   	</c:if>
+						   	   	
+						   	<!-- 검색 없을 때 -->
+						   	<c:if test="${ empty action }">
+						   	<li class="page-item">
+						   		<a class="page-link" href="${ tlf4 }">&raquo;&raquo;</a>
+						   	</li>
+						   	</c:if>
+						   	
+					   </c:if>
+					<!-- 끝페이지로 이동 처리 end-->
+				</c:if>
+			</ul>
+		</div>
+		
+	</div>
+<!-- =================================운동법 페이징끝 ========================================= -->	
+
 </body>
 </html>

@@ -1,4 +1,5 @@
-package com.project.foodbalance.notice.model.service;
+package com.project.foodbalance.notice.model.service; 
+
 
 import java.util.ArrayList;
 
@@ -62,18 +63,38 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public ArrayList<Notice> selectSearchTitle(String keyword) {
+	public int selectSearchTitle(String keyword) {
 		return noticeDao.selectSearchTitle(keyword);
 	}
 
 	@Override
-	public ArrayList<Notice> selectSearchWriter(String keyword) {
+	public int selectSearchWriter(String keyword) {
 		return noticeDao.selectSearchWriter(keyword);
 	}
 
 	@Override
-	public ArrayList<Notice> selectSearchDate(SearchDate date) {
+	public int selectSearchDate(SearchDate date) {
 		return noticeDao.selectSearchDate(date);
+	}
+
+	@Override
+	public ArrayList<Notice> pageSearchTitle(Paging page) {
+		return noticeDao.pageSearchTitle(page);
+	}
+
+	@Override
+	public ArrayList<Notice> pageSearchWriter(Paging page) {
+		return noticeDao.pageSearchWriter(page);
+	}
+
+	@Override
+	public ArrayList<Notice> pageSearchDate(Paging page) {
+		return noticeDao.pageSearchDate(page);
+	}
+
+	@Override
+	public int updateAddReadcount(int notice_no) {
+		return noticeDao.updateAddReadCount(notice_no);
 	}
 
 	

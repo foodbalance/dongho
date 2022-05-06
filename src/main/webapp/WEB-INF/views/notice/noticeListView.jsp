@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
+ 
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,30 +15,32 @@
 <meta name="author" content="" /> -->
 
 <style type="text/css">
-table {
-	width: 100%;
-	border-top: 1px solid #444444;
-	border-collapse: collapse;
-}
-
 .th {
-	border-bottom: 1px solid #444444;
+	border-bottom: 1px solid #52575c;
 	padding: 15px;
 }
 
 .td {
-	border-bottom: 1px solid #444444;
+	border-bottom: 1px solid #52575c;
 	padding: 15px;
 }
+
+
+
+
 </style>
 
 <title></title>
 
 
 <script type="text/javascript">
-	function showWrite() {
-		location.href = "${ pageContext.servletContext.contextPath }/bwform.do";
-	}
+function showWrite() {
+
+	location.href = "${ pageContext.servletContext.contextPath }/noticeWrite.do";
+
+	location.href = "${ pageContext.servletContext.contextPath }/nlist.do";
+
+}
 </script>
 
 <!-- 공지사항 -->
@@ -73,31 +75,70 @@ table {
 </script>
 </head>
 <body>
+
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 	<section class="page-section cta">
 		<div class="container">
+
+			<br> <br>
+			<div style="padding: 5px; margin: 5px;" class="row">
 			<br>
 			<br>
 			<div
-				style="background-color: #1a1a1a; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
+				style="background-color: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
 				class="row">
+
 				<div class="col-xl-9 mx-auto">
 					<br>
-					<p style="color: white; font-size: 45px;" align="center">
+					<p style="color: #52575c; font-size: 45px;" align="center">
+
+					<p style="font-size: 45px;" align="center">
 						<b>공지사항</b>
 					</p>
+					<ul class="nav nav-tabs">
+						<li class="nav-item"><a style="color: #52575c;"
+							class="nav-link" data-bs-toggle="tab" href="#titleDiv">제목 검색</a>
+						</li>
+						<li class="nav-item"><a style="color: #52575c;"
+							class="nav-link" data-bs-toggle="tab" href="#writerDiv">작성자
+								검색</a></li>
+						<li class="nav-item"><a style="color: #52575c;"
+							class="nav-link" data-bs-toggle="tab" href="#dateDiv">날짜 검색</a></li>
+
+					</ul>
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade" id="titleDiv">
+							<form action="nsearchTitle.do" method="post">
+								<label>검색할 제목을 입력하세요 : <input type="search"
+									name="keyword"></label> <input style="margin-bottom: 0.7%;"
+									class="btn btn-outline-secondary" type="submit" value="검색">
+							</form>
+						</div>
+						<div class="tab-pane fade" id="writerDiv">
+							<form action="nsearchWriter.do" method="post">
+								<label>검색할 작성자를 입력하세요 : <input type="search"
+									name="keyword"></label> <input style="margin-bottom: 0.7%;"
+									class="btn btn-outline-secondary" type="submit" value="검색">
+							</form>
+						</div>
+						<div class="tab-pane fade" id="dateDiv">
+							<form action="nsearchDate.do" method="post">
+								<label>검색할 날짜를 입력하세요 : <input type="date" name="begin">
+									~ <input type="date" name="end"></label> <input
+									style="margin-bottom: 0.7%;" class="btn btn-outline-secondary"
+									type="submit" value="검색">
+							</form>
+						</div>
+					</div>
 					<br>
 					<div class="cta-inner bg-faded text-center rounded">
 						<!-- =============================================================================== -->
 						<%
 							int num = 1;
 						%>
-						<table
-							style="border-top: 1px solid #444444; border-collapse: collapse; width: 98%; background: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px; text-align: center;"
-							align="center" cellspacing="0" cellpadding="15">
+						<table style="width: 98%;">
 							<tr>
-								<th style="border-bottom: 1px solid #444444; padding: 10px;"
-									class="th">번호</th>
+								<th class="th">번호</th>
 								<th class="th">제목</th>
 								<th class="th">작성자</th>
 								<th class="th">날짜</th>
@@ -106,11 +147,11 @@ table {
 							<c:forEach items="${ requestScope.list }" var="n">
 								<tr>
 									<td class="td"><%=num++%></td>
-									<!-- 공지 제목 클릭시 상세보기로 넘어가게 처리 -->
 									<td class="td"><c:url var="ndt" value="ndetail.do">
 											<c:param name="notice_no" value="${ n.notice_no }" />
 											<c:param name="page" value="${ currentPage }" />
-										</c:url> <a href="${ ndt }">${ n.notice_title }</a></td>
+										</c:url> <a style="color: #52575c; text-decoration: none;"
+										href="${ ndt }">${ n.notice_title }</a></td>
 									<td class="td">${ n.user_id }</td>
 									<td class="td"><fmt:formatDate value="${ n.notice_date }"
 											type="date" pattern="yyyy-MM-dd" /></td>
@@ -118,6 +159,8 @@ table {
 								</tr>
 							</c:forEach>
 						</table>
+
+				
 						<br>
 						<c:import url="/WEB-INF/views/common/paging.jsp" />
 						<!-- =============================================================================== -->
@@ -125,53 +168,23 @@ table {
 					<br>
 					<!-- 로그인한 회원이 관리자인 경우는 공지사항 등록 버튼이 보이게 함 -->
 					<c:if test="${ loginMember.admin_ok eq 'Y' }">
-							<button style="background-color: white;"
-								class="btn btn-primary btn-block"
+
+						<div>
+							<button class="btn btn-outline-secondary"
+									role="button" tabindex="0"
 								onclick="javascript:location.href='noticeWrite.do';">공지
 								등록</button>
 						</c:if>
 					<br>
-					<!-- 검색 항목 -->
-					<center>
-						<div
-							style="background-color: white; border-radius: 0.5rem; border: 1px solid; padding: 5px; margin: 5px; margin-bottom: 3%">
-							<div>
-								<h2>검색할 항목을 선택하세요.</h2>
-								<input type="radio" name="item" value="title" checked>
-								제목 &nbsp; &nbsp; <input type="radio" name="item" value="writer">
-								작성자 &nbsp; &nbsp; <input type="radio" name="item" value="date">
-								날짜
-							</div>
-							<div id="titleDiv">
-								<form action="bsearchTitle.do" method="post">
-									<label>검색할 제목을 입력하세요 : <input type="search"
-										name="keyword"></label> <input style="margin-bottom: 0.7%;"
-										class="btn btn-outline-secondary" type="submit" value="검색">
-								</form>
-							</div>
-							<div id="writerDiv">
-								<form action="bsearchWriter.do" method="post">
-									<label>검색할 작성자를 입력하세요 : <input type="search"
-										name="keyword"></label> <input style="margin-bottom: 0.7%;"
-										class="btn btn-outline-secondary" type="submit" value="검색">
-								</form>
-							</div>
-							<div id="dateDiv">
-								<form action="bsearchDate.do" method="post">
-									<label>검색할 날짜를 입력하세요 : <input type="date" name="begin">
-										~ <input type="date" name="end"></label> <input
-										style="margin-bottom: 0.7%;" class="btn btn-outline-secondary"
-										type="submit" value="검색">
-								</form>
-							</div>
-							<button style="margin-bottom: 1%;"
-								class="btn btn-outline-secondary"
-								onclick="javascript:location.href='${ pageContext.servletContext.contextPath }/nlist.do;'">전체
-								보기</button>
-						</div>
-					</center>
-					<!-- =============================================================================== -->
+					
+					
 
+					<!-- 게시글 쓰기(등록)은 로그인한 회원만 가능함 paging.jsp 로 기능 옮김 -->
+					<%-- <c:if test="${ !empty sessionScope.loginMember }">
+					   	<div class="div2">
+					      <button class="btn btn-outline-secondary" onclick="showWrite();">글쓰기</button>
+					   	</div>
+					</c:if> --%>
 				</div>
 			</div>
 		</div>

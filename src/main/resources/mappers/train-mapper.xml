@@ -13,12 +13,13 @@
 		<result column="train_url" property="train_url" />
 		<result column="train_date" property="train_date" />
 		<result column="train_count" property="train_count" />
+		<result column="train_url_img" property="train_url_img" />
 	</resultMap>
 
 	<resultMap type="Train" id="resultTop3">
 		<result column="train_no" property="train_no" />
 		<result column="train_title" property="train_title" />
-		<result column="train_count" property="train_count" />
+		<result column="train_url_img" property="train_url_img" />
 	</resultMap>
 
 	<!-- 비교연산자를 쿼리문에 그냥 사용하면 태그 앨리먼트 꺽쇠괄호 등(<, >, &)과 혼동하는 문제가 발생할 수 있음. 이 문제를 
@@ -30,10 +31,10 @@
 		<![CDATA[
 		SELECT *  
 		FROM (SELECT ROWNUM RNUM, train_no, 
-					 train_title, train_count, train_url_img  
+					 train_title, train_url_img  
 		       FROM (SELECT * FROM train
 		              ORDER BY train_COUNT DESC))  
-		WHERE RNUM >= 1 AND RNUM <= 5
+		WHERE RNUM >= 1 AND RNUM <= 3
 		]]>
 	</select>
 

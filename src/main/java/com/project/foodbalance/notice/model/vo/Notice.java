@@ -84,7 +84,5 @@ public class Notice implements java.io.Serializable {
 				+ ", notice_content=" + notice_content + ", notice_date=" + notice_date + ", notice_count="
 				+ notice_count + "]";
 	}
-	
-	
 
 }

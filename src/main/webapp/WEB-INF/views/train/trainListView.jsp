@@ -36,52 +36,69 @@ table {
 </head>
 <body>
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
-
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link" data-bs-toggle="tab" href="#home">Home</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-bs-toggle="tab" href="#profile">Profile</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" data-bs-toggle="tab" href="#disabled">Disabled</a>
-  </li>
-</ul>
-<div id="myTabContent" class="tab-content">
-  <div class="tab-pane fade active" id="home">
-	<div class="cta-inner bg-faded text-center rounded">
-    <% int num = 1; %>
-	<table style="width: 98%; ">
-		<tr><th class="th">번호</th><th class="th">제목</th><th class="th">날짜</th><th class="th">조회수</th></tr>
-		<c:forEach items="${ requestScope.list }" var="t">
-		   <tr>
-		      <td class="td"><%= num++%></td>
-		      <td class="td">
-			      <c:url var="tdt" value="tdetail.do">
-			         <c:param name="train_no" value="${ t.train_no }"/>
-			         <c:param name="page" value="${ currentPage }"/>
-			      </c:url>
-			      <p>${ t.train_title }</p>
-			      <a style="color: #52575c; text-decoration: none;" href="${ tdt }"><img src="${ t.train_url_img }"/></a>
-		      </td>
-		      <td class="td"><fmt:formatDate value="${ t.train_date }" type="date" pattern="yyyy-MM-dd"/></td>
-		      <td class="td">${ t.train_count }</td>
-		   </tr>
-		</c:forEach>
-	</table>
-	<br>
-	<c:import url="/WEB-INF/views/common/paging.jsp"/>
-	</div>
-  </div>
-  <div class="tab-pane fade" id="profile">
-    <p>profile</p>
-  </div>
-  <div class="tab-pane fade" id="disabled">
-    <p>disabled</p>
-  </div>
-</div>
-
+<div class="container">
+		<br><br>
+		    <div style=" padding: 5px; margin: 5px;" class="row">
+		        <div class="col-xl-9 mx-auto">
+		        	<br>
+			        <p style="color: #52575c; font-size: 45px;" align="center"><b>게시판</b></p>
+			        <ul class="nav nav-tabs">
+					  <li class="nav-item">
+					    <a style="color: #52575c;" class="nav-link" data-bs-toggle="tab" href="#titleDiv">제목 검색</a>
+					  </li>
+					  <li class="nav-item">
+					    <a style="color: #52575c;" class="nav-link" data-bs-toggle="tab" href="#dateDiv">날짜 검색</a>
+					  </li>
+					  
+					</ul>
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade" id="titleDiv">
+						    <form action="tsearchTitle.do" method="post">
+								<label>검색할 제목을 입력하세요 : <input type="search" name="keyword"></label>
+								<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
+							</form>
+						  </div>
+						  <div class="tab-pane fade" id="dateDiv">
+						    <form action="tsearchDate.do" method="post">
+								<label>검색할 날짜를 입력하세요 : <input type="date" name="begin"> ~ <input type="date" name="end"></label>
+								<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
+							</form>
+						</div>
+					</div>
+			        <br>
+		            
+					 <% int num = 1; %>
+						<table style="width: 98%; ">
+							<tr><th class="th">번호</th><th class="th">제목</th><th class="th">날짜</th><th class="th">조회수</th></tr>
+							<c:forEach items="${ requestScope.list }" var="t">
+							   <tr>
+							      <td class="td"><%= num++%></td>
+							      <td class="td">
+								      <c:url var="tdt" value="tdetail.do">
+								         <c:param name="train_no" value="${ t.train_no }"/>
+								         <c:param name="page" value="${ currentPage }"/>
+								      </c:url>
+								      
+								      <a style="color: #52575c; text-decoration: none;" href="${ tdt }"><img src="${ t.train_url_img }"/>${ t.train_title }</a>
+							      </td>
+							      <td class="td"><fmt:formatDate value="${ t.train_date }" type="date" pattern="yyyy-MM-dd"/></td>
+							      <td class="td">${ t.train_count }</td>
+							   </tr>
+							</c:forEach>
+						</table>
+					<c:import url="/WEB-INF/views/common/paging.jsp" />
+					<c:if test="${ loginMember.admin_ok eq 'Y' }">
+					   	<div class="parent">
+						   	<div class="div1">
+						      <button style="align-items: "class="btn btn-outline-secondary" onclick="showWrite();">글쓰기</button>
+						   	</div>
+						</div>
+					</c:if>
+					<br><br>
+					</div>
+					</div>
+					</div>
+					
 <c:import url="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
