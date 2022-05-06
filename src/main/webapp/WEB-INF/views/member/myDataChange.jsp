@@ -28,7 +28,7 @@
 			right : 0;
 			border: 1px solid blue;
 			margin : 10px;
-			background-color:rgba(123, 19, 77, 0.1);
+			background-color:rgba(66, 19, 77, 0.1);
     	}
     	.list{
     		position: absolute;
@@ -125,7 +125,7 @@
 			            <h5 align="left">아이디</h5>
 			            <li>
 							<div align="left">
-						    	<input id="user_id" type="text" name="user_id" value="${ sessionScope.loginMember.user_id }" readonly>
+						    	<input id="user_id" type="text" name="user_id" value="${ sessionScope.loginMember.user_id }" style="background-color:rgba(200, 10, 34, 0.1)" readonly>
 							</div>   
 			            </li>
 			            <h5 align="left">비밀번호</h5>

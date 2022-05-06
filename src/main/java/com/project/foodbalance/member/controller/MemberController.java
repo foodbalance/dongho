@@ -110,16 +110,16 @@ public class MemberController {
 				loginMember.setLogin_ok("N");
 				memberService.updateLoginOk(loginMember);
 					
-				model.addAttribute("message2", "로그인 제한");
-				model.addAttribute("message3", "관리자 이메일로 문의해주세요");
+				model.addAttribute("message2", "로그인 제한/");
+				model.addAttribute("message3", "비밀번호를 재설정 해주세요.");
 				model.addAttribute("reid", id);
 				model.addAttribute("repwd", pwd);
 				viewName = "member/login";
 			}
 			//로그인 제한자 로그인 시도시
 			else if(loginMember.getLogin_ok().equals("N")) {
-				model.addAttribute("message2", "로그인 제한");
-				model.addAttribute("message3", "관리자 이메일로 문의해주세요");
+				model.addAttribute("message2", "로그인 제한/");
+				model.addAttribute("message3", "비밀번호를 재설정 해주세요.");
 				model.addAttribute("reid", id);
 				model.addAttribute("repwd", pwd);
 				viewName = "member/login";
@@ -133,6 +133,7 @@ public class MemberController {
 				System.out.println("로그인 스택: "+loginMember.getLogin_stack());
 				
 				model.addAttribute("message", "비밀번호 불일치");
+				model.addAttribute("login_stack", "틀린 횟 수 " + loginMember.getLogin_stack() + " /5");
 				model.addAttribute("reid", id);
 				model.addAttribute("repwd", pwd);
 				viewName = "member/login";
@@ -493,6 +494,7 @@ public class MemberController {
   	@RequestMapping(value = "keywordchk.do", method = RequestMethod.POST)
 	public void keywordCheckMethod(@RequestParam("keyword") String keyword, @RequestParam("user_id") String user_id, HttpServletResponse response) throws IOException {
 
+  		
 		int kcount = memberService.selectCheckKeyword(keyword);
 		int idcount = memberService.selectDupCheckId(user_id);
 		      
@@ -513,19 +515,29 @@ public class MemberController {
   	
   	//비밀번호 찾기 비밀번호 변경
   	@RequestMapping(value="pwdpdate.do", method=RequestMethod.POST)
-  	public String pwdChange(Member member, Model model) {
+  	public String pwdChange(HttpServletRequest request, Member member, Model model) {
   		String value = null;
-
+  		String pwd = request.getParameter("user_pwd");
+		String pwd2 = request.getParameter("user_pwd2");
   		//아이디 확인
   		int idcount = memberService.selectDupCheckId(member.getUser_id());
   		
-  		if(idcount == 1) {
+  		if(idcount == 1 && pwd.equals(pwd2)) {
+  			//비번 재설정시 로그인 스택 초기화
+  			member.setLogin_stack(0);
+			memberService.updateLoginStack(member);
+			//비번 재설정시 로그인 ok
+			member.setLogin_ok("Y");
+			memberService.updateLoginOk(member);
   			// 멤버에 새로운 암호를 저장 :암호화 처리
   			member.setUser_pwd(bcryptPasswordEncoder.encode(member.getUser_pwd()));
   			memberService.updatePwdEncoding(member);
   	  		value = "member/login" ;
+  		}else if(idcount == 0){
+  			model.addAttribute("message", "해당 아이디가 존재하지 않습니다.");
+  			value = "common/commonview";
   		}else {
-  			model.addAttribute("message", "해당 아이디가 존재하지 안거나 비밀번호가 다릅니다.");
+  			model.addAttribute("message", "비밀번호가 일치하지 않습니다.");
   			value = "common/commonview";
   		}
 		return value;
