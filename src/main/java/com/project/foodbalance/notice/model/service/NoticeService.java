@@ -1,6 +1,5 @@
 package com.project.foodbalance.notice.model.service;
 
-
 import java.util.ArrayList;
 
 import com.project.foodbalance.common.Paging;

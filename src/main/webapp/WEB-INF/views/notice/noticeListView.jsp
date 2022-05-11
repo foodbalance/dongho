@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" errorPage="commonview.jsp"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
- 
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,49 +24,41 @@
 	border-bottom: 1px solid #52575c;
 	padding: 15px;
 }
-
-
-
-
 </style>
 
 <title></title>
 
 
 <script type="text/javascript">
-function showWrite() {
-
-	location.href = "${ pageContext.servletContext.contextPath }/noticeWrite.do";
-
-	location.href = "${ pageContext.servletContext.contextPath }/nlist.do";
-
-}
+	function showWrite(){
+	   location.href = "${ pageContext.servletContext.contextPath }/bwform.do";
+	}
 </script>
 
-<!-- 공지사항 -->
+<!-- 게시판 -->
 <script type="text/javascript"
 	src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-	$(function() {
+	$(function(){
 		showDiv();
-
-		$("input[name=item]").on("change", function() {
+		
+		$("input[name=item]").on("change", function(){
 			showDiv();
 		});
 	});
-
-	function showDiv() {
-		if ($("input[name=item]").eq(0).is(":checked")) {
+	
+	function showDiv(){
+		if($("input[name=item]").eq(0).is(":checked")){
 			$("#titleDiv").css("display", "block");
 			$("#writerDiv").css("display", "none");
 			$("#dateDiv").css("display", "none");
 		}
-		if ($("input[name=item]").eq(1).is(":checked")) {
+		if($("input[name=item]").eq(1).is(":checked")){
 			$("#titleDiv").css("display", "none");
 			$("#writerDiv").css("display", "block");
 			$("#dateDiv").css("display", "none");
 		}
-		if ($("input[name=item]").eq(2).is(":checked")) {
+		if($("input[name=item]").eq(2).is(":checked")){
 			$("#titleDiv").css("display", "none");
 			$("#writerDiv").css("display", "none");
 			$("#dateDiv").css("display", "block");
@@ -79,20 +71,12 @@ function showWrite() {
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 	<section class="page-section cta">
 		<div class="container">
-
-			<br> <br>
+			<br>
+			<br>
 			<div style="padding: 5px; margin: 5px;" class="row">
-			<br>
-			<br>
-			<div
-				style="background-color: white; border-radius: 1rem; border: 1px solid; padding: 5px; margin: 5px;"
-				class="row">
-
 				<div class="col-xl-9 mx-auto">
 					<br>
 					<p style="color: #52575c; font-size: 45px;" align="center">
-
-					<p style="font-size: 45px;" align="center">
 						<b>공지사항</b>
 					</p>
 					<ul class="nav nav-tabs">
@@ -104,7 +88,6 @@ function showWrite() {
 								검색</a></li>
 						<li class="nav-item"><a style="color: #52575c;"
 							class="nav-link" data-bs-toggle="tab" href="#dateDiv">날짜 검색</a></li>
-
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade" id="titleDiv">
@@ -112,6 +95,11 @@ function showWrite() {
 								<label>검색할 제목을 입력하세요 : <input type="search"
 									name="keyword"></label> <input style="margin-bottom: 0.7%;"
 									class="btn btn-outline-secondary" type="submit" value="검색">
+								<!-- <input style="margin-bottom: 0.7%;"
+									class="btn btn-outline-secondary" type="reset" value="취소"> -->
+								<a type="button" class="btn btn-outline-secondary"
+									style="margin-bottom: 0.7%;"
+									onclick="javascript:history.go(0);return false;">취소</a>
 							</form>
 						</div>
 						<div class="tab-pane fade" id="writerDiv">
@@ -119,6 +107,9 @@ function showWrite() {
 								<label>검색할 작성자를 입력하세요 : <input type="search"
 									name="keyword"></label> <input style="margin-bottom: 0.7%;"
 									class="btn btn-outline-secondary" type="submit" value="검색">
+								<a type="button" class="btn btn-outline-secondary"
+									style="margin-bottom: 0.7%;"
+									onclick="javascript:history.go(0);return false;">취소</a>
 							</form>
 						</div>
 						<div class="tab-pane fade" id="dateDiv">
@@ -126,7 +117,9 @@ function showWrite() {
 								<label>검색할 날짜를 입력하세요 : <input type="date" name="begin">
 									~ <input type="date" name="end"></label> <input
 									style="margin-bottom: 0.7%;" class="btn btn-outline-secondary"
-									type="submit" value="검색">
+									type="submit" value="검색"> <input type="button"
+									class="btn btn-outline-secondary" style="margin-bottom: 0.7%;"
+									onclick="javascript:history.go(0);return false;" value="취소">
 							</form>
 						</div>
 					</div>
@@ -160,25 +153,27 @@ function showWrite() {
 							</c:forEach>
 						</table>
 
-				
+
 						<br>
 						<c:import url="/WEB-INF/views/common/paging.jsp" />
+						<br>
+						<br>
 						<!-- =============================================================================== -->
 					</div>
-					<br>
+					
 					<!-- 로그인한 회원이 관리자인 경우는 공지사항 등록 버튼이 보이게 함 -->
 					<c:if test="${ loginMember.admin_ok eq 'Y' }">
-
-						<div>
-							<button class="btn btn-outline-secondary"
-									role="button" tabindex="0"
+						
+					<div>
+						<center>
+							<button class="btn btn-outline-secondary" role="button"
+								tabindex="0"
 								onclick="javascript:location.href='noticeWrite.do';">공지
 								등록</button>
-						</c:if>
+						</center>
+					</c:if>
 					<br>
-					
-					
-
+				
 					<!-- 게시글 쓰기(등록)은 로그인한 회원만 가능함 paging.jsp 로 기능 옮김 -->
 					<%-- <c:if test="${ !empty sessionScope.loginMember }">
 					   	<div class="div2">

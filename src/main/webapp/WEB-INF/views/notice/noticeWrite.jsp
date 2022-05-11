@@ -4,9 +4,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,9 +107,6 @@ table {
 								</tr>
 
 								<tr style="overflow:scroll; width:500px; height:150px;"><!-- 스크롤바 추가  -->
-
-								<tr style="overflow:scroll; width:500px; height:150px;">
-
 									<th>내 용</th>
 									<td><textarea name="notice_content" class="form-control"
 											rows="20" cols="50" required></textarea></td>&nbsp;

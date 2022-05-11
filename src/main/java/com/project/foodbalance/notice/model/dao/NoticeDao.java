@@ -15,6 +15,8 @@ import com.project.foodbalance.notice.model.vo.Notice;
 @Repository("noticeDao")
 public class NoticeDao {
 	
+	
+	
 	@Autowired
 	private SqlSessionTemplate session;
 

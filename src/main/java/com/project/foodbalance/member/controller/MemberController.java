@@ -110,16 +110,16 @@ public class MemberController {
 				loginMember.setLogin_ok("N");
 				memberService.updateLoginOk(loginMember);
 					
-				model.addAttribute("message2", "로그인 제한");
-				model.addAttribute("message3", "관리자 이메일로 문의해주세요");
+				model.addAttribute("message2", "로그인 제한/");
+				model.addAttribute("message3", "비밀번호를 재설정 해주세요.");
 				model.addAttribute("reid", id);
 				model.addAttribute("repwd", pwd);
 				viewName = "member/login";
 			}
 			//로그인 제한자 로그인 시도시
 			else if(loginMember.getLogin_ok().equals("N")) {
-				model.addAttribute("message2", "로그인 제한");
-				model.addAttribute("message3", "관리자 이메일로 문의해주세요");
+				model.addAttribute("message2", "로그인 제한/");
+				model.addAttribute("message3", "비밀번호를 재설정 해주세요.");
 				model.addAttribute("reid", id);
 				model.addAttribute("repwd", pwd);
 				viewName = "member/login";
@@ -127,12 +127,13 @@ public class MemberController {
 			//로그인 실패
 			else {
 				//제한 스택 부여
-				System.out.println("로그인 아이디: "+loginMember.getUser_id());
-				System.out.println("로그인 스택: "+loginMember.getLogin_stack());
 				loginMember.setLogin_stack(loginMember.getLogin_stack()+1);
 				memberService.updateLoginStack(loginMember);
-		
+				System.out.println("로그인 아이디: "+loginMember.getUser_id());
+				System.out.println("로그인 스택: "+loginMember.getLogin_stack());
+				
 				model.addAttribute("message", "비밀번호 불일치");
+				model.addAttribute("login_stack", "틀린 횟 수 " + loginMember.getLogin_stack() + " /5");
 				model.addAttribute("reid", id);
 				model.addAttribute("repwd", pwd);
 				viewName = "member/login";
@@ -184,7 +185,7 @@ public class MemberController {
 		//패스워드 암호화 처리
 		member.setUser_pwd(bcryptPasswordEncoder.encode(member.getUser_pwd()));
 		if (memberService.insertMember(member) > 0) {
-		    model.addAttribute("register", "회원 가입을 완료");
+		    model.addAttribute("register", "회원 가입 완료");
 		    return "common/main";
 		} else {
 		    model.addAttribute("message", "회원 가입 실패");
@@ -480,4 +481,75 @@ public class MemberController {
   		}
   		return value;
   	}
+  	
+  	
+  	//비밀번호 찾기 이동  
+  	@RequestMapping("findPwdPage.do")
+  	public String moveㄹindPwd() {
+  		return "member/pwdChange";
+  	}
+  	
+  	//비밀번호 찾기 아이디, 키워드 확인
+  	//ajax 통신 요청
+  	@RequestMapping(value = "keywordchk.do", method = RequestMethod.POST)
+	public void keywordCheckMethod(@RequestParam("keyword") String keyword, @RequestParam("user_id") String user_id, HttpServletResponse response) throws IOException {
+
+  		
+		int kcount = memberService.selectCheckKeyword(keyword);
+		int idcount = memberService.selectDupCheckId(user_id);
+		      
+		   String returnValue = null;
+		   if(kcount >= 1 && idcount == 1) {
+		    returnValue = "ok";
+		   }else {
+		       returnValue = "dup";
+		   }
+		      
+		   //response를 이용해서 클라이언트로 출력스트림 만들고 값 보내기
+		   response.setContentType("text/html; charset=utf-8");
+		   PrintWriter out = response.getWriter();
+		   out.append(returnValue);
+		   out.flush();
+		   out.close();
+	}
+  	
+  	//비밀번호 찾기 비밀번호 변경
+  	@RequestMapping(value="pwdupdate.do", method=RequestMethod.POST)
+  	public String pwdChange(HttpServletRequest request, Member member, Model model) {
+  		String value = null;
+  		String pwd = request.getParameter("user_pwd");
+		String pwd2 = request.getParameter("user_pwd2");
+		String id = request.getParameter("user_id");
+  		//아이디 확인
+  		int idcount = memberService.selectDupCheckId(member.getUser_id());
+  		
+  		if(idcount == 1 && pwd.equals(pwd2) && !pwd.isEmpty()) {
+  			//비번 재설정시 로그인 스택 초기화
+  			member.setLogin_stack(0);
+			memberService.updateLoginStack(member);
+			//비번 재설정시 로그인 ok
+			member.setLogin_ok("Y");
+			memberService.updateLoginOk(member);
+  			// 멤버에 새로운 암호를 저장 :암호화 처리
+  			member.setUser_pwd(bcryptPasswordEncoder.encode(member.getUser_pwd()));
+  			memberService.updatePwdEncoding(member);
+  	  		value = "member/login" ;
+  		}else if(id.isEmpty()) {
+  			model.addAttribute("message", "아이디를 입력하세요.");
+  			value = "member/pwdChange";
+  		}else if(idcount == 0){
+  			model.addAttribute("message", "아이디가 존재하지 않습니다.");
+  			value = "member/pwdChange";
+  		}else if(pwd.isEmpty()) {
+  			model.addAttribute("message", "비밀번호를 입력하세요.");
+  			System.out.println("비밀"+ pwd);
+  			value = "member/pwdChange";
+  		}else {
+  			model.addAttribute("message", "비밀번호가 일치하지 않습니다.");
+  			value = "member/pwdChange";
+  		}
+  		
+  		return value;
+  	}
+  	
 }

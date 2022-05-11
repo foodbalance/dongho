@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -32,11 +31,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import com.project.foodbalance.board.model.service.BoardService;
-import com.project.foodbalance.board.model.service.ReplyService;
 import com.project.foodbalance.board.model.vo.Board;
-import com.project.foodbalance.board.model.vo.Reply;
 import com.project.foodbalance.common.Paging;
 import com.project.foodbalance.common.SearchDate;
 import com.project.foodbalance.member.model.vo.Member;
@@ -49,13 +45,10 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@Inject
-	private ReplyService replyService;
-	
-	
 	//게시글 페이지단위로 목록 조회 처리용
 	@RequestMapping("blist.do")
-	public ModelAndView boardListMethod(@RequestParam(name="page", required=false) String page, ModelAndView mv) {
+	public ModelAndView noticeListMethod(@RequestParam(name = "page", required = false) String page, ModelAndView mv,
+			@RequestParam(name = "next", required = false) boolean next) {
 		int currentPage = 1;
 		if(page != null) {
 			currentPage = Integer.parseInt(page);
@@ -69,8 +62,19 @@ public class BoardController {
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		//현재 페이지가 포함된 페이지 그룹의 시작값 지정 (뷰 아래쪽에 표시할 페이지 수를 10개씩 한 경우)
 		int startPage = (int)((double)currentPage / 10 + 0.9);
-		//현재 페이지가 포함된 페이지그룹의 끝값
+		// 현재페이지가 limit보다 크면 그룹의 시작값 = (((현재페이지 - 1) / 10) * (10) + 1
+		if(currentPage > limit) {
+			startPage = (((currentPage -1) / limit) * limit) + 1;
+		}
+	
+		if(next == true) {
+			//startPage = 그룹의 시작값
+			startPage = currentPage;
+		}
+		
+		// 현재 페이지가 포함된 페이지그룹의 끝값
 		int endPage = startPage + 10 - 1;
+		
 		//페이징처리 분류
 		String menu = "board";
 			
@@ -172,23 +176,18 @@ public class BoardController {
 			//조회수 1증가 처리
 		boardService.updateAddReadcount(board_no);
 		try {
-			
 			if(board != null) {
 				model.addAttribute("board", board);
 			
 				Member loginMember = (Member)session.getAttribute("loginMember");
-				model.addAttribute("reply", replyService.viewReply(board_no));
-				
 				result = "board/boardDetail";
 				
 			}
-			
 		}catch(Exception e) {
 			model.addAttribute("message", board_no + "번 게시글 상세보기 실패");
 			
 			result = "common/commonview";
 		}
-		
 		return result;
 	}
 
@@ -197,12 +196,14 @@ public class BoardController {
 	@RequestMapping("bfdown.do")
 	public ModelAndView fileDownMethod(HttpServletRequest request, @RequestParam("ofile") String originFileName, @RequestParam("rfile") String renameFileName, ModelAndView mv) {
 		//공지사항 첨부파일 저장 폴더 경로 지정
+		System.out.println("확인이다");
 		String savePath = request.getSession().getServletContext().getRealPath("resources/board_upfiles/");
 		//저장 폴더에서 읽을 파일에 대해 경로 추가
 		File renameFile = new File(savePath + renameFileName);
 		//다운을 위해 내보내는 파일 객체 생성
 		File originFile = new File(originFileName);
 		
+		System.out.println("경로"+renameFile);
 
 		//filedown - servlet-context.xml 파일 다운 위한 뷰클래스 id명
 		mv.setViewName("filedown");	//등록된 파일다운로드 처리용 뷰 클래스 id 명
@@ -216,7 +217,6 @@ public class BoardController {
 	//글 삭제
 	@RequestMapping("bdel.do")
 	public String boardDeleteMethod(Board board, HttpServletRequest request, Model model) {
-		System.out.println(board);
 		if(boardService.deleteBoard(board) > 0) {
 			//글삭제 성공시 저장폴더에 첨부파일도 삭제 처리
 			if(board.getBoard_rename_img() != null) {
@@ -341,7 +341,9 @@ public class BoardController {
 
 	// 제목 검색 페이징
 	@RequestMapping("bsearchTitle.do")
-	public ModelAndView searchTitleMethod(@RequestParam(name="page", required=false) String page, @RequestParam("keyword") String keyword, ModelAndView mv) {
+	public ModelAndView searchTitleMethod(@RequestParam(name="page", required=false) String page, 
+			@RequestParam("keyword") String keyword, ModelAndView mv,
+			@RequestParam(name = "next", required = false) boolean next) {
 		int currentPage = 1;
 		if(page != null) {
 			currentPage = Integer.parseInt(page);
@@ -357,7 +359,17 @@ public class BoardController {
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		//현재 페이지가 포함된 페이지 그룹의 시작값 지정 (뷰 아래쪽에 표시할 페이지 수를 10개씩 한 경우)
 		int startPage = (int)((double)currentPage / 10 + 0.9);
-		//현재 페이지가 포함된 페이지그룹의 끝값
+		// 현재페이지가 limit보다 크면 그룹의 시작값 = (((현재페이지 - 1) / 10) * (10) + 1
+		if(currentPage > limit) {
+			startPage = (((currentPage -1) / limit) * limit) + 1;
+		}
+	
+		if(next == true) {
+			//startPage = 그룹의 시작값
+			startPage = currentPage;
+		}
+		
+		// 현재 페이지가 포함된 페이지그룹의 끝값
 		int endPage = startPage + 10 - 1;
 		// 검색어
 		String searchkeyword  = keyword;
@@ -400,7 +412,9 @@ public class BoardController {
 
 	// 작성자 검색 페이징
 	@RequestMapping("bsearchWriter.do")
-	public ModelAndView searchWriterMethod(@RequestParam(name="page", required=false) String page, @RequestParam("keyword") String keyword, ModelAndView mv) {
+	public ModelAndView searchWriterMethod(@RequestParam(name="page", required=false) String page, 
+			@RequestParam("keyword") String keyword, ModelAndView mv,
+			@RequestParam(name = "next", required = false) boolean next) {
 		int currentPage = 1;
 		if(page != null) {
 			currentPage = Integer.parseInt(page);
@@ -416,7 +430,17 @@ public class BoardController {
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		//현재 페이지가 포함된 페이지 그룹의 시작값 지정 (뷰 아래쪽에 표시할 페이지 수를 10개씩 한 경우)
 		int startPage = (int)((double)currentPage / 10 + 0.9);
-		//현재 페이지가 포함된 페이지그룹의 끝값
+		// 현재페이지가 limit보다 크면 그룹의 시작값 = (((현재페이지 - 1) / 10) * (10) + 1
+		if(currentPage > limit) {
+			startPage = (((currentPage -1) / limit) * limit) + 1;
+		}
+	
+		if(next == true) {
+			//startPage = 그룹의 시작값
+			startPage = currentPage;
+		}
+		
+		// 현재 페이지가 포함된 페이지그룹의 끝값
 		int endPage = startPage + 10 - 1;
 		// 검색어
 		String searchkeyword  = keyword;
@@ -462,7 +486,8 @@ public class BoardController {
 	
 	// 날짜 검색 페이징
 		@RequestMapping("bsearchDate.do")
-		public ModelAndView searchDateMethod(@RequestParam(name="page", required=false) String page, SearchDate date, ModelAndView mv) {
+		public ModelAndView searchDateMethod(@RequestParam(name="page", required=false) String page, SearchDate date, ModelAndView mv,
+				@RequestParam(name = "next", required = false) boolean next) {
 			int currentPage = 1;
 			if(page != null) {
 				currentPage = Integer.parseInt(page);
@@ -478,7 +503,17 @@ public class BoardController {
 			int maxPage = (int)((double)listCount / limit + 0.9);
 			//현재 페이지가 포함된 페이지 그룹의 시작값 지정 (뷰 아래쪽에 표시할 페이지 수를 10개씩 한 경우)
 			int startPage = (int)((double)currentPage / 10 + 0.9);
-			//현재 페이지가 포함된 페이지그룹의 끝값
+			// 현재페이지가 limit보다 크면 그룹의 시작값 = (((현재페이지 - 1) / 10) * (10) + 1
+			if(currentPage > limit) {
+				startPage = (((currentPage -1) / limit) * limit) + 1;
+			}
+		
+			if(next == true) {
+				//startPage = 그룹의 시작값
+				startPage = currentPage;
+			}
+			
+			// 현재 페이지가 포함된 페이지그룹의 끝값
 			int endPage = startPage + 10 - 1;
 			// 검색어
 			Date begin = date.getBegin();
@@ -525,7 +560,7 @@ public class BoardController {
 //		//댓글달기 페이지로 이동
 		@RequestMapping("breplyform.do")
 		public String moveReplyForm(@RequestParam("board_no") int origin_num,
-				@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
+				@RequestParam("page") String currentPage, Model model) {
 			model.addAttribute("board_no", origin_num);
 			model.addAttribute("currentPage", currentPage);
 					
@@ -534,13 +569,13 @@ public class BoardController {
 		
 		//댓글 등록 처리용
 		@RequestMapping(value="breply.do", method=RequestMethod.POST)
-		public String replyInsertMethod(Board reply, @RequestParam(value="page") int page, Model model) {
+		public String replyInsertMethod(Board reply, @RequestParam("page") int page, Model model) {
 			//해당 댓글에 대한 원글 조회
 			Board origin = boardService.selectBoard(reply.getBoard_ref());
-			System.out.println("초기" + origin.getBoard_reply_lev());		
+					
 			//현재 등록글의 레벨을 설정
 			reply.setBoard_reply_lev(origin.getBoard_reply_lev() + 1);
-			System.out.println(reply.getBoard_reply_lev());		
+					
 			//대댓글일때는 board_reply_ref 값 지정 : 참조하는 댓글 번호
 			if(reply.getBoard_reply_lev() == 3) {
 				reply.setBoard_ref(origin.getBoard_ref());  //참조 원글 번호
@@ -554,7 +589,6 @@ public class BoardController {
 					
 			if(boardService.insertReply(reply) > 0) {
 				return "redirect:blist.do?page=" + page;
-				
 			}else {
 				model.addAttribute("message", reply.getBoard_ref() + "번 글에 대한 댓글 등록 실패.");
 				return "common/commonview";
@@ -563,7 +597,7 @@ public class BoardController {
 		
 		//댓글, 대댓글 수정 처리용
 		@RequestMapping(value="breplyup.do", method=RequestMethod.POST)
-		public String replyUpdateMethod(Board reply, @RequestParam(value="page", defaultValue="1") int page, Model model) {
+		public String replyUpdateMethod(Board reply, @RequestParam("page") int page, Model model) {
 					
 			if(boardService.updateReply(reply) > 0) {
 				//댓글, 대댓글 수정성공시 다시 상세페이지가 보여지게 한다면
@@ -576,11 +610,4 @@ public class BoardController {
 			}
 		}
 		
-	
-	
-	
-	
-	
-	
-	
 }

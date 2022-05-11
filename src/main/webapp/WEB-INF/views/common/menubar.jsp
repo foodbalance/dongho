@@ -51,7 +51,7 @@
         
          </button>
       &ensp;&ensp;&ensp;
-          <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='#';">음식이미지 ai분석
+          <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='foodai.do';">음식이미지 ai분석
       
             </button>
          &ensp;&ensp;&ensp;

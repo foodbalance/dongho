@@ -39,7 +39,8 @@ public class NoticeController {
 
 	// 게시글 페이지단위로 목록 조회 처리용
 	@RequestMapping("nlist.do")
-	public ModelAndView noticeListMethod(@RequestParam(name = "page", required = false) String page, ModelAndView mv) {
+	public ModelAndView noticeListMethod(@RequestParam(name = "page", required = false) String page, ModelAndView mv,
+			@RequestParam(name = "next", required = false) boolean next) {
 		int currentPage = 1;
 		if (page != null) {
 			currentPage = Integer.parseInt(page);
@@ -55,8 +56,20 @@ public class NoticeController {
 		int maxPage = (int) ((double) listCount / limit + 0.9);
 		// 현재 페이지가 포함된 페이지 그룹의 시작값 지정 (뷰 아래쪽에 표시할 페이지 수를 10개씩 한 경우)
 		int startPage = (int) ((double) currentPage / 10 + 0.9);
+		
+		// 현재페이지가 limit보다 크면 그룹의 시작값 = (((현재페이지 - 1) / 10) * (10) + 1
+		if(currentPage > limit) {
+			startPage = (((currentPage -1) / limit) * limit) + 1;
+		}
+	
+		if(next == true) {
+			//startPage = 그룹의 시작값
+			startPage = currentPage;
+		}
+		
 		// 현재 페이지가 포함된 페이지그룹의 끝값
 		int endPage = startPage + 10 - 1;
+		
 		// 패이징 구분
 		String menu = "notice";
 		if (maxPage < endPage) {
@@ -178,7 +191,9 @@ public class NoticeController {
 
 	// 제목 검색 및 페이징
 	@RequestMapping("nsearchTitle.do")
-	public ModelAndView searchTitleMethod(@RequestParam(name="page", required=false) String page, @RequestParam("keyword") String keyword, ModelAndView mv) {
+	public ModelAndView searchTitleMethod(@RequestParam(name="page", required=false) String page, 
+			@RequestParam("keyword") String keyword, ModelAndView mv,
+			@RequestParam(name = "next", required = false) boolean next) {
 		int currentPage = 1;
 		if(page != null) {
 			currentPage = Integer.parseInt(page);
@@ -194,7 +209,17 @@ public class NoticeController {
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		//현재 페이지가 포함된 페이지 그룹의 시작값 지정 (뷰 아래쪽에 표시할 페이지 수를 10개씩 한 경우)
 		int startPage = (int)((double)currentPage / 10 + 0.9);
-		//현재 페이지가 포함된 페이지그룹의 끝값
+		// 현재페이지가 limit보다 크면 그룹의 시작값 = (((현재페이지 - 1) / 10) * (10) + 1
+		if(currentPage > limit) {
+			startPage = (((currentPage -1) / limit) * limit) + 1;
+		}
+	
+		if(next == true) {
+			//startPage = 그룹의 시작값
+			startPage = currentPage;
+		}
+		
+		// 현재 페이지가 포함된 페이지그룹의 끝값
 		int endPage = startPage + 10 - 1;
 		// 검색어
 		String searchkeyword  = keyword;
@@ -254,7 +279,9 @@ public class NoticeController {
 //		}	
 	// 작성자 검색 및 페이징
 	@RequestMapping("nsearchWriter.do")
-	public ModelAndView searchWriterMethod(@RequestParam(name="page", required=false) String page, @RequestParam("keyword") String keyword, ModelAndView mv) {
+	public ModelAndView searchWriterMethod(@RequestParam(name="page", required=false) String page, 
+			@RequestParam("keyword") String keyword, ModelAndView mv,
+			@RequestParam(name = "next", required = false) boolean next) {
 		int currentPage = 1;
 		if(page != null) {
 			currentPage = Integer.parseInt(page);
@@ -270,7 +297,17 @@ public class NoticeController {
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		//현재 페이지가 포함된 페이지 그룹의 시작값 지정 (뷰 아래쪽에 표시할 페이지 수를 10개씩 한 경우)
 		int startPage = (int)((double)currentPage / 10 + 0.9);
-		//현재 페이지가 포함된 페이지그룹의 끝값
+		// 현재페이지가 limit보다 크면 그룹의 시작값 = (((현재페이지 - 1) / 10) * (10) + 1
+		if(currentPage > limit) {
+			startPage = (((currentPage -1) / limit) * limit) + 1;
+		}
+	
+		if(next == true) {
+			//startPage = 그룹의 시작값
+			startPage = currentPage;
+		}
+		
+		// 현재 페이지가 포함된 페이지그룹의 끝값
 		int endPage = startPage + 10 - 1;
 		// 검색어
 		String searchkeyword  = keyword;
@@ -316,7 +353,8 @@ public class NoticeController {
 	
 	// 날짜 검색 및 페이징
 	@RequestMapping("nsearchDate.do")
-	public ModelAndView searchDateMethod(@RequestParam(name="page", required=false) String page, SearchDate date, ModelAndView mv) {
+	public ModelAndView searchDateMethod(@RequestParam(name="page", required=false) String page, SearchDate date, ModelAndView mv,
+			@RequestParam(name = "next", required = false) boolean next) {
 		int currentPage = 1;
 		if(page != null) {
 			currentPage = Integer.parseInt(page);
@@ -332,7 +370,17 @@ public class NoticeController {
 		int maxPage = (int)((double)listCount / limit + 0.9);
 		//현재 페이지가 포함된 페이지 그룹의 시작값 지정 (뷰 아래쪽에 표시할 페이지 수를 10개씩 한 경우)
 		int startPage = (int)((double)currentPage / 10 + 0.9);
-		//현재 페이지가 포함된 페이지그룹의 끝값
+		// 현재페이지가 limit보다 크면 그룹의 시작값 = (((현재페이지 - 1) / 10) * (10) + 1
+		if(currentPage > limit) {
+			startPage = (((currentPage -1) / limit) * limit) + 1;
+		}
+	
+		if(next == true) {
+			//startPage = 그룹의 시작값
+			startPage = currentPage;
+		}
+		
+		// 현재 페이지가 포함된 페이지그룹의 끝값
 		int endPage = startPage + 10 - 1;
 		// 검색어
 		Date begin = date.getBegin();

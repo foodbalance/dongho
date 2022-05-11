@@ -118,7 +118,8 @@
 				data: { user_id: $("#user_id").val() },
 				success: function(data){
 					console.log("success : " + data);
-					if(data == "ok"){
+					
+					if(data == "ok" && $("#user_id").val() != ""){
 						//alert("사용 가능한 아이디 입니다.");
 						message += '<h5 align="left" style="color:red;" id="idcheck">사용 가능한 아이디 입니다.</h5>'
 						result += '<input id="check2" type="hidden" value="ok">'
@@ -126,8 +127,14 @@
 						document.getElementById("idcheck").innerHTML = message;
 						document.getElementById("check1").innerHTML = result;
 							
-						$("#user_pwd").focus();
+					/* 	$("#user_pwd").focus(); */
 
+					}else if($("#user_id").val() == ""){
+						message += '<h5 align="left" style="color:red;" id="idcheck">아이디를 입력해 주세요.</h5>'
+						result += '<input id="check2" type="hidden" value="no">'
+									
+						document.getElementById("idcheck").innerHTML = message;
+						document.getElementById("check1").innerHTML = result;
 					}else{
 						//alert("이미 사용중인 아이디 입니다.\n다시 입력하세요.");
 							
@@ -136,7 +143,7 @@
 							
 						document.getElementById("idcheck").innerHTML = message;
 						document.getElementById("check1").innerHTML = result;
-						$("#user_id").select();
+						/* $("#user_id").select(); */
 					}
 				},
 				error: function(jqXHR, textstatus, errorthrown){
