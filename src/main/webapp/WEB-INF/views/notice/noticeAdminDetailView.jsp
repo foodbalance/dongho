@@ -150,7 +150,7 @@ td{
 		
 </style>
 
-<title></title>
+<title>공지사항 상세(관리자)</title>
 
 
 <!-- Core theme JS-->
@@ -201,7 +201,7 @@ td{
 		    <div  class="row">
 		        <div class="col-xl-9 mx-auto">
 		       
-			        <p style="color: #52575c; font-size: 35px; margin-top: 5%;" align="center"><b>공지사항 상세보기</b></p>
+			        <p style="color: #52575c; font-size: 35px; margin-top: 5%;" align="center"><b>공지사항 상세(관리자)</b></p>
 					<br>
 		            <div class="cta-inner bg-faded text-center rounded">
 						<!-- =============================================================================== -->
@@ -226,11 +226,10 @@ td{
 					</div>
 					<div style="padding: 5px; margin: 5px; margin-bottom: 5%" align="center">
 						<br>
-
 						<a type="button" class="btn btn-outline-secondary" 
-						onclick="location.href=document.referrer;">목록
+						onclick="javascript:history.go(-1);return false;">목록
 						</a>
-
+						
 						<!-- 수정페이지로 이동 -->
 						<c:url var="nup" value="/upmove.do">
 							<c:param name="notice_no" value="${notice.notice_no }" />
@@ -239,6 +238,7 @@ td{
 						<button class="btn btn-outline-secondary" 
 							role="button" tabindex="0"
 							onclick="javascript:location.href='${nup}';">수정</button>
+						
 						<!-- 공지 삭제 -->
 						<c:url var="ndel" value="/ndel.do">
 							<c:param name="notice_no" value="${notice.notice_no }" />

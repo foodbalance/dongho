@@ -26,12 +26,12 @@
 }
 </style>
 
-<title></title>
+<title>공지사항</title>
 
 
 <script type="text/javascript">
 	function showWrite(){
-	   location.href = "${ pageContext.servletContext.contextPath }/bwform.do";
+	   location.href = "${ pageContext.servletContext.contextPath }/noticeWrite.do";
 	}
 </script>
 
@@ -88,7 +88,10 @@
 								검색</a></li>
 						<li class="nav-item"><a style="color: #52575c;"
 							class="nav-link" data-bs-toggle="tab" href="#dateDiv">날짜 검색</a></li>
+						<button type="button" class="btn btn-outline-secondary" style="margin-left: 53%;"
+						 		onclick="javascript:location.href='nlist.do';">처음으로</button>
 					</ul>
+					
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade" id="titleDiv">
 							<form action="nsearchTitle.do" method="post">
@@ -123,6 +126,9 @@
 							</form>
 						</div>
 					</div>
+					
+					
+					
 					<br>
 					<div class="cta-inner bg-faded text-center rounded">
 						<!-- =============================================================================== -->

@@ -150,7 +150,7 @@ td{
 		
 </style>
 
-<title></title>
+<title>공지사항 상세</title>
 
 
 <!-- Core theme JS-->
@@ -228,9 +228,10 @@ td{
 					<br>
 					<div style="padding: 5px; margin: 5px; margin-bottom: 5%" align="center">
 						<a type="button" class="btn btn-outline-secondary" 
-						onclick="location.href=document.referrer;">목록
+							onclick="javascript:history.go(-1);return false;">목록
+							<!-- onclick="location.href=document.referrer;">목록 -->
 						</a>
-
+						
 					</div>
 				</div>
 			</div>
