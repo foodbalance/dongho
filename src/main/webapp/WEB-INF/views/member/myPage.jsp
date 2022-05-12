@@ -151,6 +151,31 @@
 	.a1{
 		padding : 5px;
 	}
+	
+	/* 페이지 */
+#ss2{
+	width: 70%; 
+	min-width: 100%; 
+	margin-right:auto; 
+	margin-left:auto; 
+	height: 1100px;
+}
+
+/*   겉 테두리  */
+#se{
+	position:relative; 
+	margin: auto;
+	width: 100%;
+	max-width: 1350px;
+	height: 1365px;
+ 	background: white;
+ 	border-radius: 30px;
+ 	border: 3px solid black;
+ 	flex-wrap: wrap; 
+ 	transition: all ease-in-out 0.3s;
+ 
+ 	
+  }	
 </style>
 
 <script type="text/javascript">
@@ -252,8 +277,8 @@ function calendarInit() {
 
 
 </head>
-<body>
-
+<body id="ss2">
+	<div id="se">
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
 
 <center>
@@ -292,6 +317,7 @@ function calendarInit() {
 
 
 	<c:import url="/WEB-INF/views/common/footer.jsp" />
+	</div>
 
 </body>
 </html>

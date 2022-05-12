@@ -13,15 +13,17 @@
 
 <!-- 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<meta charset="UTF-8">
+<meta charset="UTF-8"> 
 
 <style type="text/css">
   #menubtn{
- 	 background-color: #52575c;
- 	 font-size: 20px;
+ 	 background-color: #f4f4fc;
+ 	 font-size: 25px;
+ 	 font-weight:600;
  	 text-align: center;
- 	 
-  }
+ 	 height: 50px;
+ 	 border-radius: 10px;
+  } 
   #menubtn:hover{
    
   	background-color: silver;
@@ -31,12 +33,12 @@
 </head>
 
 <br>
-
-<h1 style="float: left; font-size: 40px; ">FOOD BALANCE</h1>
+<div>
+<a style="float: left; margin: -20px 0px -500px 30px;  font-weight:700; color:  #52575c; font-size: 70px; text-decoration:none;" href="main.do">FOOD BALANCE</a><br>
 <c:import url="/WEB-INF/views/common/loginSession.jsp" />
-
+</div>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar" style="background-color: #8195f6; ">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,8 +52,7 @@
             <span class="visually-hidden">(current)</span>
         
          </button>
-      &ensp;&ensp;&ensp;
-          <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='foodai.do';">음식이미지 ai분석
+      
       
             </button>
          &ensp;&ensp;&ensp;
@@ -60,7 +61,11 @@
        
           <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='blist.do';">게시판</button>
          &ensp;&ensp;&ensp;
-       <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='tlist.do';">운동법</button>
+    <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='tlist.do';">운동법</button>
+        &ensp;&ensp;&ensp;
+          <button type="button" class="btn btn-outline-secondary" id="menubtn" onclick="javascript:location.href='foodai.do';">음식이미지 ai분석</button>
+    
+     
       </ul>
  
     </div>
@@ -68,4 +73,3 @@
 </nav>
 </body>
 </html>
-

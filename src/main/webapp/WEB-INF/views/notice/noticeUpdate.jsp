@@ -29,6 +29,29 @@ table {
 	border-bottom: 1px solid #444444;
 	padding: 15px;
 }
+
+    		/* 페이지 */
+#ss{
+	width: 70%; 
+	min-width: 100%; 
+	margin-right:auto; 
+	margin-left:auto; 
+	height: 100%;
+}
+/*   겉 테두리  */
+#se{
+	position:relative; 
+	margin: auto;
+	width: 100%;
+	max-width: 1350px;
+	height: 100%;
+ 	background: white;
+ 	border-radius: 30px;
+ 	border: 3px solid black;
+ 	flex-wrap: wrap; 
+ 	transition: all ease-in-out 0.3s;
+ 	
+  }	
 </style>
 
 <title></title>
@@ -71,7 +94,8 @@ table {
 	}
 </script>
 </head>
-<body>
+<body id="ss">
+<div id="se"> 
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 	<section class="page-section cta">
 		<div class="container">
@@ -134,5 +158,6 @@ table {
 		</div>
 	</section>
 	<c:import url="/WEB-INF/views/common/footer.jsp" />
+	</div>
 </body>
 </html>

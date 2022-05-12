@@ -24,6 +24,29 @@
 	border-bottom: 1px solid #52575c;
 	padding: 15px;
 }
+
+    		/* 페이지 */
+#ss{
+	width: 70%; 
+	min-width: 100%; 
+	margin-right:auto; 
+	margin-left:auto; 
+	height: 100%;
+}
+/*   겉 테두리  */
+#se{
+	position:relative; 
+	margin: auto;
+	width: 100%;
+	max-width: 1350px;
+	height: 100%;
+ 	background: white;
+ 	border-radius: 30px;
+ 	border: 3px solid black;
+ 	flex-wrap: wrap; 
+ 	transition: all ease-in-out 0.3s;
+ 	
+  }	
 </style>
 
 <title></title>
@@ -66,7 +89,8 @@
 	}
 </script>
 </head>
-<body>
+<body id="ss">
+<div id="se"> 
 
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 	<section class="page-section cta">
@@ -83,9 +107,7 @@
 						<li class="nav-item"><a style="color: #52575c;"
 							class="nav-link" data-bs-toggle="tab" href="#titleDiv">제목 검색</a>
 						</li>
-						<li class="nav-item"><a style="color: #52575c;"
-							class="nav-link" data-bs-toggle="tab" href="#writerDiv">작성자
-								검색</a></li>
+					
 						<button type="button" class="btn btn-outline-secondary" style="margin-left: 53%;"
                          onclick="javascript:location.href='nlist.do';">처음으로</button>
 						
@@ -189,5 +211,6 @@
 	<br>
 
 	<c:import url="/WEB-INF/views/common/footer.jsp" />
+	</div>
 </body>
 </html>

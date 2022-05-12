@@ -23,7 +23,7 @@
 	}
 
 	.div1{
-		border: 1px solid blue;
+		border: 1px solid white;
 		background-color:rgba(0, 0, 0, 0.1);
 		width : 400px;
 		height: 960px;
@@ -31,7 +31,31 @@
 	.div2{
 		padding : 10px 15px 10px 0;
 	}
-	
+	/* 페이지 */
+#ss{
+	width: 70%; 
+	min-width: 100%; 
+	margin-right:auto; 
+	margin-left:auto; 
+	height: 2000px;
+}
+
+/*   겉 테두리  */
+#se{
+	position:relative; 
+	margin: auto;
+	width: 100%;
+	max-width: 1350px;
+	height: 2110px;
+ 	background: white;
+ 	border-radius: 30px;
+ 	border: 3px solid black;
+ 	flex-wrap: wrap; 
+ 	transition: all ease-in-out 0.3s;
+ 
+ 	
+  }	
+  	
 </style>
 
 
@@ -154,7 +178,8 @@
 		}
 </script>
 </head>
-<body>
+<body id="ss">
+<div id="se">
 <nav>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 </nav>
@@ -274,7 +299,7 @@
 
 
 <c:import url="/WEB-INF/views/common/footer.jsp" />
-
+</div>
 
 </body>
 </html>

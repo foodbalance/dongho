@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
-<head>
+<head>    
 <meta charset="utf-8"/>
 <style type="text/css">
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:15px; }
@@ -40,23 +40,23 @@
 #placesList .item .marker_14 {background-position: 0 -608px;}
 #placesList .item .marker_15 {background-position: 0 -654px;}
 #pagination {margin:10px auto;text-align: center;}
-#pagination a {display:inline-block;margin-right:10px;}
-#pagination .on {font-weight: bold; cursor: default;color:#777;}
+#pagination a {display:inline-block;margin-right:10px; color:white;}
+#pagination .on {font-weight: bold; cursor: default;color: lime;}
 </style>
 </head>
 
 
-<body>
+<body style="">
 
 <!-- services 라이브러리 불러오기 -->
 
-<div id="map" style="width:1300px; padding: 0px; margin:0px; left: -2px;  height:632px; border-radius:20px; border-top-left-radius: 0px; border-top-right-radius: 0px;"></div>
+<div id="map" style="border: 1px solid black; width: 1293px; margin-top: -5px; left: 0px;  height:500px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=48c857465598a8d4ed1ec243d3a699f8&libraries=services,clusterer,drawing"></script>
 	<script>
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 var options = { //지도를 생성할 때 필요한 기본 옵션
 	center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-	level: 3 //지도의 레벨(확대, 축소 정도)
+	level: 2 //지도의 레벨(확대, 축소 정도)
 };
 
 var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
@@ -76,10 +76,10 @@ searchAddrFromCoords(map.getCenter(), displayCenterInfo);
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
         if (status === kakao.maps.services.Status.OK) {
-            var detailAddr = !!result[0].road_address ? '<div style="color:black">도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
-            detailAddr += '<div style="color:black">지번 주소 : ' + result[0].address.address_name + '</div>';
+            var detailAddr = '<div style="color:black;">도로명주소 : ' + '<p>' + result[0].address.address_name + '</p>' + '</div>';
+            	detailAddr = '<div style="color:black; ">지번 주소 : ' + '<p style="width:100px;">' + result[0].address.address_name +'</p>' +  '</div>';
             
-            var content = '<div class="bAddr" style="color:black">' +
+            var content = '<div class="bAddr" style="color:black;">' +
                            
                             detailAddr + 
                         '</div>';
@@ -126,23 +126,16 @@ function displayCenterInfo(result, status) {
 }
 
 </script>
-<div class="map_wrap" style=" top: -590px; height: 570px;">
+<div class="map_wrap" style=" top: -500px; height: 500px;">
 
 
-<div id="menu_wrap" class="bg_white" style="width:350px;">
+<div id="menu_wrap" class="bg_white" style="width:350px; background-color: white-space; color: black;">
     <div class="option">
-        <div>
-           <span id="info.location.approxAddr" class="approxAddr">&nbsp;</span>
-                키워드 : <button onclick="searchPlaces1();" id="keyword1" value="서강대 헬스" >헬스장</button>  
-                <button onclick="searchPlaces2();" id="keyword2" value="서강대 샐러드" >샐러드</button> 
-                <button onclick="searchPlaces3();" id="keyword3" value="서강대 공원" >공원</button>  
-              
-        
-        </div>
+
     </div>
     <hr>
     <ul id="placesList"></ul>
-    <div id="pagination"></div>
+    <div id="pagination" style="color: white;"></div>
 </div>
 </div>
 
@@ -158,7 +151,7 @@ if (navigator.geolocation) {
         	lon = 126.937541; // 경도
         
         var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-            message = '<div style="padding:5px;color:black;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
+            message = '<div style="padding:5px;color:black; border: dotted; width:150px; ">현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
         
         // 마커와 인포윈도우를 표시합니다
         displayMarker(locPosition, message);

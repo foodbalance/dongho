@@ -23,6 +23,29 @@ table {
 	border-bottom: 1px solid #444444;
 	padding: 15px;
 }
+
+    		/* 페이지 */
+#ss{
+	width: 70%; 
+	min-width: 100%; 
+	margin-right:auto; 
+	margin-left:auto; 
+	height: 100%;
+}
+/*   겉 테두리  */
+#se{
+	position:relative; 
+	margin: auto;
+	width: 100%;
+	max-width: 1350px;
+	height: 100%;
+ 	background: white;
+ 	border-radius: 30px;
+ 	border: 3px solid black;
+ 	flex-wrap: wrap; 
+ 	transition: all ease-in-out 0.3s;
+ 	
+  }	
 </style>
 <title>운동법 페이지</title>
 <script type="text/javascript">
@@ -34,7 +57,8 @@ table {
 <script type="text/javascript"
 	src="${ pageContext.servletContext.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
 </head>
-<body>
+<body id="ss">
+<div id="se"> 
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
 <div class="container">
 		<br><br>
@@ -46,9 +70,7 @@ table {
 					  <li class="nav-item">
 					    <a style="color: #52575c;" class="nav-link" data-bs-toggle="tab" href="#titleDiv">제목 검색</a>
 					  </li>
-					  <li class="nav-item">
-					    <a style="color: #52575c;" class="nav-link" data-bs-toggle="tab" href="#dateDiv">날짜 검색</a>
-					  </li>
+					  
 					  
 					</ul>
 					<div id="myTabContent" class="tab-content">
@@ -100,5 +122,6 @@ table {
 					</div>
 					
 <c:import url="/WEB-INF/views/common/footer.jsp" />
+</div>
 </body>
 </html>

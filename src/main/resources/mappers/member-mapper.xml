@@ -58,6 +58,7 @@
 		values (#{ user_id }, #{ user_pwd }, #{ user_name }, #{ user_fnum }, #{ user_enum }, #{ phone }, #{ email }, 
 		        #{ postcode }, #{ address }, #{ address1 },#{ address2 }, #{ keyword }, 'N', 'Y', 0)
 	</insert>
+
 	
 	<!-- 아이디 중복체크 -->
 	<select id="selectCheckId" parameterType="string" resultType="_int">
@@ -73,6 +74,14 @@
 		from member
 		where email = #{ email }
 	</select>
+	
+	<!-- 카카오) 아이디로 유저 중복체크 -->
+	<select id="kakaodupCheck" parameterType="String" resultType="Member">
+		select *
+		from member
+		where user_id = #{ user_id }
+	</select>
+	
 	<!-- 이메일로 유저 선택 -->
 	<select id="selectUser" parameterType="String" resultType="Member">
 		select * from member

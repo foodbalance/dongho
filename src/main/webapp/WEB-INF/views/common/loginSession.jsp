@@ -7,13 +7,26 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<style>
+#menubtn{
+ 	 background-color: #f4f4fc;
+ 	 font-size: 18px;
+ 	 font-weight:600;
+ 	 text-align: center;
+ 	 height: 50px;
+ 	 border-radius: 10px;
+ 	 margin-bottom: 1%;
+  } 
+</style>
 </head>
+
 <body>
+
 		<!-- 비로그인한 경우 -->
     	<c:if test="${ empty loginMember }">
 	    <div align="right">
-	    	<a style="padding:10px;" class="btn btn-primary btn-block" href="loginPage.do">로그인</a>
-	    	<a style="padding:10px; margin:10px;" class="btn btn-primary btn-block" href="registerPage.do">회원가입</a>
+	    	<a style="padding:10px;" id="menubtn" class="btn btn-outline-secondary" href="loginPage.do">로그인</a>
+	    	<a style="padding:10px;" id="menubtn" class="btn btn-outline-secondary" href="registerPage.do">회원가입</a>
 	    </div>
 	    </c:if>
 	    

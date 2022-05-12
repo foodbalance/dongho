@@ -150,7 +150,28 @@ td{
 	background-color: C3A50E;
 }
 		
-
+		/* 페이지 */
+#ss{
+	width: 70%; 
+	min-width: 100%; 
+	margin-right:auto; 
+	margin-left:auto; 
+	height: 100%;
+}
+/*   겉 테두리  */
+#se{
+	position:relative; 
+	margin: auto;
+	width: 100%;
+	max-width: 1350px;
+	height: 100%;
+ 	background: white;
+ 	border-radius: 30px;
+ 	border: 3px solid black;
+ 	flex-wrap: wrap; 
+ 	transition: all ease-in-out 0.3s;
+ 	
+  }
 
  
 
@@ -161,8 +182,8 @@ td{
 <title></title>
 
 </head>
-<body>
-
+<body id="ss">
+<div id="se"> 
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 	<section class="page-section cta">
 	    <div class="container">
@@ -200,10 +221,13 @@ td{
 						</div>
 					</div>
 				</form>
-			</div>			
+				
+			</div>
+			<c:import url="/WEB-INF/views/common/footer.jsp" />			
 		</div>
 	</section>
 
-<c:import url="/WEB-INF/views/common/footer.jsp" />
+
+</div>
 </body>
 </html>

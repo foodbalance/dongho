@@ -7,7 +7,34 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<style>
+/* 페이지 */
+#ss{
+	width: 70%; 
+	min-width: 100%; 
+	margin-right:auto; 
+	margin-left:auto; 
+	height: 2000px;
+}
+/*   겉 테두리  */
+#se{
+	position:relative; 
+	margin: auto;
+	width: 100%;
+	max-width: 1350px;
+	height: 2110px;
+ 	background: white;
+ 	border-radius: 30px;
+ 	border: 3px solid black;
+ 	flex-wrap: wrap; 
+ 	transition: all ease-in-out 0.3s;
+ 
+ 	
+  }	
+  	
+</style>
+<body id="ss">
+<div id="se"> 
 <c:import url="/WEB-INF/views/common/menubar.jsp" />
 <div class="container">
     <div class="col-xl-9 mx-auto">
@@ -60,7 +87,7 @@
 		  <div class="progress-bar bg-danger" role="progressbar" style="width: ${fat_rate}%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${ fat_rate }%</div>
 		</div><br>
           <div class="upload-box" align="center">
-            <form action="foodaiInsert.do" method="post" enctype="multipart/form-data">
+            <form action="foodai.do" method="post" enctype="multipart/form-data">
             <input class="form-control" id="user_id" type="hidden" placeholder="ID" name="user_id" value="${ sessionScope.loginMember.user_id }"/>
             <input style="margin-bottom: 1%; " class="btn btn-outline-secondary" type="submit" value="다른 음식 측정하기">
             </form>
@@ -72,5 +99,6 @@
 <footer style="">
 				<c:import url="/WEB-INF/views/common/footer.jsp" />
 </footer>
+</div>
 </body>
 </html>
