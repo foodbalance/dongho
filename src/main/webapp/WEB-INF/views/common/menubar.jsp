@@ -17,11 +17,12 @@
 
 <style type="text/css">
   #menubtn{
- 	 background-color: #52575c;
+ 	 background-color: #f4f4fc;
  	 font-size: 25px;
+ 	 font-weight:600;
  	 text-align: center;
  	 height: 50px;
- 	 
+ 	 border-radius: 10px;
   } 
   #menubtn:hover{
    
@@ -32,12 +33,12 @@
 </head>
 
 <br>
-
-<h1 style="float: left; font-size: 40px;"><a style="color:  #52575c; font-size: 45px; text-decoration:none;" href="main.do">FOOD BALANCE</a></h1>
+<div>
+<a style="float: left; margin: -20px 0px -500px 30px;  font-weight:700; color:  #52575c; font-size: 70px; text-decoration:none;" href="main.do">FOOD BALANCE</a><br>
 <c:import url="/WEB-INF/views/common/loginSession.jsp" />
-
+</div>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar" style="background-color: #8195f6; ">
   <div class="container-fluid">
     <a class="navbar-brand" href="#"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">

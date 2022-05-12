@@ -50,7 +50,7 @@
 
 <!-- services 라이브러리 불러오기 -->
 
-<div id="map" style="border: 1px solid black; width: 1295px; margin:0px; left: -2px;  height:540px;border-bottom-left-radius: 20px; border-bottom-right-radius: 20px;"></div>
+<div id="map" style="border: 1px solid black; width: 1293px; margin-top: -5px; left: 0px;  height:500px;"></div>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=48c857465598a8d4ed1ec243d3a699f8&libraries=services,clusterer,drawing"></script>
 	<script>
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
@@ -126,10 +126,10 @@ function displayCenterInfo(result, status) {
 }
 
 </script>
-<div class="map_wrap" style=" top: -520px; height: 500px;">
+<div class="map_wrap" style=" top: -500px; height: 500px;">
 
 
-<div id="menu_wrap" class="bg_white" style="width:350px; background-color: black; color: white;">
+<div id="menu_wrap" class="bg_white" style="width:350px; background-color: white-space; color: black;">
     <div class="option">
 
     </div>
@@ -151,7 +151,7 @@ if (navigator.geolocation) {
         	lon = 126.937541; // 경도
         
         var locPosition = new kakao.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-            message = '<div style="padding:5px;color:black;">현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
+            message = '<div style="padding:5px;color:black; border: dotted; width:150px; ">현재 위치</div>'; // 인포윈도우에 표시될 내용입니다
         
         // 마커와 인포윈도우를 표시합니다
         displayMarker(locPosition, message);

@@ -9,6 +9,7 @@
 <title></title>
 </head>
 <body>
+
 		<!-- 비로그인한 경우 -->
     	<c:if test="${ empty loginMember }">
 	    <div align="right">

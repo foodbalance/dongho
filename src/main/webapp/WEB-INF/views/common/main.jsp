@@ -14,6 +14,9 @@
 
 <style> 
 
+
+
+
 .tb1{ 
 	cellspacing:0; 
 	background-color: #e6e6e6; 
@@ -30,6 +33,7 @@
 	background-color: #e6e6e6; 
 	border: 1px solid #e6e6e6;
 	height: 40px;
+
 	
 }
 #bottomtr{
@@ -41,7 +45,7 @@
 td{
 	font-size: 20px;
 	padding: 5px 5px 0px 5px;
-	height: 30px;
+	height: 10px;
 	margin-bottom: 0px; 
 	
 }
@@ -52,49 +56,52 @@ td{
 	position:static; 
 }
 #box1{
-	margin:auto; width: 90px; height: 40px; font-size: 15px; background-color: gray; border-radius: 5px; padding-top: 8px;
+	margin:auto; width: 90px; height: 40px; font-size: 15px; background-color: #f4f4fc;  border-radius: 5px; padding-top: 8px;
 }
 
 
 #inputID{  /*로그인 창 인풋*/
 
-	margin: 5px;
+	margin: 5px 10px 0 0;
 	width: 150px;
 
 }
 #inputPassword{  /*로그인 창 인풋*/
 
-	margin: 5px;
+		margin: 5px 10px 0 0;
 	width: 150px;
 
 }
 
 /*   로그인창 버튼  */
 #btn{  /* 아이디 찾기 버튼*/
-	margin: 0;
+	margin: 10px 0 0 -10px;
 	padding: 0;
 	border-radius: 9px;
 	font-size: 13px;
 	width: 100px;
 	height: 30px;
+	background-color: #e1e9f8;
 }
 #btn1{  /* 비밀번호 찾기 버튼*/
 	
 	float: left;
-	margin: 0;
+	margin: 10px 0 0 -30px;
 	padding: 0;
 	border-radius: 9px;
 	font-size: 13px;
 	width: 100px;
 	height: 30px;
+	background-color: #e1e9f8;
 }
 #btn2{  /* 회원가입 버튼*/
-	margin: 0 0 0 -20px;
+	margin: 10px 0 0 20px;
 	padding 0;
 	border-radius: 9px;
 	font-size: 13px;
 	width: 100px;
 	height: 30px;
+	background-color: #e1e9f8;
 }
 
 /*   로그인창 버튼  end */
@@ -109,14 +116,14 @@ grid-column-gap: 0px;
 grid-row-gap: 0px;
 }
 
-.div1 { grid-area: 1 / 1 / 2 / 2; }
-.div2 { grid-area: 2 / 1 / 3 / 2; }
-.div3 { grid-area: 1 / 2 / 2 / 3; }
-.div4 { grid-area: 2 / 2 / 3 / 3; }
-.div5 { grid-area: 1 / 3 / 3 / 4; }
-.div6 { grid-area: 3 / 1 / 4 / 2; }
-.div7 { grid-area: 3 / 2 / 4 / 3; }
-.div8 { grid-area: 3 / 3 / 4 / 4; }
+.div1 { grid-area: 1 / 1 / 2 / 2; margin-left: -50px;}
+.div2 { grid-area: 2 / 1 / 3 / 2; margin-left: -50px;}
+.div3 { grid-area: 1 / 2 / 2 / 3; margin-left: -20px;}
+.div4 { grid-area: 2 / 2 / 3 / 3; margin-left: -20px;}
+.div5 { grid-area: 1 / 3 / 3 / 4; margin-left: 10px;}
+.div6 { grid-area: 3 / 1 / 4 / 2; margin-left: -40px;}
+.div7 { grid-area: 3 / 2 / 4 / 3; margin-left: 10px; }
+.div8 { grid-area: 3 / 3 / 4 / 4; margin-left: 20px;}
 
 
 /* 메인 그리드 */
@@ -128,7 +135,7 @@ grid-column-gap: 0px;
 grid-row-gap: 0px;
 }
 .main1 { grid-area: 3 / 1 / 2 / 4; height: 500px;} /* 지도  */
-.main2 { grid-area: 1 / 1 / 3 / 3; height: 500px;} /* 운동법  */
+.main2 { grid-area: 1 / 1 / 3 / 3; height: 300px;} /* 운동법  */
 
 .main4 { grid-area: 1 / 3 / 3 / 3; height: 500px;} /* 로그인  */
 .main5 { grid-area: 2 / 1 / 4 / 2; height: 500px; padding-bottom: 50px; height: 300px;} /* 공지 */
@@ -145,6 +152,14 @@ grid-row-gap: 0px;
   border-radius: 30px;
 }
 
+/* 페이지 */
+#ss{
+	width: 70%; 
+	min-width: 100%; 
+	margin-right:auto; 
+	margin-left:auto; 
+	height: 2000px;
+}
 
 /*   겉 테두리  */
 #se{
@@ -158,6 +173,7 @@ grid-row-gap: 0px;
  	border: 3px solid black;
  	flex-wrap: wrap; 
  	transition: all ease-in-out 0.3s;
+ 
  	
   }	
   	
@@ -170,10 +186,13 @@ grid-row-gap: 0px;
 	margin: 30px 30px 0px 25px; 
 	text-align: center; 
 	width: 860px; 
-	height: 550px; 
-	background-color: black; 
-	color: white;
+	height: 440px; 
+	background-color: #f4f4fc; 
+	color: #52575c;
 	position:relative;
+		font-weight: 600;
+		font: 30px;		
+
 }
 
 
@@ -181,14 +200,17 @@ grid-row-gap: 0px;
 	border: 2px solid black;
 	border-radius: 20px; 
 	padding: 0px;
-	margin:330px 30px 0px 25px; 
+	margin: 250px 30px 0px 25px; 
 	text-align: center; 
 	width: 620px; 
 	height: 330px; 
-	background-color: black; 
-	color: white;
+	background-color: #f4f4fc; 
+	color: #52575c;
 	top : -200px;
 	position:relative;
+		font-weight: 600;
+		font: 30px;
+	
 	
 }
 
@@ -199,25 +221,34 @@ grid-row-gap: 0px;
 	margin: 30px 30px 0px -420px; 
 	text-align: center; 
 	width: 390px; 
-	height: 200px; 
-	background-color: black; 
-	color: white;
+	height: 250px; 
+	background-color: #f4f4fc; 
+	color: #52575c;
 	position:relative;
+		font-weight: 500;
 }
 #spotdiv{  /* 스팟( 지도) */
 	border: 2px solid black;
 	border-radius: 20px; 
 	padding: 0px; 
-	margin: 510px 30px 30px 25px;   /* 상 우 하 좌 */
+	margin: 450px 30px 30px 25px;   /* 상 우 하 좌 */
 	text-align: center; 
 	width: 1295px; 
-	height: 650px; 
-	background-color: black; 
-	color: white; 
+	height: 670px; 
+	background-color: #f4f4fc; 
+	color: #52575c; 
+		font-weight: 500;
 	 
-
-
 }
+#h4{
+	
+	font-weight: 700;
+	font-size: 40px;
+	height: 60px;
+	margin-top: -30px;
+	margin-bottom: 20px;
+}
+
 </style>
 
 <script type="text/javascript" 
@@ -323,9 +354,9 @@ $(function(){
 			var values = "";
 			for(var i in json.list){  //i(인덱스) 변수가 자동으로 1씩 증가 처리됨
 				values += "<tr id='bottomtr'><td>" + json.list[i].train_no 
-						+ "</td><td><a   href='tdetail.do?train_no=" + json.list[i].train_no + "'>"
-						+ "<img style='margin-bottom: 3px; '  src='" + json.list[i].train_url_img + "'></a>"
-						+ "</td><td><a href='tdetail.do?train_no=" + json.list[i].train_no + "'>"
+						+ "</td><td><a    href='tdetail.do?train_no=" + json.list[i].train_no + "'>"
+						+ "<img style='margin-bottom: 3px;'  src='" + json.list[i].train_url_img + "'></a>"
+						+ "</td><td><a style='text-decoration:none; color: black;' href='tdetail.do?train_no=" + json.list[i].train_no + "'>"
 						+ decodeURIComponent(json.list[i].train_title).replace(/\+/gi, " ") 
 						+ "</a></td>"
 			}  //for in
@@ -340,9 +371,12 @@ $(function(){
 </script>
 </head>
 <body>
+<div>
 
-<div style="width: 70%; min-width: 100%; margin-right:auto; margin-left:auto; height: 2000px;  ">
+<div id="ss">
+
  <div  id="se">
+
 <nav>
 	<c:import url="/WEB-INF/views/common/menubar.jsp" />
 </nav>
@@ -352,11 +386,11 @@ $(function(){
 <div class="mainA">
 <div class="main1"> 
 <div id="spotdiv">
-			<h4><br>다이어트 스팟</h4>   <div>
+			<h4 id="h4"><br>다이어트 스팟</h4>   <div>
            <span id="info.location.approxAddr" class="approxAddr">&nbsp;</span>
-             	<button onclick="searchPlaces1();" id="keyword1" value="서강대 헬스" style="border-radius: 10px; background-color: silver; height: 40px; width: 100px; font-size: 15px bold;" >헬스장</button>  
-                <button onclick="searchPlaces2();" id="keyword2" value="서강대 샐러드" style="border-radius: 10px; background-color: silver; height: 40px; width: 100px; font-size: 15px bold;" >샐러드</button> 
-                <button onclick="searchPlaces3();" id="keyword3" value="서강대 공원"  style="border-radius: 10px; background-color: silver; height: 40px; width: 100px; font-size: 15px bold;">공원</button>  
+             	<button onclick="searchPlaces1();" id="keyword1" value="서강대 헬스" style="border-radius: 10px; background-color: white-space; height: 40px; width: 100px; font-size: 20px; font-weight:600;   margin: 30px 10px 0 0;" >헬스장</button>  
+                <button onclick="searchPlaces2();" id="keyword2" value="서강대 샐러드" style="border-radius: 10px; background-color: white-space; height: 40px; width: 100px; font-size: 20px;font-weight:600; margin: 30px 10px 0 0;" >샐러드</button> 
+                <button onclick="searchPlaces3();" id="keyword3" value="서강대 공원"  style="border-radius: 10px; background-color: white-space; height: 40px; width: 100px; font-size: 20px;font-weight:550; margin: 30px 10px 0 0;">공원</button>  
         </div>
 	 <br>
 			<c:import url="/WEB-INF/views/common/kakaomap.jsp" />
@@ -365,11 +399,11 @@ $(function(){
 </div>
 <div class="main2"> 
 <div id="mdv2" >
-		<h4><br>운동법</h4><br>
+		<h4 id="h4"><br>운동법</h4><br>
 		<table id="ttoplist"  class="tb1" >
 			<tr id="toptr">
 					<th style="width: 20px;">No.</th>
-				<th style="width: 30px;">영상</th>
+				<th style="width: 30px;"></th>
 				<th style="width: 380px;">제목</th>
 			</tr>
 		</table>
@@ -393,18 +427,32 @@ $(function(){
 		 			</div>
 				</div>
 			<div class="div3"><input id="inputID" type="text" placeholder="ID" name="inputID" value="${ reid }" required/></div>
-			<div class="div5" ><button onclick="movePage()" class="btn btn-outline-secondary"  type="submit"  style="float:left; height: 100px; border-radius: 8px;">로그인</button></div>
+			<div class="div5" ><button onclick="movePage()" class="btn btn-outline-secondary"  type="submit"  style="float:left; width:80px; height: 80px; border-radius: 8px;">로그인</button></div>
 			<div class="div2">
 					<div id="box1" for="inputPassword">
 						비밀번호 
 					</div>
 					</div>
 			<div class="div4"><input id="inputPassword" type="password" placeholder="Password" name="inputPassword" value="${ repwd }" required/></div>
-			<div class="div6"><button type="button" id="btn" onclick="javascript:location.href='findIdPage.do';">아이디 찾기</button></div>
-			<div class="div7"><button onclick="javascript:location.href='findPwdPage.do';" type="button" id="btn1">비밀번호 찾기</button></div>
-			<div class="div8"><button onclick="javascript:location.href='registerPage.do';" type="button" id="btn2">회원가입</button></div>
+			<div class="div6"><button onclick="javascript:location.href='registerPage.do';" type="button" id="btn2">회원가입</button></div>
+			<div class="div7"><button type="button" id="btn" onclick="javascript:location.href='findIdPage.do';">아이디 찾기</button></div>
+			<div class="div8"><button onclick="javascript:location.href='findPwdPage.do';" type="button" id="btn1">비밀번호 찾기</button></div>
 		</div>
-		</form>	
+		</form>
+		<form action="mainkakao.do" method="post" style="margin-top: 20px;">			 
+			<a class="p-2" href="https://kauth.kakao.com/oauth/authorize?
+				client_id=0379944c5ce4811c750a64c9fa5e08a7
+				&redirect_uri=https://127.0.0.1:8443/food/kakaologin.do
+				&response_type=code"><img
+			    src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+			    width="300"
+			    height="50"
+			    alt="카카오 로그인 버튼" />
+			</a>
+	<!-- REST_API키 및 REDIRECT_URi는 본인걸로 수정하세요 -->
+	<!-- 저는 redirect_uri을 http://localhost:8080/member/kakaoLogin로 했습니다. -->
+	<!-- 본인걸로 수정 시 띄어쓰기 절대 하지 마세요. 오류납니다. -->
+		</form>
 		</div> 
 	    </c:if>
 
@@ -413,13 +461,13 @@ $(function(){
 		 <div id="logindiv"> 
 			<div >
 			
-				<div align="right" style="text-align:center; font: 23px bold; margin-top: 10px; color:white;">${ sessionScope.loginMember.user_name } 님 환영합니다.</div>
+				<div align="right" style="text-align:center; font: 23px bold; margin-top: 20px; color: #52575c; font-weight: 600;">${ sessionScope.loginMember.user_name } 님 환영합니다.</div>
 				<c:url var="callMyInfo" value="myinfo.do">
 					<c:param name="user_id" value="${ loginMember.user_id }" />
 				</c:url>
-				<button style="font:20px bold; border-radius: 4px; width: 230px; height: 50px; left: 60px;  margin: 10px;" onclick="javascript:location.href='logout.do';">로그아웃</button><br>
-				<button style="border-radius: 4px; width: 120px; height: 40px; left: 60px;  margin: 10px;" onclick="javascript:location.href='#';">마이페이지</button>
-				
+				<br><br>
+				<button style="border-radius: 4px; font:20px x-large;  width: 130px; height: 40px; left: 60px;  margin: 0px; background-color: #e1e9f8;" onclick="javascript:location.href='myinfo.do';">마이페이지</button>
+				<button style="font:20px x-large; border-radius: 4px; width: 130px; height: 40px; left: 60px;  margin: 10px; background-color: #e1e9f8;" onclick="javascript:location.href='logout.do';">로그아웃</button><br>
 			</div>
 			</div>
 		</c:if>
@@ -428,12 +476,13 @@ $(function(){
 			<div id="logindiv">
 			<div >
 			
-				<div align="right" style="text-align:center; font: 23px bold; margin-top: 10px; color:white;">${ sessionScope.loginMember.user_name } 님 환영합니다.</div>
+				<div align="right" style="text-align:center; font: 25px bold; margin-top: 50px; color: #52575c; font-weight: 600;">${ sessionScope.loginMember.user_name } 님 환영합니다.</div>
 				<c:url var="callMyInfo" value="myinfo.do">
 					<c:param name="user_id" value="${ loginMember.user_id }" />
 				</c:url>
-				<button style="font:20px bold; border-radius: 4px; width: 230px; height: 50px; left: 60px;  margin: 10px;" onclick="javascript:location.href='logout.do';">로그아웃</button><br>
-				<button style="border-radius: 4px; width: 120px; height: 40px; left: 60px;  margin: 10px;" onclick="javascript:location.href='#';">회원관리</button>
+				<br><br>
+				<button style="border-radius: 4px; font:20px x-large;  width: 130px; height: 40px; left: 60px;  margin: 0px; background-color: #e1e9f8;" onclick="javascript:location.href='userList.do';">회원관리</button>
+				<button style="font:20px x-large; border-radius: 4px; width: 130px; height: 40px; left: 60px;  margin: 10px; background-color: #e1e9f8;" onclick="javascript:location.href='logout.do';">로그아웃</button><br>
 				
 			</div>
 			
@@ -443,12 +492,12 @@ $(function(){
 </div>
 <div class="main5">
 <div id="mdv" >
-		<h4><br>공지사항</h4><br>
+		<h4 id="h4"><br>공지사항</h4><br>
 		<table class="tb1" id="newnotice">
 			<tr id="toptr">
-				<th style="width: 80px">No.</th>
-				<th style="width: 300px">Name</th>
-				<th style="width: 90px">Value</th>
+				<th style="width: 80px">번호</th>
+				<th style="width: 300px">제목</th>
+				<th style="width: 90px">조회수</th>
 			</tr>
 		</table>
 	</div>
@@ -456,12 +505,12 @@ $(function(){
 
 <div class="main6">
 <div id="mdv" >
-		<h4><br>게시판</h4><br>
+		<h4 id="h4"><br>게시판</h4><br>
 		<table id="toplist" class="tb1"  >
 			<tr id="toptr">
-				<th style="width: 80px">No.</th>
-				<th style="width: 400px">Name</th>
-				<th style="width: 80px">Value</th>
+				<th style="width: 80px">번호</th>
+				<th style="width: 400px">제목</th>
+				<th style="width: 80px">조회수</th>
 			</tr>
 		</table>
 	</div>
@@ -477,6 +526,6 @@ $(function(){
 </div>   
   </div>
 
-
+</div>
 </body>
 </html>
