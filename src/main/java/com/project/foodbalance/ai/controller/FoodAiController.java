@@ -109,7 +109,19 @@ public class FoodAiController {
 				System.out.println("food id : " + food_id);
 				FoodAi food_info = foodaiService.selectFoodAi(food_id);
 				System.out.println(food_info.getFood_name());
+				double kcal_rate =  food_info.getKcal() * 100 / 2400;
+				double carbo_rate = food_info.getCarbo() * 100 / 500;
+				double protein_rate = food_info.getProtein() * 100 / 70;
+				double fat_rate = food_info.getFat() * 100/40;
+				System.out.println("칼로리 : " +kcal_rate);
+				System.out.println("탄수화물 : " +carbo_rate);
+				System.out.println("단백질 : " +protein_rate);
+				System.out.println("지방 : " +fat_rate);
 				
+				model.addAttribute("kcal_rate", kcal_rate);
+				model.addAttribute("carbo_rate", carbo_rate);
+				model.addAttribute("protein_rate", protein_rate);
+				model.addAttribute("fat_rate", fat_rate);
 				model.addAttribute("food_img", resultFoodAi.getFood_rename_img());
 				model.addAttribute("food_name", food_info.getFood_name());
 				model.addAttribute("weight", food_info.getWeight());

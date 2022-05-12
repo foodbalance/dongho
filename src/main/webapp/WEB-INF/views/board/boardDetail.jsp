@@ -236,7 +236,27 @@ td{
 					</div>
 					<br>
 					<div style="padding: 5px; margin: 5px; margin-bottom: 5%" align="center" >
-						<button class="btn btn-outline-secondary" onclick="javascript:history.go(-1);">목록</button>
+						<c:if test="${ !empty search }">
+							<c:url var="btlist" value="bsearchTitle.do">
+								<c:param name="keyword" value="${ search }" />
+							</c:url>
+						<a type="button" class="btn btn-outline-secondary" href="${ btlist }">목록</a>
+						</c:if>
+						<c:if test="${ !empty search_writer }">
+							<c:url var="bwlist" value="bsearchWriter.do">
+								<c:param name="keyword" value="${ search_writer }" />
+							</c:url>
+						<a type="button" class="btn btn-outline-secondary" href="${ bwlist }">목록</a>
+						</c:if>
+						
+						<!-- 검색조건 없을시 목록 넘어가기 -->
+						<c:if test="${ empty search && search_writer && search_date }">
+							<c:url var="blist" value="blist.do">
+							</c:url>
+						<a type="button" class="btn btn-outline-secondary" 
+						href="${ blist }">목록
+						</a>
+						</c:if>
 						
 						
 				      	

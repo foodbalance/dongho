@@ -226,10 +226,27 @@ td{
 					</div>
 					<div style="padding: 5px; margin: 5px; margin-bottom: 5%" align="center">
 						<br>
-
+						<c:if test="${ !empty search }">
+							<c:url var="ntlist" value="nsearchTitle.do">
+								<c:param name="keyword" value="${ search }" />
+							</c:url>
+						<a type="button" class="btn btn-outline-secondary" href="${ ntlist }">목록</a>
+						</c:if>
+						<c:if test="${ !empty search_writer }">
+							<c:url var="nwlist" value="nsearchWriter.do">
+								<c:param name="keyword" value="${ search_writer }" />
+							</c:url>
+						<a type="button" class="btn btn-outline-secondary" href="${ nwlist }">목록</a>
+						</c:if>
+						
+						<!-- 검색조건 없을시 목록 넘어가기 -->
+						<c:if test="${ empty search && search_writer && search_date }">
+							<c:url var="nlist" value="nlist.do">
+							</c:url>
 						<a type="button" class="btn btn-outline-secondary" 
-						onclick="location.href=document.referrer;">목록
+						href="${ nlist }">목록
 						</a>
+						</c:if>
 
 						<!-- 수정페이지로 이동 -->
 						<c:url var="nup" value="/upmove.do">

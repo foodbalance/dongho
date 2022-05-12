@@ -85,9 +85,8 @@
 					  <li class="nav-item">
 					    <a style="color: #52575c;" class="nav-link" data-bs-toggle="tab" href="#writerDiv">작성자 검색</a>
 					  </li>
-					  <li class="nav-item">
-					    <a style="color: #52575c;" class="nav-link" data-bs-toggle="tab" href="#dateDiv">날짜 검색</a>
-					  </li>
+					 <button type="button" class="btn btn-outline-secondary" style="margin-left: 53%;"
+                         onclick="javascript:location.href='blist.do';">처음으로</button>
 					  
 					</ul>
 					<div id="myTabContent" class="tab-content">
@@ -123,6 +122,8 @@
 								      <c:url var="bdt" value="bdetail.do">
 								         <c:param name="board_no" value="${ b.board_no }"/>
 								         <c:param name="page" value="${ currentPage }"/>
+								         <c:param name="search" value="${ search }" />
+										 <c:param name="search_writer" value="${ search_writer }" />
 								      </c:url>
 								      <a style="color: #52575c; text-decoration: none;" href="${ bdt }">${ b.board_title }</a>
 							      </td>

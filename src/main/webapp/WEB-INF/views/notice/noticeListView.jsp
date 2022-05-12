@@ -86,15 +86,15 @@
 						<li class="nav-item"><a style="color: #52575c;"
 							class="nav-link" data-bs-toggle="tab" href="#writerDiv">작성자
 								검색</a></li>
-						<li class="nav-item"><a style="color: #52575c;"
-							class="nav-link" data-bs-toggle="tab" href="#dateDiv">날짜 검색</a></li>
+						<button type="button" class="btn btn-outline-secondary" style="margin-left: 53%;"
+                         onclick="javascript:location.href='nlist.do';">처음으로</button>
+						
 					</ul>
 					<div id="myTabContent" class="tab-content">
 						<div class="tab-pane fade" id="titleDiv">
 							<form action="nsearchTitle.do" method="post">
-								<label>검색할 제목을 입력하세요 : <input type="search"
-									name="keyword"></label> <input style="margin-bottom: 0.7%;"
-									class="btn btn-outline-secondary" type="submit" value="검색">
+								<label>검색할 제목을 입력하세요 : <input type="search" name="keyword"></label> 
+								<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색">
 								<!-- <input style="margin-bottom: 0.7%;"
 									class="btn btn-outline-secondary" type="reset" value="취소"> -->
 								<a type="button" class="btn btn-outline-secondary"
@@ -104,8 +104,7 @@
 						</div>
 						<div class="tab-pane fade" id="writerDiv">
 							<form action="nsearchWriter.do" method="post">
-								<label>검색할 작성자를 입력하세요 : <input type="search"
-									name="keyword"></label> <input style="margin-bottom: 0.7%;"
+								<label>검색할 작성자를 입력하세요 : <input type="search" name="keyword"></label> <input style="margin-bottom: 0.7%;"
 									class="btn btn-outline-secondary" type="submit" value="검색">
 								<a type="button" class="btn btn-outline-secondary"
 									style="margin-bottom: 0.7%;"
@@ -115,10 +114,9 @@
 						<div class="tab-pane fade" id="dateDiv">
 							<form action="nsearchDate.do" method="post">
 								<label>검색할 날짜를 입력하세요 : <input type="date" name="begin">
-									~ <input type="date" name="end"></label> <input
-									style="margin-bottom: 0.7%;" class="btn btn-outline-secondary"
-									type="submit" value="검색"> <input type="button"
-									class="btn btn-outline-secondary" style="margin-bottom: 0.7%;"
+									~ <input type="date" name="end"></label> 
+									<input style="margin-bottom: 0.7%;" class="btn btn-outline-secondary" type="submit" value="검색"> 
+									<input type="button" class="btn btn-outline-secondary" style="margin-bottom: 0.7%;"
 									onclick="javascript:history.go(0);return false;" value="취소">
 							</form>
 						</div>
@@ -130,6 +128,7 @@
 							int num = 1;
 						%>
 						<table style="width: 98%;">
+						<input type="hidden" value="keyword">
 							<tr>
 								<th class="th">번호</th>
 								<th class="th">제목</th>
@@ -143,6 +142,8 @@
 									<td class="td"><c:url var="ndt" value="ndetail.do">
 											<c:param name="notice_no" value="${ n.notice_no }" />
 											<c:param name="page" value="${ currentPage }" />
+											<c:param name="search" value="${ search }" />
+											<c:param name="search_writer" value="${ search_writer }" />
 										</c:url> <a style="color: #52575c; text-decoration: none;"
 										href="${ ndt }">${ n.notice_title }</a></td>
 									<td class="td">${ n.user_id }</td>

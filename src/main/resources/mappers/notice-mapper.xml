@@ -16,7 +16,7 @@
 	<resultMap id="noticeTop3Result" type="Notice">
 		<id property="notice_no" column="notice_no" />
 		<result property="notice_title" column="notice_title" />
-		<result property="notice_date" column="notice_date" />
+		<result property="notice_count" column="notice_count" />
 	</resultMap>
 
 	<!-- 비교연산자를 쿼리문에 그냥 사용하면 태그 앨리먼트 꺽쇠괄호 등(<, >, &)과 혼동하는 문제가 발생할 수 있음. 이 문제를 
@@ -167,7 +167,7 @@
 	<select id="selectTop3" resultMap="noticeTop3Result">
 		<![CDATA[
 		SELECT *
-		FROM (SELECT ROWNUM RNUM, notice_no, notice_title, notice_date
+		FROM (SELECT ROWNUM RNUM, notice_no, notice_title, notice_count
 		          FROM (SELECT * FROM NOTICE
 		                     ORDER BY notice_date desc, notice_no DESC))
 		WHERE RNUM >= 1 AND RNUM <= 5

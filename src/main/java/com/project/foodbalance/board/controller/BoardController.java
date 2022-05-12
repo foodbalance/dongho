@@ -170,7 +170,10 @@ public class BoardController {
 		
 	//게시글 상세보기
 	@RequestMapping("bdetail.do")
-	public String boardDetailMethod(@RequestParam("board_no") int board_no, Model model, HttpSession session){
+	public String boardDetailMethod(@RequestParam("board_no") int board_no
+			, @RequestParam(name="search", required=false) String search
+			, @RequestParam(name="search_writer", required=false) String search_writer
+			, Model model, HttpSession session){
 		Board board = boardService.selectBoard(board_no);
 		String result = null;
 			//조회수 1증가 처리
@@ -178,7 +181,8 @@ public class BoardController {
 		try {
 			if(board != null) {
 				model.addAttribute("board", board);
-			
+				model.addAttribute("search", search);
+				model.addAttribute("search_writer", search_writer);
 				Member loginMember = (Member)session.getAttribute("loginMember");
 				result = "board/boardDetail";
 				
@@ -392,6 +396,7 @@ public class BoardController {
 		System.out.println("검색" + listCount +",  키워드 : " + searchkeyword);
 		
 		if(list != null && list.size() > 0) {
+			mv.addObject("search", keyword);
 			mv.addObject("list", list);
 			mv.addObject("listCount", listCount);
 			mv.addObject("maxPage", maxPage);
@@ -465,6 +470,7 @@ public class BoardController {
 		System.out.println("검색" + listCount +",  키워드 : " + searchkeyword);
 		System.out.println(list);
 		if(list != null && list.size() > 0) {
+			mv.addObject("search_writer", keyword);
 			mv.addObject("list", list);
 			mv.addObject("listCount", listCount);
 			mv.addObject("maxPage", maxPage);

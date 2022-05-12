@@ -28,34 +28,13 @@
               </div>
             </div>
           </div>
-          <div class="upload-box">
+          <div class="upload-box" align="center">
             <form action="foodImgfileUpload.do" method="post" enctype="multipart/form-data">
             <input class="form-control" id="user_id" type="hidden" placeholder="ID" name="user_id" value="${ sessionScope.loginMember.user_id }"/>
-            <input class="form-control" type="file" name="fupfile" value="음식이미지">
+            <input class="form-control" type="file" name="fupfile" value="음식이미지"><br>
             <input style="margin-bottom: 1%; " class="btn btn-outline-secondary" type="submit" value="사진등록하기">
             </form>
           </div>
-          <fieldset class="form-group">
-            <legend class="mt-4">아침, 점심, 저녁 중 한가지를 선택해주세요.</legend>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optionsRadios" id="breakfast" value="option1" checked="">
-                아침
-              </label>
-            </div>
-            <div class="form-check">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optionsRadios" id="lunch" value="option2">
-                점심
-              </label>
-            </div>
-            <div class="form-check disabled">
-              <label class="form-check-label">
-                <input type="radio" class="form-check-input" name="optionsRadios" id="dinner" value="option3">
-                저녁
-              </label>
-            </div>
-          </fieldset>
         </fieldset>
      </div>
    </div>

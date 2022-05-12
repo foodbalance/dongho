@@ -122,15 +122,21 @@ public class NoticeController {
 
 	// 공지글 상세보기 요청 처리용
 	@RequestMapping("ndetail.do")
-	public String noticeDatailMethod(@RequestParam("notice_no") int notice_no, Model model, HttpSession session) {
+	public String noticeDatailMethod(@RequestParam("notice_no") int notice_no, @RequestParam(name="search", required=false) String search
+			,@RequestParam(name="search_writer", required=false) String search_writer
+			, Model model, HttpSession session) {
 		Notice notice = noticeService.selectNotice(notice_no);
+		System.out.println("전달된 키값 : " + search);
 		
 		//조회수 1증가 처리
 		noticeService.updateAddReadcount(notice_no);
-
+		
 		if (notice != null) {
 			model.addAttribute("notice", notice);
-
+			model.addAttribute("search", search);
+			model.addAttribute("search_writer", search_writer);
+			
+			
 			Member loginMember = (Member) session.getAttribute("loginMember");
 
 			if (loginMember != null && loginMember.getAdmin_ok().equals("Y")) {
@@ -191,7 +197,7 @@ public class NoticeController {
 
 	// 제목 검색 및 페이징
 	@RequestMapping("nsearchTitle.do")
-	public ModelAndView searchTitleMethod(@RequestParam(name="page", required=false) String page, 
+	public ModelAndView searchTitleMethod(@RequestParam(name="page", required=false) String page,  
 			@RequestParam("keyword") String keyword, ModelAndView mv,
 			@RequestParam(name = "next", required = false) boolean next) {
 		int currentPage = 1;
@@ -242,6 +248,7 @@ public class NoticeController {
 		System.out.println("검색" + listCount +",  키워드 : " + searchkeyword);
 		
 		if(list != null && list.size() > 0) {
+			mv.addObject("search", keyword);
 			mv.addObject("list", list);
 			mv.addObject("listCount", listCount);
 			mv.addObject("maxPage", maxPage);
@@ -332,6 +339,7 @@ public class NoticeController {
 		System.out.println("검색" + listCount +",  키워드 : " + searchkeyword);
 		System.out.println(list);
 		if(list != null && list.size() > 0) {
+			mv.addObject("search_writer", keyword);
 			mv.addObject("list", list);
 			mv.addObject("listCount", listCount);
 			mv.addObject("maxPage", maxPage);
@@ -445,7 +453,7 @@ public class NoticeController {
 			job.put("notice_no", notice.getNotice_no());
 			job.put("notice_title", URLEncoder.encode(notice.getNotice_title(), "utf-8"));
 			// 한글 데이터는 반드시 인코딩해서 json에 담아야 한글이 깨지지 않음
-			job.put("notice_date", notice.getNotice_date().toString());
+			job.put("notice_count", notice.getNotice_count());
 			// 날짜는 반드시 toString() 으로 문자열로 바꿔서 json 에 담아야 함
 
 			jarr.add(job); // job를 jarr에 저장
