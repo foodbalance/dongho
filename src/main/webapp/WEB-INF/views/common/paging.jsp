@@ -213,7 +213,8 @@
 
 						<!-- 검색 없을 때 -->
 						<c:if test="${ empty action }">
-							<li class="page-item"><a class="page-link">&raquo;</a></li>
+							<li class="page-item"><a class="page-link" href="${ blf3 }">&raquo;</a>
+							</li>
 						</c:if>
 
 					</c:if>
@@ -448,15 +449,15 @@
 						</c:url>
 
 						<c:if test="${ action eq 'nsearchTitle' }">
-							<li class="page-item"><a class="page-link" href="${ nlf3 }">&raquo;</a>
+							<li class="page-item"><a class="page-link" href="${ ntitle }">&raquo;</a>
 							</li>
 						</c:if>
 						<c:if test="${ action eq 'nsearchWriter' }">
-							<li class="page-item"><a class="page-link" href="${ nlf3 }">&raquo;</a>
+							<li class="page-item"><a class="page-link" href="${ nwrite }">&raquo;</a>
 							</li>
 						</c:if>
 						<c:if test="${ action eq 'nsearchDate' }">
-							<li class="page-item"><a class="page-link" href="${ nlf3 }">&raquo;</a>
+							<li class="page-item"><a class="page-link" href="${ ndate }">&raquo;</a>
 							</li>
 						</c:if>
 

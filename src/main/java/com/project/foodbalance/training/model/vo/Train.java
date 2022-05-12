@@ -13,6 +13,7 @@ public class Train implements Serializable {
 	private String train_content;	//운동법 설명
 	private String train_url;	//운동법 영상 url
 	private String train_url_img;	//운동법 썸네일
+	private String train_url_video; // 운동법 영상재생
 	private Date train_date;	//게시날짜
 	private int train_count;	//조회수
 	
@@ -21,7 +22,7 @@ public class Train implements Serializable {
 	}
 
 	public Train(int train_no, String user_id, String train_title, String train_content, String train_url,
-			String train_url_img, Date train_date, int train_count) {
+			String train_url_img, String train_url_video, Date train_date, int train_count) {
 		super();
 		this.train_no = train_no;
 		this.user_id = user_id;
@@ -29,6 +30,7 @@ public class Train implements Serializable {
 		this.train_content = train_content;
 		this.train_url = train_url;
 		this.train_url_img = train_url_img;
+		this.train_url_video = train_url_video;
 		this.train_date = train_date;
 		this.train_count = train_count;
 	}
@@ -79,6 +81,14 @@ public class Train implements Serializable {
 
 	public void setTrain_url_img(String train_url_img) {
 		this.train_url_img = train_url_img;
+	}
+
+	public String getTrain_url_video() {
+		return train_url_video;
+	}
+
+	public void setTrain_url_video(String train_url_video) {
+		this.train_url_video = train_url_video;
 	}
 
 	public Date getTrain_date() {

@@ -64,7 +64,7 @@
 							<tr>
 								<th class="th">영 상</th>
 								<td class="td" colspan="5">
-									<iframe width="560" height="315" src="${ train.train_url }" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+									<iframe width="560" height="315" src="${ train.train_url_video }" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 								</td>
 							</tr>
 							<tr><th class="th">내     용</th><td class="td" style="margin-left: 10%;" colspan="5"><textarea class="form-control" name="board_content" rows="5" cols="50" readonly>${train.train_content }</textarea></td></tr>

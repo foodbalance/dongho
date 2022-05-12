@@ -27,22 +27,22 @@
           <legend align="center">이미지 분석 페이지</legend>
           <div class="row">
             <div class="col">
-              <br><br><br><br><br><br><br><br><br><br>
               <div id="wait">
-              	<c:set var="foodimg" value="${ imgfile }"/>
-              	<c:if test="${ !empty foodimg }">
-              		<img style="diplay:inline; top:200px; left:8%;" width=350px; height=350px;" src="${ pageContext.servletContext.contextPath }/resources/ai_food_img/${ imgfile }" >
-              	</c:if>
-              	<c:if test="${ empty foodimg }">
-              	<img style="display:inline; position:absolute; top:155px; left:15px;" width=400px; height=400px; src="${ pageContext.servletContext.contextPath }/resources/static/img/ai.png">
-              	</c:if>
+              	<center>
+	              	<c:set var="foodimg" value="${ imgfile }"/>
+	              	<c:if test="${ !empty foodimg }">
+	              		<img style="diplay:inline; top:200px; left:8%;" src="${ pageContext.servletContext.contextPath }/resources/ai_food_img/${ imgfile }" >
+	              	</c:if>
+	              	<c:if test="${ empty foodimg }">
+	              	<img style="display:inline; position:absolute; top:155px; left:15px;" width=400px; height=400px; src="${ pageContext.servletContext.contextPath }/resources/static/img/ai.png">
+	              	</c:if>
+              	</center>
               </div>
             </div>
           </div>
           <div class="upload-box">
             <form action="foodaiInsert.do" method="post" enctype="multipart/form-data">
             <input class="form-control" id="user_id" type="hidden" placeholder="ID" name="user_id" value="${ sessionScope.loginMember.user_id }"/>
-            <input class="form-control" type="file" name="fupfile" value="음식이미지">
             <input style="margin-bottom: 1%; " class="btn btn-outline-secondary" type="submit" value="측정하기">
             </form>
           </div>

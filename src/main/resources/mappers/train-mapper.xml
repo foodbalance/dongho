@@ -14,6 +14,7 @@
 		<result column="train_date" property="train_date" />
 		<result column="train_count" property="train_count" />
 		<result column="train_url_img" property="train_url_img" />
+		<result column="train_url_video" property="train_url_video" />
 	</resultMap>
 
 	<resultMap type="Train" id="resultTop3">
@@ -50,25 +51,25 @@
 			SELECT *  
 			FROM (SELECT ROWNUM RNUM, train_no, train_title, user_id,   
 			               train_content, train_url, train_url_img, 
-			               train_date,train_count  
+			               train_date,train_count ,train_url_video
 			       FROM (SELECT * FROM train order by train_no desc))
 			where rnum >= #{startRow} and rnum <= #{endRow}
 		]]>
 	</select>
 
-	<!-- 수정 확인 -->
+	
 	<!-- 글 등록 -->
 	<insert id="insertOriginTrain" parameterType="Train">
 		insert into
 		train
 		(train_no, user_id, train_title,
 		train_content, train_date,
-		train_count, train_url, train_url_img)
+		train_count, train_url, train_url_img, train_url_video)
 		values ((select max(train_no) + 1
 		from train),
 		#{user_id},
 		#{train_title}, #{train_content}, sysdate, 0,
-		#{train_url}, #{train_url_img})
+		#{train_url}, #{train_url_img}, #{train_url_video})
 	</insert>
 	<!-- 수정 확인 -->
 
@@ -100,8 +101,9 @@
 		set
 		train_title = #{train_title},
 		train_content = #{train_content},
-		train_url = #{train_url}
-		train_url_img = #{train_url_img}
+		train_url = #{train_url},
+		train_url_img = #{train_url_img},
+		train_url_video = #{ train_url_video }
 		where train_no = #{train_no}
 	</update>
 
@@ -110,7 +112,7 @@
 	<![CDATA[
 		SELECT *  
 		FROM (SELECT ROWNUM RNUM, train_no, train_TITLE, user_id,   
-				               train_CONTENT, train_url, train_url_img, train_DATE, train_count  
+				               train_CONTENT, train_url, train_url_img, train_url_video, train_DATE, train_count  
 	          FROM(select *
 	               from train
 	               where train_title like '%' || #{ keyword } || '%'))
@@ -131,7 +133,7 @@
 	<![CDATA[
 		SELECT *  
 		FROM (SELECT ROWNUM RNUM, train_no, train_TITLE, user_id,   
-				               train_CONTENT, train_url, train_url_img, train_DATE,train_count  
+				               train_CONTENT, train_url, train_url_img, train_url_video, train_DATE,train_count  
 	          FROM(select *
 	               from train
 	               where user_id like '%' || #{ keyword } || '%'))
@@ -154,7 +156,7 @@
 	<![CDATA[
 		SELECT *  
 		FROM (SELECT ROWNUM RNUM, train_no, train_TITLE, user_id,   
-				               train_CONTENT, train_url, train_url_img, train_DATE, train_count  
+				               train_CONTENT, train_url, train_url_img, train_url_video, train_DATE, train_count  
 	          FROM(select *
 	               from train
 	               where train_date between #{ begin } and #{ end }))

@@ -16,6 +16,7 @@
 		<typeAlias alias="SearchDate" type="com.project.foodbalance.common.SearchDate"/>
 		<typeAlias alias="Paging" type="com.project.foodbalance.common.Paging"/>
 		<typeAlias alias="Train" type="com.project.foodbalance.training.model.vo.Train"/>
+		<typeAlias alias="FoodAi" type="com.project.foodbalance.ai.model.vo.FoodAi"/>
 	</typeAliases>
 	
 	<mappers>
@@ -24,6 +25,7 @@
 		<mapper resource="mappers/reply-mapper.xml"/>
 		<mapper resource="mappers/notice-mapper.xml"/>
 		<mapper resource="mappers/train-mapper.xml"/>
+		<mapper resource="mappers/foodai-mapper.xml"/>
 		<!-- <mapper resource="mappers/manage-mapper.xml"/> -->
 		
 	</mappers>

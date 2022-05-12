@@ -20,5 +20,8 @@ public class FoodAiServiceImpl implements FoodAiService{
 	public int selectFoodAiCount(FoodAi foodai) {
 		return foodaiDao.selectFoodAiCount(foodai);
 	}
-
+	@Override
+	public FoodAi selectFoodAi(String food_id) {
+		return foodaiDao.selectFoodAi(food_id);
+	}
 }

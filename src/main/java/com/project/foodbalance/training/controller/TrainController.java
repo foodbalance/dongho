@@ -131,11 +131,12 @@ public class TrainController {
 	//운동법 등록 처리용
 	@RequestMapping(value = "tinsert.do", method = RequestMethod.POST)
 	public String trainInsertMethod(Train train, HttpServletRequest request, Model model) {
-		String thumbId = train.getTrain_url().substring(train.getTrain_url().length()-11) + "/default.jpg"; //유뷰브 url 에서 동영상 아이디 추출
+		String thumbId = train.getTrain_url().substring(train.getTrain_url().length()-11); //유뷰브 url 에서 동영상 아이디 추출
 		String furl = "http://img.youtube.com/vi/";	// 썸네일 이미지 추출하기 위한 전반부 url
-		String url_img = furl + thumbId;		
+		String url_img = furl + thumbId + "/default.jpg";		
 		train.setTrain_url_img(url_img);	//썸네일 이미지 url train에 지정
-		train.setTrain_url("https://www.youtube.com/embed/" + thumbId + "autoplay=1&mute=1");	// 유튜브 iframe에 src 에 들어갈 url 구문 지정
+		train.setTrain_url_video("https://www.youtube.com/embed/" + thumbId + "?autoplay=1&mute=1");
+		System.out.println(train.getTrain_url_video());// 유튜브 iframe에 src 에 들어갈 url 구문 지정
 		if(trainService.insertOriginTrain(train) > 0) {
 			System.out.println(train);
 			return "redirect:tlist.do?page=1";
@@ -189,6 +190,7 @@ public class TrainController {
 	public String moveTrainUpdateView(@RequestParam("train_no") int train_no, @RequestParam("page") int currentPage
 			,Model model) {
 		Train train = trainService.selectTrain(train_no);
+		System.out.println(train.getTrain_content());
 		if(train != null) {
 			model.addAttribute("train", train);
 			model.addAttribute("page", currentPage);
@@ -201,12 +203,16 @@ public class TrainController {
 	
 	//수정 처리용
 	@RequestMapping(value="trainup.do", method=RequestMethod.POST)
-	public String trainUpdateMethod(Train train, HttpServletRequest request, Model model,
-			@RequestParam("page") int page, @RequestParam(name="delFlag", required =false) String delFlag) {
+	public String trainUpdateMethod(Train train, HttpServletRequest request, Model model) {
+		String thumbId = train.getTrain_url().substring(train.getTrain_url().length()-11); //유뷰브 url 에서 동영상 아이디 추출
+		String furl = "http://img.youtube.com/vi/";	// 썸네일 이미지 추출하기 위한 전반부 url
+		String url_img = furl + thumbId + "/default.jpg";		
+		train.setTrain_url_img(url_img);	//썸네일 이미지 url train에 지정
+		train.setTrain_url_video("https://www.youtube.com/embed/" + thumbId + "?autoplay=1&mute=1");
+		System.out.println(train.getTrain_url_video());// 유튜브 iframe에 src 에 들어갈 url 구문 지정
 		if (trainService.updateOriginTrain(train) > 0) {
-			model.addAttribute("page", page);
-			model.addAttribute("train_no", train.getTrain_no());
-			return "redirect:tdetial.do";
+			
+			return "redirect:tlist.do";
 		}else {
 			model.addAttribute("message", train.getTrain_no() + "번 게시물 수정 실패");
 			return "common/errer";

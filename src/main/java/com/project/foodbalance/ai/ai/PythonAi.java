@@ -8,29 +8,30 @@ public class PythonAi {
 	public String AiValue(String save_path, String img_name) {
 		String value = null;
 		
-		String img_path = "C:/FoodBalance/food/src/main/webapp/resources/ai_food_img/" + img_name;
+		
 		System.out.println("img_name : " + img_name);
+
+		String command = "C:/Users/ict02-07/.conda/envs/food/python.exe";		
+		String argv1 = "C:/django/pytorch-YOLOv4-master/models.py";
 		
-		save_path = "/";
-		String command = "C:/Users/ict02-07/.conda/envs/food/python.exe";
-		
-		String arg1 = "C:/django/pytorch-YOLOv4-master/demo.py";
-		String argv1 = "15";
-		String argv2 = "C:/django/pytorch-YOLOv4-master/checkpoints/Yolov4_epoch50.pth";
-		String argv4 = "C:/django/pytorch-YOLOv4-master/test/_classes.txt";
-		
+		String argv2 = "15";
+		String argv3 = "C:/django/pytorch-YOLOv4-master/checkpoints/Yolov4_epoch50.pth";
+		String argv4 = "C:/FoodBalance/food/src/main/webapp/resources/ai_food_img/" + img_name;
+		String argv5 = "C:/django/pytorch-YOLOv4-master/test/_classes.txt";
+		String argvs = argv2 + argv3 + argv4 + argv5;
 		try {
-			ProcessBuilder builder = new ProcessBuilder(command, arg1, argv1, argv2, img_path, argv4);
-			System.out.println("builder : " + builder);
+			ProcessBuilder builder = new ProcessBuilder(command,  argv1, argv2, argv3, argv4, argv5);
 			Process process = builder.start();
 			int exitVal = process.waitFor();
 			BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(), "euc-kr"));
 			String line;
+			line = br.readLine();
+			value = line.substring(0,8);
 			
-			while ((line = br.readLine()) != null) {
-				System.out.println(">>>" + line);
-				value = line;
-			}
+			/*
+			 * while ((line = br.readLine()) != null) { System.out.println(">>>" + line);
+			 * value = line+","; }
+			 */
 			
 			if(exitVal != 0) {
 				System.out.println("error on process");

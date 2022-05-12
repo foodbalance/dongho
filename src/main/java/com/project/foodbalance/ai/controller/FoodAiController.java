@@ -85,11 +85,11 @@ public class FoodAiController {
 	
 	
 	@RequestMapping(value="foodaiInsert.do", method = RequestMethod.POST)
-	public String FoodAiInsertMethod(FoodAi foodai, HttpServletRequest request, Model model) {
+	public String FoodAiInsertMethod(@RequestParam("user_id") String user_id, HttpServletRequest request, Model model) {
 		System.out.println("save file check : " + resultFoodAi.getFood_original_img());
-		String savePath = request.getSession().getServletContext().getRealPath("resources/ai_food_img");
+		String savePath = request.getSession().getServletContext().getRealPath("resources/ai_food_img/");
 		try {
-			if(foodai.getUser_id().equals("")) {
+			if(user_id.equals("")) {
 				model.addAttribute("message", "로그인 필요 페이지");
 				return "common/commonview";
 			}else if(resultFoodAi.getFood_rename_img() == null){
@@ -97,15 +97,27 @@ public class FoodAiController {
 				model.addAttribute("message", "사진을 등록하세요");
 				return "foodai/foodai";
 			}else {
-				//파일명 등록
-				foodai.setFood_original_img(resultFoodAi.getFood_original_img());
-				foodai.setFood_rename_img(resultFoodAi.getFood_rename_img());
+//				FoodAi foodai = new FoodAi();
+				
+//				//파일명 등록
+//				foodai.setFood_original_img(resultFoodAi.getFood_original_img());
+//				foodai.setFood_rename_img(resultFoodAi.getFood_rename_img());
 			
 				//ai측정 등록
 				PythonAi ai = new PythonAi();
-				foodai.setFood_result(ai.AiValue(savePath, resultFoodAi.getFood_rename_img()));
-				System.out.println("food result : " + foodai.getFood_result());
+				String food_id = ai.AiValue(savePath, resultFoodAi.getFood_rename_img());
+				System.out.println("food id : " + food_id);
+				FoodAi food_info = foodaiService.selectFoodAi(food_id);
+				System.out.println(food_info.getFood_name());
 				
+				model.addAttribute("food_img", resultFoodAi.getFood_rename_img());
+				model.addAttribute("food_name", food_info.getFood_name());
+				model.addAttribute("weight", food_info.getWeight());
+				model.addAttribute("kcal", food_info.getKcal());
+				model.addAttribute("carbo", food_info.getCarbo());
+				model.addAttribute("sugars", food_info.getSugars());
+				model.addAttribute("fat", food_info.getFat());
+				model.addAttribute("protein", food_info.getProtein());
 				return "foodai/foodresult";
 			}
 		} catch(Exception e) {
