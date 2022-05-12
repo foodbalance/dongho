@@ -390,7 +390,7 @@ $(function(){
 			<div class="div1">
 					<div id="box1" for="inputID">
 						아이디 
-					</div>
+		 			</div>
 				</div>
 			<div class="div3"><input id="inputID" type="text" placeholder="ID" name="inputID" value="${ reid }" required/></div>
 			<div class="div5" ><button onclick="movePage()" class="btn btn-outline-secondary"  type="submit"  style="float:left; height: 100px; border-radius: 8px;">로그인</button></div>
